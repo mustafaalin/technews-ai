@@ -1,14 +1,27 @@
-// src/data/blogData.ts
 import { BlogPost, Category } from '../types/blog';
+import postsFromJson from './blogPosts.json';
 
-export const categories: Category[] = [
-  { id: '1', name: 'AI & Machine Learning', slug: 'ai-ml', count: 3 },
-  { id: '2', name: 'Web Development', slug: 'web-dev', count: 1 },
-  { id: '3', name: 'Mobile Tech', slug: 'mobile', count: 1 },
-  { id: '4', name: 'Cloud Computing', slug: 'cloud', count: 1 },
-  { id: '5', name: 'Cybersecurity', slug: 'security', count: 1 },
-  { id: '6', name: 'Startups', slug: 'startups', count: 0 },
+const allPosts: BlogPost[] = postsFromJson as any;
+
+export const baseCategories: Omit<Category, 'count'>[] = [
+  { id: '1', name: 'AI & Machine Learning', slug: 'ai-ml' },
+  { id: '2', name: 'Web Development', slug: 'web-dev' },
+  { id: '3', name: 'Mobile Tech', slug: 'mobile' },
+  { id: '4', name: 'Cloud Computing', slug: 'cloud' },
+  { id: '5', name: 'Cybersecurity', slug: 'security' },
+  { id: '6', name: 'Startups', slug: 'startups' },
 ];
 
-// Client-side'da JSON'u dinamik olarak fetch edeceğiz
-export const blogPosts: BlogPost[] = [];
+const categoryCounts: { [key: string]: number } = {};
+for (const post of allPosts) {
+  if (post.category) {
+    categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
+  }
+}
+
+export const categories: Category[] = baseCategories.map(category => ({
+  ...category,
+  count: categoryCounts[category.slug] || 0,
+}));
+
+export const blogPosts: BlogPost[] = allPosts;
