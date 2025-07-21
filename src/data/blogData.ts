@@ -10,19 +10,58 @@ export const categories: Category[] = [
 ];
 
 export const blogPosts: BlogPost[] = [
+  // Yeni post en üste ekleniyor
+  {
+    id: '1753108487969',
+    title: 'TechCrunch Disrupt 2025: Girişimcilikte İlk Adım',
+    summary: 'Giriş: Yenilik Arayanların Buluşma Noktası – TechCrunch Disrupt 2025  Teknoloji dünyasının en heyecan verici etkinliklerinden biri olan TechCrunch Disrupt, 2...',
+    content: `Giriş: Yenilik Arayanların Buluşma Noktası – TechCrunch Disrupt 2025
+
+Teknoloji dünyasının en heyecan verici etkinliklerinden biri olan TechCrunch Disrupt, 2025 yılında da çıtayı her zamankinden daha yükseğe taşıma hedefiyle geri dönüyor. 27-29 Ekim tarihleri arasında San Francisco’daki Moscone West’te düzenlenecek bu dev konferans, 10.000’i aşkın kurucu, yatırımcı ve teknoloji içgörüsüne sahip profesyonelin bir araya gelmesine sahne olacak. Girişimcilikten yapay zekâya, yatırım trendlerinden ürüne dönüşüm hikâyelerine kadar geniş bir yelpazede içeriğe sahip TechCrunch Disrupt 2025, sadece bugünü değil, yarının teknolojisini de şekillendirmeyi amaçlıyor. Konferansta öne çıkan panellerden biri ise erken aşama yatırım süreçlerini masaya yatıran “From Idea to First Check: Raising Pre-Seed and Seed Capital” yani “Fikirden İlk Yatırıma: Ön-Tohum ve Tohum Yatırımı Süreci” başlıklı oturum. Bu panel, girişimlerin ilk fonlarını nasıl bulacağı ve yatırımcıları nasıl ikna edecekleri konusunda paha biçilmez bilgiler sunmayı vaat ediyor.
+
+Detaylar: Girişimlerin İlk Adımı Üzerine Kritik Bir Panel
+
+TechCrunch Disrupt 2025’in en dikkat çeken bölümlerinden biri olan Builders Stage'deki bu panel, girişimcilerin zorlu ancak bir o kadar da heyecan verici olan “sıfırdan bir” yolculuğunu aydınlatıyor. Panelin başlığı olan "From Idea to First Check", adından da anlaşılacağı üzere bir fikrin gerçek bir başlangıç sermayesiyle nasıl desteklenebileceğini anlatıyor. Henüz MVP’si (minimum viable product) dahi hazır olmayan bir girişimci, fikrini nasıl duyurur? Yatırımcıların dikkatini nasıl çeker? Ve en önemlisi, fikir ne zaman yatırım almaya değer görülür?
+
+Katılımcılar bu panelde, sektörün deneyimli yatırımcılarının ve başarılı kurucuların gerçek dünyadan örneklerle desteklediği stratejileri dinleme fırsatı bulacaklar. Panelde fikre yatırım yapan melek yatırımcıların beklentileri, ön tohum yatırımın riskleri ve bir girişimin yatırımcı sunumunu nasıl hazırlaması gerektiği konuları ele alınacak. Böylece katılımcılar, fikir aşamasındaki bir projeye nasıl “evet” denildiğini yakından görebilecek.
+
+Teknik Detaylar: Yatırımcının Dilini Konuşmak
+
+Ön tohum (pre-seed) ve tohum (seed) yatırım turları, özellikle ürünün ya hiç olmadığı ya da henüz kullanıcıya ulaşmadığı erken aşamalarda gerçekleşiyor. Bu süreçlerde yatırımcılar, genellikle girişimcinin vizyonuna, yetkinliğine, pazar bilgisine ve fikirlerinin ölçeklenebilirliğine yatırım yapıyorlar. Pitch deck – yani yatırımcı sunumu – bu anlamda kilit rol oynuyor. Net, veri destekli ama aynı zamanda ilgi çekici bir sunum her şeyin başlangıcı olabilir.
+
+Bunun dışında yatırımcılar, pazar büyüklüğü (TAM, SAM, SOM analizi), rekabet avantajı (unique selling proposition), go-to-market stratejisi, ekip profili ve varsa pilot kullanıcı geri bildirimleri gibi metriklere de önem veriyor. Panelde, yatırım turu öncesinde bir girişimin karşılaması gereken teknik ve stratejik kriterler detaylı şekilde ele alınacak.
+
+Sektöre Yansımaları: Yeni Nesil Girişimcilere İlham
+
+TechCrunch Disrupt 2025’in bu paneli, özellikle erken aşama girişimler için yol gösterici olacak. Girişim sermayesinin kuralları değişiyor: Sıradışı fikirler kadar, bunların uygulanabilirliği ve kurucunun problem çözme becerisi de önem kazanıyor. Ayrıca panel, yatırımcıların da nasıl kararlar verdiğini daha şeffaf hale getirerek bilgi asimetrisini azaltıyor. Bu şeffaflık sayesinde kurucular, yatırımcılara daha bilinçli şekilde yaklaşabilecek.
+
+Ek olarak, yatırımcı ekosistemindeki dinamiklerin değiştiği bu dönemde, farklı bölgelerden gelen girişimcilerin de aynı söz hakkına sahip olması, küresel ölçekte inovasyonun demokratikleşmesine katkı sağlayacak. Panel, sadece Silikon Vadisi girişimcilerine değil, Türkiye gibi yükselen teknoloji pazarlarından gelen kuruculara da ilham verecek.
+
+Sonuç ve Kişisel Yorum: Disrupt Etmenin Tam Zamanı
+
+TechCrunch Disrupt 2025, sadece bir teknoloji konferansı değil; bir inovasyon kutlaması, bir vizyon şöleni ve en önemlisi geleceğin liderlerinin buluşma alanı. “From Idea to First Check” paneli ise bu kutlamanın merkezinde yer alarak girişimcilik yolculuğunun en kırılgan ama en heyecan verici dönemine ışık tutuyor. Kişisel olarak, bu tarz panellerin girişimcilik ekosistemine ciddi katkılar sunduğunu düşünüyorum. Girişimcilik yalnız bir yolculuk gibi görünebilir, ancak gelen ilhamlar, edinilen bilgiler ve kurulan bağlantılar sayesinde bu yol boşlukta değil, değerli bir topluluğun tam kalbinde atıyor.
+
+Eğer teknolojiye ilginiz varsa, bir fikriniz varsa ya da sadece geleceği merak ediyorsanız, TechCrunch Disrupt 2025'i takvimlerinize not almalısınız. Çünkü bazen, her şey bir sahnede anlatılan tek bir cümleyle değişebilir – ve bu yıl o sahnede anlatılacak çok şey var.`,
+    category: 'ai-ml',
+    imageUrl: './images/techcrunch-disrupt-2025-girisimcilikte-ilk-adim.png',
+    sourceUrl: 'https://techcrunch.com/2025/07/21/from-idea-to-first-check-raising-pre-seed-and-seed-capital-at-techcrunch-disrupt-2025/',
+    publishDate: '2025-07-21',
+    readTime: 3,
+    tags: ['TechCrunch', 'AI', 'Machine Learning'],
+    author: 'AI Admin'
+  },
+  // Mevcut postlar
   {
     id: '1',
     title: 'OpenAI Releases GPT-4 Turbo with Enhanced Reasoning Capabilities',
     summary: 'OpenAI has unveiled GPT-4 Turbo, featuring improved reasoning abilities and reduced hallucinations. The new model shows significant improvements in mathematical problem-solving and code generation.',
     content: `OpenAI has announced the release of GPT-4 Turbo, marking a significant advancement in AI reasoning capabilities. The new model demonstrates remarkable improvements in mathematical problem-solving, code generation, and logical reasoning tasks.
-
 Key improvements include:
 - 40% reduction in hallucination rates
 - Enhanced mathematical reasoning capabilities
 - Improved code generation and debugging
 - Better understanding of complex instructions
 - Reduced computational costs for developers
-
 The model is now available through OpenAI's API and is expected to revolutionize how developers integrate AI into their applications. Early testing shows significant improvements in accuracy across various domains, making it a game-changer for AI-powered applications.`,
     category: 'ai-ml',
     imageUrl: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -37,7 +76,6 @@ The model is now available through OpenAI's API and is expected to revolutionize
     title: 'React 19 Beta Introduces Revolutionary Concurrent Features',
     summary: 'React 19 beta brings groundbreaking concurrent features including automatic batching, improved suspense, and new hooks that promise to transform how developers build user interfaces.',
     content: `React 19 beta has been released with revolutionary concurrent features that promise to transform frontend development. The new version introduces automatic batching, improved suspense capabilities, and several new hooks that enhance developer productivity.
-
 Major new features:
 - Automatic batching for better performance
 - Enhanced Suspense with error boundaries
@@ -45,7 +83,6 @@ Major new features:
 - Improved server-side rendering
 - Better TypeScript integration
 - New use() hook for promises and context
-
 These features aim to simplify state management and improve application performance. The React team has worked extensively on making these features backward-compatible while providing significant performance improvements.`,
     category: 'web-dev',
     imageUrl: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -54,119 +91,5 @@ These features aim to simplify state management and improve application performa
     readTime: 4,
     tags: ['React', 'JavaScript', 'Frontend', 'Web Development'],
     author: 'AI Admin'
-  },
-  {
-    id: '3',
-    title: 'Apple Vision Pro Sales Exceed Expectations in First Quarter',
-    summary: 'Apple Vision Pro has sold over 600,000 units in its first quarter, exceeding analyst predictions. The mixed reality headset is gaining traction in enterprise and creative industries.',
-    content: `Apple Vision Pro has achieved remarkable success in its first quarter, selling over 600,000 units and exceeding analyst expectations. The mixed reality headset has found strong adoption in enterprise applications and creative industries.
-
-Key success metrics:
-- 600,000+ units sold in Q1
-- Strong enterprise adoption (40% of sales)
-- Growing developer ecosystem with 1000+ native apps
-- High customer satisfaction ratings (4.8/5)
-- Significant interest from healthcare and education sectors
-
-The device has particularly excelled in professional environments, with companies using it for training, design reviews, and remote collaboration. Apple has announced plans for a more affordable version targeting consumer markets.`,
-    category: 'mobile',
-    imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
-    sourceUrl: 'https://apple.com/newsroom/vision-pro-q1-results',
-    publishDate: '2025-01-13',
-    readTime: 3,
-    tags: ['Apple', 'VR', 'Mixed Reality', 'Technology'],
-    author: 'AI Admin'
-  },
-  {
-    id: '4',
-    title: 'AWS Announces New AI-Powered Cloud Security Suite',
-    summary: 'Amazon Web Services launches an AI-powered security suite that uses machine learning to detect and prevent cyber threats in real-time across cloud infrastructures.',
-    content: `Amazon Web Services has launched a comprehensive AI-powered security suite that leverages machine learning to provide real-time threat detection and prevention across cloud infrastructures. The new suite represents a significant advancement in cloud security technology.
-
-Key features include:
-- Real-time threat detection using ML algorithms
-- Automated incident response capabilities
-- Behavioral analysis for anomaly detection
-- Integration with existing AWS security tools
-- Predictive threat modeling
-- Compliance automation features
-
-The suite has already been tested by major enterprise customers and has shown a 85% reduction in security incidents. This represents AWS's commitment to making cloud security more intelligent and automated.`,
-    category: 'cloud',
-    imageUrl: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
-    sourceUrl: 'https://aws.amazon.com/security/ai-suite',
-    publishDate: '2025-01-12',
-    readTime: 4,
-    tags: ['AWS', 'Cloud Security', 'AI', 'Cybersecurity'],
-    author: 'AI Admin'
-  },
-  {
-    id: '5',
-    title: 'Microsoft Copilot Integration Expands to All Office Applications',
-    summary: 'Microsoft announces that Copilot AI assistant will be integrated across all Office applications, bringing intelligent automation to Word, Excel, PowerPoint, and Outlook.',
-    content: `Microsoft has announced a major expansion of its Copilot AI assistant, integrating it across all Office applications. This move brings intelligent automation and AI-powered assistance to Word, Excel, PowerPoint, and Outlook, transforming how users interact with these productivity tools.
-
-New capabilities include:
-- Intelligent document creation in Word
-- Advanced data analysis in Excel
-- Automated presentation design in PowerPoint
-- Smart email composition in Outlook
-- Cross-application workflow automation
-- Natural language query processing
-
-The integration is designed to enhance productivity while maintaining user control over content creation. Microsoft reports that early beta users have seen a 30% increase in productivity across various tasks.`,
-    category: 'ai-ml',
-    imageUrl: 'https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=800',
-    sourceUrl: 'https://microsoft.com/copilot-office-integration',
-    publishDate: '2025-01-11',
-    readTime: 3,
-    tags: ['Microsoft', 'Copilot', 'AI', 'Productivity'],
-    author: 'AI Admin'
-  },
-  {
-    id: '6',
-    title: 'Google Quantum Computer Achieves New Milestone in Error Correction',
-    summary: 'Google researchers have achieved a breakthrough in quantum error correction, bringing practical quantum computing closer to reality with their new 1000-qubit processor.',
-    content: `Google researchers have achieved a significant breakthrough in quantum error correction with their new 1000-qubit processor. This advancement brings practical quantum computing applications closer to reality and represents a major step forward in the field.
-
-Key achievements:
-- 1000-qubit processor with improved stability
-- 99.9% error correction accuracy
-- Sustained quantum coherence for 100 seconds
-- Successful execution of complex algorithms
-- Demonstration of quantum advantage in specific problems
-
-The breakthrough addresses one of the biggest challenges in quantum computing - maintaining quantum states long enough to perform useful calculations. This development paves the way for practical applications in cryptography, drug discovery, and complex optimization problems.`,
-    category: 'ai-ml',
-    imageUrl: 'https://images.pexels.com/photos/2348565/pexels-photo-2348565.jpeg?auto=compress&cs=tinysrgb&w=800',
-    sourceUrl: 'https://quantum-ai.google/breakthrough-2024',
-    publishDate: '2025-01-10',
-    readTime: 4,
-    tags: ['Google', 'Quantum Computing', 'Research', 'Technology'],
-    author: 'AI Admin'
-  },
-  {
-    id: '7',
-    title: 'Major Data Breach Exposes 50 Million User Accounts Across Multiple Platforms',
-    summary: 'A sophisticated cyberattack has compromised user data from several major social media platforms, highlighting critical vulnerabilities in current security infrastructure and prompting urgent security updates.',
-    content: `A coordinated cyberattack has resulted in one of the largest data breaches of 2024, exposing personal information from over 50 million user accounts across multiple social media platforms. The breach has raised serious concerns about current cybersecurity practices and data protection measures.
-
-Details of the breach:
-- 50+ million user accounts compromised
-- Personal data including emails, phone numbers, and encrypted passwords exposed
-- Attack utilized advanced persistent threat (APT) techniques
-- Multiple platforms affected simultaneously
-- Breach discovered after 3 weeks of unauthorized access
-
-Security experts believe the attack was carried out by a sophisticated threat actor group using zero-day exploits and social engineering tactics. The affected companies have implemented emergency security patches and are working with law enforcement agencies to investigate the incident.
-
-This breach underscores the critical importance of implementing robust cybersecurity measures, including multi-factor authentication, regular security audits, and advanced threat detection systems. Users are advised to immediately change their passwords and enable two-factor authentication on all accounts.`,
-    category: 'security',
-    imageUrl: 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=800',
-    sourceUrl: 'https://cybersecurity-news.com/major-breach-2024',
-    publishDate: '2025-01-09',
-    readTime: 5,
-    tags: ['Data Breach', 'Cybersecurity', 'Privacy', 'Security'],
-    author: 'AI Admin'
   }
-];
+]
