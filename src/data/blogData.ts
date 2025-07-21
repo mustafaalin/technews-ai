@@ -1,6 +1,4 @@
-// blogData.ts
-import fs from 'fs';
-import path from 'path';
+// src/data/blogData.ts
 import { BlogPost, Category } from '../types/blog';
 
 export const categories: Category[] = [
@@ -12,6 +10,5 @@ export const categories: Category[] = [
   { id: '6', name: 'Startups', slug: 'startups', count: 0 },
 ];
 
-export const blogPosts: BlogPost[] = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), 'src/data/blogPosts.json'), 'utf8')
-);
+// Client-side'da JSON'u dinamik olarak fetch edeceğiz
+export const blogPosts: BlogPost[] = [];
