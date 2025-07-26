@@ -25,7 +25,7 @@ const About = () => {
         </div>
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Hakkımızda</h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          TechPulse AI, teknoloji dünyasının nabzını tutan, yapay zeka destekli haber platformudur.
+          Pulse of Tech, teknoloji dünyasının nabzını tutan, yapay zeka destekli haber platformudur.
         </p>
       </div>
 
@@ -133,7 +133,7 @@ const About = () => {
           <p className="text-blue-600 font-medium mb-3">Kurucu & Geliştirici</p>
           <p className="text-gray-700 max-w-2xl mx-auto">
             Teknoloji tutkunu bir yazılım geliştirici olarak, yapay zeka ve web teknolojilerindeki 
-            gelişmeleri takip etmeyi ve paylaşmayı seviyorum. TechPulse AI'ı, teknoloji 
+            gelişmeleri takip etmeyi ve paylaşmayı seviyorum. Pulse of Tech'i, teknoloji 
             topluluğuna değer katmak amacıyla geliştirdim.
           </p>
         </div>

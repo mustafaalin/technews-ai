@@ -147,10 +147,10 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">E-posta</h3>
                 <a 
-                  href="mailto:info@techpulse.ai" 
+                  href="mailto:info@pulseoftech.net" 
                   className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
                 >
-                  info@techpulse.ai
+                  info@pulseoftech.net
                 </a>
               </div>
               
@@ -181,7 +181,7 @@ const Contact = () => {
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
               >
                 <Linkedin className="w-5 h-5 mr-3" />
-                <span>TechPulse AI</span>
+                <span>Pulse of Tech</span>
               </a>
               
               <a 
@@ -189,7 +189,7 @@ const Contact = () => {
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
               >
                 <Github className="w-5 h-5 mr-3" />
-                <span>techpulse-ai</span>
+                <span>pulseoftech</span>
               </a>
             </div>
           </div>

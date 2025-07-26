@@ -1,4 +1,4 @@
-# TechPulse AI - Tech News Blog
+# Pulse of Tech - Tech News Blog
 
 A modern, AI-powered tech news blog built with React, TypeScript, and Tailwind CSS. Features daily AI-generated summaries of the latest technology news.
 
