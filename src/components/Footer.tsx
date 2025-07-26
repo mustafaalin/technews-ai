@@ -58,7 +58,7 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
+            <span className="text-xl font-bold">Pulse of Tech</span>
 
           {/* Categories */}
           <div>
@@ -98,7 +98,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} TechPulse AI. Tüm hakları saklıdır.
+            © {currentYear} Pulse of Tech. Tüm hakları saklıdır.
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
             Yapay Zeka Destekli • Günlük Güncelleme • ❤️ ile Yapıldı

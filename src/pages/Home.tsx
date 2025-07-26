@@ -24,7 +24,7 @@ const Home = () => {
           Yapay Zeka Destekli Teknoloji Haber Dünyası
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-          Günlük yapay zeka destekli teknoloji haberi özetleriyle güncel kalın. 
+          Günlük yapay zeka destekli teknoloji haberi özetleriyle güncel kalın.
           Teknoloji dünyasından içgörüleri saatlerce değil, dakikalar içinde edinin.
         </p>
         <div className="flex justify-center space-x-8 text-sm text-gray-500">

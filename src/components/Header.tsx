@@ -29,7 +29,7 @@ const Header = () => {
             <div className="bg-blue-600 p-2 rounded-lg">
               <Zap className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">TechPulse AI</span>
+            <span className="text-xl font-bold text-gray-900">Pulse of Tech</span>
           </Link>
 
           {/* Desktop Navigation */}
