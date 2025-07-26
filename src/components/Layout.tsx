@@ -6,7 +6,7 @@ import CategoryNav from './CategoryNav';
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col">
       <Header />
       <CategoryNav />
       <main className="flex-1">

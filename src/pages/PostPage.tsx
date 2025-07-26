@@ -30,8 +30,8 @@ const PostPage = () => {
   const categoryData = categories.find(cat => cat.slug === post.category);
   const categoryName = categoryData ? categoryData.name : post.category;
 
-  return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gray-50">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Navigation */}
       <div className="mb-8">
         <Link
@@ -118,8 +118,9 @@ const PostPage = () => {
       {/* Content */}
       <div className="prose max-w-none mb-12">
         <div className="text-gray-800 leading-relaxed space-y-4">
+        <div className="text-gray-900 leading-relaxed space-y-4 text-lg">
           {post.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="mb-4">
+            <p key={index} className="mb-6 leading-relaxed">
               {paragraph}
             </p>
           ))}
@@ -175,7 +176,8 @@ const PostPage = () => {
             ))}
         </div>
       </div>
-    </article>
+      </article>
+    </div>
   );
 };
 

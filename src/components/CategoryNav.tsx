@@ -10,15 +10,15 @@ const CategoryNav = () => {
   };
 
   return (
-    <nav className="bg-slate-800/90 backdrop-blur-sm border-b border-slate-700">
+    <nav className="bg-white/90 backdrop-blur-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex space-x-8 overflow-x-auto py-4">
           <Link
             to="/"
             className={`whitespace-nowrap pb-2 px-3 py-1 rounded-lg border-b-2 font-medium text-sm transition-all duration-200 ${
               location.pathname === '/'
-                ? 'border-cyan-400 text-cyan-400 bg-slate-700/30'
-                : 'border-transparent text-gray-300 hover:text-cyan-400 hover:bg-slate-700/30'
+                ? 'border-blue-500 text-blue-600 bg-blue-50'
+                : 'border-transparent text-gray-700 hover:text-blue-600 hover:bg-gray-50'
             }`}
           >
             Tüm Yazılar
@@ -29,8 +29,8 @@ const CategoryNav = () => {
               to={`/category/${category.slug}`}
               className={`whitespace-nowrap pb-2 px-3 py-1 rounded-lg border-b-2 font-medium text-sm transition-all duration-200 ${
                 isActive(category.slug)
-                  ? 'border-cyan-400 text-cyan-400 bg-slate-700/30'
-                  : 'border-transparent text-gray-300 hover:text-cyan-400 hover:bg-slate-700/30'
+                  ? 'border-blue-500 text-blue-600 bg-blue-50'
+                  : 'border-transparent text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               {category.name}

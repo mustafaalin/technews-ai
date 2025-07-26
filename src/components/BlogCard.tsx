@@ -22,7 +22,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
   const categoryName = categoryData ? categoryData.name : post.category;
 
   return (
-    <article className="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 border border-slate-700/50">
+    <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border border-gray-200">
       <div className="aspect-w-16 aspect-h-9 relative">
         <img
           src={post.imageUrl}
@@ -30,16 +30,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-4 left-4">
-          <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+          <span className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
             {categoryName}
           </span>
         </div>
       </div>
       
       <div className="p-6">
-        <div className="flex items-center text-sm text-gray-400 mb-3">
+        <div className="flex items-center text-sm text-gray-500 mb-3">
           <User className="w-4 h-4 mr-1" />
-          <span className="font-medium text-gray-300">{post.author}</span>
+          <span className="font-medium text-gray-700">{post.author}</span>
           <span className="mx-2">•</span>
           <Clock className="w-4 h-4 mr-1" />
           <span>{post.readTime} dk okuma</span>
@@ -47,16 +47,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <span>{formatDate(post.publishDate)}</span>
         </div>
         
-        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
+        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
           <Link
             to={`/post/${post.id}`}
-            className="hover:text-cyan-400 transition-colors duration-200"
+            className="hover:text-blue-600 transition-colors duration-200"
           >
             {post.title}
           </Link>
         </h3>
         
-        <p className="text-gray-300 mb-4 line-clamp-3">
+        <p className="text-gray-600 mb-4 line-clamp-3">
           {post.summary}
         </p>
         
@@ -65,7 +65,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
             {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="bg-slate-700/50 text-gray-300 px-2 py-1 rounded-md text-xs border border-slate-600"
+                className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs border border-gray-300"
               >
                 {tag}
               </span>
@@ -75,7 +75,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <div className="flex items-center space-x-2">
             <Link
               to={`/post/${post.id}`}
-              className="text-cyan-400 hover:text-cyan-300 font-medium text-sm transition-colors duration-200"
+             className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
             >
               Devamını oku
             </Link>
@@ -83,7 +83,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
               href={post.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-300 transition-colors duration-200"
+              className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
               title="Orijinal kaynağı görüntüle"
             >
               <ExternalLink className="w-4 h-4" />
