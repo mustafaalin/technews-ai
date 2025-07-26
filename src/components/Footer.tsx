@@ -17,7 +17,7 @@ const Footer = () => {
     company: [
       { name: 'Hakkımızda', href: '/about' },
       { name: 'İletişim', href: '/contact' },
-      { name: 'Gizlilik Politikası', href: '/privacy' },
+      { name: 'Gizlilik Politikası', href: '#' },
       { name: 'Kullanım Şartları', href: '#' },
       { name: 'RSS Beslemesi', href: '#' },
     ],
