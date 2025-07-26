@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -17,11 +19,42 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic would go here
-    console.log('Form submitted:', formData);
-    alert('Mesajınız alındı! En kısa sürede size dönüş yapacağız.');
+    
+    setIsSubmitting(true);
+    
+    try {
+      // EmailJS ile email gönder
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // EmailJS service ID'nizi buraya yazın
+        'YOUR_TEMPLATE_ID', // EmailJS template ID'nizi buraya yazın
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'info@pulseoftech.net'
+        },
+        'YOUR_PUBLIC_KEY' // EmailJS public key'inizi buraya yazın
+      );
+      
+      alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
+      
+      // Formu temizle
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+    } catch (error) {
+      console.error('Email gönderme hatası:', error);
+      alert('Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -126,10 +159,15 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium flex items-center justify-center"
+              disabled={isSubmitting}
+              className={`w-full px-6 py-3 rounded-lg transition-colors duration-200 font-medium flex items-center justify-center ${
+                isSubmitting 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
             >
               <Send className="w-4 h-4 mr-2" />
-              Mesaj Gönder
+              {isSubmitting ? 'Gönderiliyor...' : 'Mesaj Gönder'}
             </button>
           </form>
         </div>
