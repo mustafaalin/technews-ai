@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, Send, Github, Linkedin, Twitter } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +10,7 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -23,23 +23,13 @@ const Contact = () => {
     e.preventDefault();
     
     setIsSubmitting(true);
+    setSubmitStatus('idle');
     
     try {
-      // EmailJS ile email gönder
-      await emailjs.send(
-        'YOUR_SERVICE_ID', // EmailJS service ID'nizi buraya yazın
-        'YOUR_TEMPLATE_ID', // EmailJS template ID'nizi buraya yazın
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_email: 'info@pulseoftech.net'
-        },
-        'YOUR_PUBLIC_KEY' // EmailJS public key'inizi buraya yazın
-      );
+      // Simüle edilmiş form gönderimi (gerçek implementasyon için EmailJS veya backend gerekli)
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
+      setSubmitStatus('success');
       
       // Formu temizle
       setFormData({
@@ -51,7 +41,7 @@ const Contact = () => {
       
     } catch (error) {
       console.error('Email gönderme hatası:', error);
-      alert('Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -157,6 +147,41 @@ const Contact = () => {
               />
             </div>
 
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-green-800">
+                      Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-red-800">
+                      Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan e-posta gönderin.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -185,10 +210,10 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">E-posta</h3>
                 <a 
-                  href="mailto:info@pulseoftech.net" 
+                  href="mailto:mustafaalin@outlook.com" 
                   className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
                 >
-                  info@pulseoftech.net
+                  mustafaalin@outlook.com
                 </a>
               </div>
               
@@ -207,27 +232,33 @@ const Contact = () => {
             
             <div className="space-y-4">
               <a 
-                href="#" 
+                href="https://twitter.com/mustafaalin" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
               >
                 <Twitter className="w-5 h-5 mr-3" />
-                <span>@TechPulseAI</span>
+                <span>@mustafaalin</span>
               </a>
               
               <a 
-                href="#" 
+                href="https://linkedin.com/in/mustafaalin" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
               >
                 <Linkedin className="w-5 h-5 mr-3" />
-                <span>Pulse of Tech</span>
+                <span>Mustafa ALIN</span>
               </a>
               
               <a 
-                href="#" 
+                href="https://github.com/mustafaalin" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
               >
                 <Github className="w-5 h-5 mr-3" />
-                <span>pulseoftech</span>
+                <span>mustafaalin</span>
               </a>
             </div>
           </div>
