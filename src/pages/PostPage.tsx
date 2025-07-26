@@ -30,6 +30,7 @@ const PostPage = () => {
   const categoryData = categories.find(cat => cat.slug === post.category);
   const categoryName = categoryData ? categoryData.name : post.category;
 
+  return (
     <div className="min-h-screen bg-gray-50">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Navigation */}
@@ -124,6 +125,7 @@ const PostPage = () => {
               {paragraph}
             </p>
           ))}
+        </div>
         </div>
       </div>
 
