@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Clock, Users, User } from 'lucide-react';
 import BlogCard from '../components/BlogCard';
+import NewsletterSignup from '../components/NewsletterSignup';
 import { blogPosts } from '../data/blogData';
 
 const Home = () => {
@@ -113,23 +114,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Newsletter CTA */}
-      <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-center text-white">
-        <h3 className="text-2xl font-bold mb-4">Hiçbir Haberi Kaçırmayın</h3>
-        <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-          Günlük yapay zeka destekli teknoloji haberi özetlerini e-posta kutunuza alın. Bilgili kalan binlerce profesyonele katılın.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <input
-            type="email"
-            placeholder="E-posta adresinizi girin"
-            className="px-4 py-2 rounded-lg text-gray-900 w-full sm:w-auto"
-          />
-          <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
-            Abone Ol
-          </button>
-        </div>
-      </div>
+      {/* Newsletter Signup */}
+      <NewsletterSignup />
     </div>
   );
 };
