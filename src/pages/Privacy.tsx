@@ -212,7 +212,7 @@ const Privacy = () => {
           <div className="bg-gray-50 p-4 rounded-lg">
             <p className="text-gray-700">
               <strong>E-posta:</strong> privacy@techpulse.ai<br />
-              <strong>İletişim Formu:</strong> <Link to="/contact" className="text-blue-600 hover:text-blue-800">İletişim sayfası</Link>
+              <strong>İletişim Formu:</strong> <Link to="/contact" className=\"text-blue-600 hover:text-blue-800">İletişim sayfası</Link>
             </p>
           </div>
         </div>
