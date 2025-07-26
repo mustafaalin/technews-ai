@@ -21,24 +21,24 @@ const Home = () => {
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          AI-Powered Tech News World
+          Yapay Zeka Destekli Teknoloji Haber Dünyası
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-          Stay ahead of the curve with daily AI-generated summaries of the latest technology news. 
-          Get insights from across the tech world in minutes, not hours.
+          Günlük yapay zeka destekli teknoloji haberi özetleriyle güncel kalın. 
+          Teknoloji dünyasından içgörüleri saatlerce değil, dakikalar içinde edinin.
         </p>
         <div className="flex justify-center space-x-8 text-sm text-gray-500">
           <div className="flex items-center">
             <TrendingUp className="w-4 h-4 mr-1" />
-            <span>Updated Daily</span>
+            <span>Günlük Güncelleme</span>
           </div>
           <div className="flex items-center">
             <Clock className="w-4 h-4 mr-1" />
-            <span>2-4 min reads</span>
+            <span>2-4 dk okuma</span>
           </div>
           <div className="flex items-center">
             <Users className="w-4 h-4 mr-1" />
-            <span>10,000+ readers</span>
+            <span>10,000+ okuyucu</span>
           </div>
         </div>
       </div>
@@ -46,9 +46,9 @@ const Home = () => {
       {/* Featured Post */}
       <div className="mb-12">
         <div className="flex items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Featured Story</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Öne Çıkan Haber</h2>
           <div className="ml-3 bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
-            Trending
+            Trend
           </div>
         </div>
         
@@ -89,14 +89,14 @@ const Home = () => {
                 <span className="font-medium">{featuredPost.author}</span>
                 <span className="mx-2">•</span>
                 <Clock className="w-4 h-4 mr-1" />
-                <span>{featuredPost.readTime} min read</span>
+                <span>{featuredPost.readTime} dk okuma</span>
               </div>
               
               <Link
                 to={`/post/${featuredPost.id}`}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium inline-block"
               >
-                Read Full Story
+                Tam Haberi Oku
               </Link>
             </div>
           </div>
@@ -105,7 +105,7 @@ const Home = () => {
 
       {/* Recent Posts */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Updates</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Son Güncellemeler</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recentPosts.map((post) => (
             <BlogCard key={post.id} post={post} />
@@ -115,18 +115,18 @@ const Home = () => {
 
       {/* Newsletter CTA */}
       <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-center text-white">
-        <h3 className="text-2xl font-bold mb-4">Never Miss a Beat</h3>
+        <h3 className="text-2xl font-bold mb-4">Hiçbir Haberi Kaçırmayın</h3>
         <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-          Get daily AI-curated tech news summaries delivered to your inbox. Join thousands of professionals staying informed.
+          Günlük yapay zeka destekli teknoloji haberi özetlerini e-posta kutunuza alın. Bilgili kalan binlerce profesyonele katılın.
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="E-posta adresinizi girin"
             className="px-4 py-2 rounded-lg text-gray-900 w-full sm:w-auto"
           />
           <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
-            Subscribe
+            Abone Ol
           </button>
         </div>
       </div>

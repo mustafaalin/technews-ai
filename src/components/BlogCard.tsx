@@ -42,7 +42,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <span className="font-medium">{post.author}</span>
           <span className="mx-2">•</span>
           <Clock className="w-4 h-4 mr-1" />
-          <span>{post.readTime} min read</span>
+          <span>{post.readTime} dk okuma</span>
           <span className="mx-2">•</span>
           <span>{formatDate(post.publishDate)}</span>
         </div>
@@ -77,14 +77,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
               to={`/post/${post.id}`}
               className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200"
             >
-              Read more
+              Devamını oku
             </Link>
             <a
               href={post.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
-              title="View original source"
+              title="Orijinal kaynağı görüntüle"
             >
               <ExternalLink className="w-4 h-4" />
             </a>

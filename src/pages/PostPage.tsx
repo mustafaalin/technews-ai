@@ -10,9 +10,9 @@ const PostPage = () => {
   if (!post) {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Post not found</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı bulunamadı</h1>
         <Link to="/" className="text-blue-600 hover:text-blue-800">
-          Return to home
+          Ana sayfaya dön
         </Link>
       </div>
     );
@@ -39,7 +39,7 @@ const PostPage = () => {
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to all posts
+          Tüm yazılara dön
         </Link>
       </div>
 
@@ -66,7 +66,7 @@ const PostPage = () => {
           <span>{formatDate(post.publishDate)}</span>
           <span className="mx-2">•</span>
           <Clock className="w-4 h-4 mr-1" />
-          <span>{post.readTime} min read</span>
+          <span>{post.readTime} dk okuma</span>
         </div>
         
         <div className="flex items-center justify-between border-b border-gray-200 pb-6">
@@ -92,7 +92,7 @@ const PostPage = () => {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
             >
               <ExternalLink className="w-4 h-4 mr-1" />
-              View Source
+              Kaynağı Görüntüle
             </a>
           </div>
         </div>
@@ -109,7 +109,7 @@ const PostPage = () => {
 
       {/* Summary */}
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 mb-8">
-        <h2 className="text-lg font-semibold text-blue-900 mb-2">Summary</h2>
+        <h2 className="text-lg font-semibold text-blue-900 mb-2">Özet</h2>
         <p className="text-blue-800 leading-relaxed">
           {post.summary}
         </p>
@@ -128,9 +128,9 @@ const PostPage = () => {
 
       {/* Source Link */}
       <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h3 className="font-semibold text-gray-900 mb-2">Read the Original Article</h3>
+        <h3 className="font-semibold text-gray-900 mb-2">Orijinal Makaleyi Okuyun</h3>
         <p className="text-gray-600 mb-4">
-          For more detailed information and the complete story, visit the original source.
+          Daha detaylı bilgi ve tam hikaye için orijinal kaynağı ziyaret edin.
         </p>
         <a
           href={post.sourceUrl}
@@ -139,13 +139,13 @@ const PostPage = () => {
           className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
         >
           <ExternalLink className="w-4 h-4 mr-2" />
-          Visit Original Source
+          Orijinal Kaynağı Ziyaret Et
         </a>
       </div>
 
       {/* Related Posts */}
       <div className="border-t border-gray-200 pt-8">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Related Posts</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-6">İlgili Yazılar</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blogPosts
             .filter(p => p.id !== post.id && p.category === post.category)

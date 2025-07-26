@@ -12,9 +12,9 @@ const CategoryPage = () => {
   if (!category) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Category not found</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Kategori bulunamadı</h1>
         <Link to="/" className="text-blue-600 hover:text-blue-800">
-          Return to home
+          Ana sayfaya dön
         </Link>
       </div>
     );
@@ -29,7 +29,7 @@ const CategoryPage = () => {
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to all posts
+          Tüm yazılara dön
         </Link>
       </div>
 
@@ -39,7 +39,7 @@ const CategoryPage = () => {
           {category.name}
         </h1>
         <p className="text-gray-600 text-lg">
-          {categoryPosts.length} {categoryPosts.length === 1 ? 'article' : 'articles'} in this category
+          Bu kategoride {categoryPosts.length} {categoryPosts.length === 1 ? 'makale' : 'makale'}
         </p>
       </div>
 
@@ -52,12 +52,12 @@ const CategoryPage = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No posts found in this category yet.</p>
+          <p className="text-gray-500 text-lg">Bu kategoride henüz yazı bulunamadı.</p>
           <Link
             to="/"
             className="text-blue-600 hover:text-blue-800 mt-4 inline-block"
           >
-            Browse all posts
+            Tüm yazılara göz at
           </Link>
         </div>
       )}

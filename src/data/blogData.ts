@@ -4,12 +4,12 @@ import postsFromJson from './blogPosts.json';
 const allPosts: BlogPost[] = postsFromJson as any;
 
 export const baseCategories: Omit<Category, 'count'>[] = [
-  { id: '1', name: 'AI & Machine Learning', slug: 'ai-ml' },
-  { id: '2', name: 'Web Development', slug: 'web-dev' },
-  { id: '3', name: 'Mobile Tech', slug: 'mobile' },
-  { id: '4', name: 'Cloud Computing', slug: 'cloud' },
-  { id: '5', name: 'Cybersecurity', slug: 'security' },
-  { id: '6', name: 'Startups', slug: 'startups' },
+  { id: '1', name: 'Yapay Zeka & Makine Öğrenmesi', slug: 'ai-ml' },
+  { id: '2', name: 'Web Geliştirme', slug: 'web-dev' },
+  { id: '3', name: 'Mobil Teknoloji', slug: 'mobile' },
+  { id: '4', name: 'Bulut Bilişim', slug: 'cloud' },
+  { id: '5', name: 'Siber Güvenlik', slug: 'security' },
+  { id: '6', name: 'Girişimcilik', slug: 'startups' },
 ];
 
 const categoryCounts: { [key: string]: number } = {};

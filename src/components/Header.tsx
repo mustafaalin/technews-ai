@@ -8,12 +8,12 @@ const Header = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'AI & ML', href: '/category/ai-ml' },
-    { name: 'Web Dev', href: '/category/web-dev' },
-    { name: 'Mobile', href: '/category/mobile' },
-    { name: 'Cloud', href: '/category/cloud' },
-    { name: 'Security', href: '/category/security' },
+    { name: 'Ana Sayfa', href: '/' },
+    { name: 'Yapay Zeka', href: '/category/ai-ml' },
+    { name: 'Web Geliştirme', href: '/category/web-dev' },
+    { name: 'Mobil', href: '/category/mobile' },
+    { name: 'Bulut', href: '/category/cloud' },
+    { name: 'Güvenlik', href: '/category/security' },
   ];
 
   const isActive = (path: string) => {
@@ -55,7 +55,7 @@ const Header = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search tech news..."
+                placeholder="Teknoloji haberlerinde ara..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
@@ -96,7 +96,7 @@ const Header = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
-                  placeholder="Search tech news..."
+                  placeholder="Teknoloji haberlerinde ara..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"

@@ -7,19 +7,19 @@ const Footer = () => {
 
   const footerLinks = {
     categories: [
-      { name: 'AI & Machine Learning', href: '/category/ai-ml' },
-      { name: 'Web Development', href: '/category/web-dev' },
-      { name: 'Mobile Tech', href: '/category/mobile' },
-      { name: 'Cloud Computing', href: '/category/cloud' },
-      { name: 'Cybersecurity', href: '/category/security' },
-      { name: 'Startups', href: '/category/startups' },
+      { name: 'Yapay Zeka & Makine Öğrenmesi', href: '/category/ai-ml' },
+      { name: 'Web Geliştirme', href: '/category/web-dev' },
+      { name: 'Mobil Teknoloji', href: '/category/mobile' },
+      { name: 'Bulut Bilişim', href: '/category/cloud' },
+      { name: 'Siber Güvenlik', href: '/category/security' },
+      { name: 'Girişimcilik', href: '/category/startups' },
     ],
     company: [
-      { name: 'About', href: '#' },
-      { name: 'Contact', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'RSS Feed', href: '#' },
+      { name: 'Hakkımızda', href: '#' },
+      { name: 'İletişim', href: '#' },
+      { name: 'Gizlilik Politikası', href: '#' },
+      { name: 'Kullanım Şartları', href: '#' },
+      { name: 'RSS Beslemesi', href: '#' },
     ],
   };
 
@@ -43,8 +43,8 @@ const Footer = () => {
               <span className="text-xl font-bold">TechPulse AI</span>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
-              Stay updated with the latest technology news through AI-powered summaries. 
-              Get concise, accurate insights from the world of tech, delivered daily.
+              Yapay zeka destekli özetlerle en son teknoloji haberlerinden haberdar olun. 
+              Teknoloji dünyasından özlü, doğru içgörüleri günlük olarak edinin.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -62,7 +62,7 @@ const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Categories</h3>
+            <h3 className="text-lg font-semibold mb-4">Kategoriler</h3>
             <ul className="space-y-2">
               {footerLinks.categories.map((link) => (
                 <li key={link.name}>
@@ -79,7 +79,7 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4">Şirket</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -98,10 +98,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} TechPulse AI. All rights reserved.
+            © {currentYear} TechPulse AI. Tüm hakları saklıdır.
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
-            Powered by AI • Updated Daily • Made with ❤️
+            Yapay Zeka Destekli • Günlük Güncelleme • ❤️ ile Yapıldı
           </p>
         </div>
       </div>
