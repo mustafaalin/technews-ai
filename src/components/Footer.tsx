@@ -15,9 +15,9 @@ const Footer = () => {
       { name: 'Girişimcilik', href: '/category/startups' },
     ],
     company: [
-      { name: 'Hakkımızda', href: '#' },
-      { name: 'İletişim', href: '#' },
-      { name: 'Gizlilik Politikası', href: '#' },
+      { name: 'Hakkımızda', href: '/about' },
+      { name: 'İletişim', href: '/contact' },
+      { name: 'Gizlilik Politikası', href: '/privacy' },
       { name: 'Kullanım Şartları', href: '#' },
       { name: 'RSS Beslemesi', href: '#' },
     ],

@@ -5,6 +5,9 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import PostPage from './pages/PostPage';
 import CategoryPage from './pages/CategoryPage';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/post/:id" element={<PostPage />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Route>
       </Routes>
     </Router>
