@@ -58,7 +58,7 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            <span className="text-xl font-bold">Pulse of Tech</span>
+          </div>
 
           {/* Categories */}
           <div>
