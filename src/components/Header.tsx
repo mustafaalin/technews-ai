@@ -25,24 +25,25 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-3">
             <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg shadow-lg">
               <Zap className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Pulse of Tech</span>
-            <span className="text-xl font-bold text-gray-900">Pulse of Tech</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Pulse of Tech
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-all duration-200 px-3 py-2 rounded-lg ${
+                className={`text-sm font-medium transition-all duration-200 px-4 py-2 rounded-lg hover:scale-105 ${
                   isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-blue-600 bg-blue-50 shadow-sm'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
                 }`}
               >
                 {item.name}
@@ -51,7 +52,7 @@ const Header = () => {
           </nav>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden lg:flex items-center">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
@@ -59,7 +60,7 @@ const Header = () => {
                 placeholder="Teknoloji haberlerinde ara..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64 text-gray-900 placeholder-gray-500"
+                className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64 text-gray-900 placeholder-gray-500 transition-all duration-200 hover:bg-white"
               />
             </div>
           </div>
@@ -67,7 +68,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -76,23 +77,23 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200">
-          <div className="px-4 py-3 space-y-3">
+        <div className="md:hidden bg-white/98 backdrop-blur-sm border-t border-gray-200 shadow-lg">
+          <div className="px-4 py-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block text-base font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                className={`block text-base font-medium transition-all duration-200 px-4 py-3 rounded-lg ${
                   isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-blue-600 bg-blue-50 shadow-sm'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="pt-3 border-t">
+            <div className="pt-4 border-t border-gray-200">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
@@ -100,7 +101,7 @@ const Header = () => {
                   placeholder="Teknoloji haberlerinde ara..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full text-gray-900 placeholder-gray-500"
+                  className="pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full text-gray-900 placeholder-gray-500 transition-all duration-200"
                 />
               </div>
             </div>
