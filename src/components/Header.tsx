@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
+import { blogPosts } from '../data/blogData';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<typeof blogPosts>([]);
+  const [showResults, setShowResults] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: 'Ana Sayfa', href: '/' },
@@ -20,8 +24,41 @@ const Header = () => {
     return location.pathname === path;
   };
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    
+    if (query.trim().length < 2) {
+      setSearchResults([]);
+      setShowResults(false);
+      return;
+    }
+
+    const filtered = blogPosts.filter(post =>
+      post.title.toLowerCase().includes(query.toLowerCase()) ||
+      post.summary.toLowerCase().includes(query.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+      post.content.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setSearchResults(filtered);
+    setShowResults(true);
+  };
+
+  const handleResultClick = (postId: string) => {
+    navigate(`/post/${postId}`);
+    setSearchQuery('');
+    setShowResults(false);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchResults.length > 0) {
+      handleResultClick(searchResults[0].id);
+    }
+  };
+
   return (
-    <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-gray-200">
+    <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-gray-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -53,15 +90,58 @@ const Header = () => {
 
           {/* Search Bar */}
           <div className="hidden lg:flex items-center">
-            <div className="relative">
+            <div className="relative" onBlur={() => setTimeout(() => setShowResults(false), 200)}>
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Teknoloji haberlerinde ara..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64 text-gray-900 placeholder-gray-500 transition-all duration-200 hover:bg-white"
-              />
+              <form onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  placeholder="Teknoloji haberlerinde ara..."
+                  value={searchQuery}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
+                  className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64 text-gray-900 placeholder-gray-500 transition-all duration-200 hover:bg-white"
+                />
+              </form>
+              
+              {/* Search Results Dropdown */}
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
+                  {searchResults.slice(0, 5).map((post) => (
+                    <div
+                      key={post.id}
+                      onClick={() => handleResultClick(post.id)}
+                      className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    >
+                      <h4 className="font-medium text-gray-900 text-sm line-clamp-1">
+                        {post.title}
+                      </h4>
+                      <p className="text-gray-600 text-xs mt-1 line-clamp-2">
+                        {post.summary}
+                      </p>
+                      <div className="flex items-center mt-2 text-xs text-gray-500">
+                        <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {post.category}
+                        </span>
+                        <span className="ml-2">{post.readTime} dk</span>
+                      </div>
+                    </div>
+                  ))}
+                  {searchResults.length > 5 && (
+                    <div className="p-3 text-center text-gray-500 text-sm bg-gray-50">
+                      +{searchResults.length - 5} daha fazla sonuç
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* No Results */}
+              {showResults && searchQuery.length >= 2 && searchResults.length === 0 && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50">
+                  <p className="text-gray-500 text-sm text-center">
+                    "{searchQuery}" için sonuç bulunamadı
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -94,15 +174,41 @@ const Header = () => {
               </Link>
             ))}
             <div className="pt-4 border-t border-gray-200">
-              <div className="relative">
+              <div className="relative" onBlur={() => setTimeout(() => setShowResults(false), 200)}>
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Teknoloji haberlerinde ara..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full text-gray-900 placeholder-gray-500 transition-all duration-200"
-                />
+                <form onSubmit={handleSearchSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Teknoloji haberlerinde ara..."
+                    value={searchQuery}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
+                    className="pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full text-gray-900 placeholder-gray-500 transition-all duration-200"
+                  />
+                </form>
+                
+                {/* Mobile Search Results */}
+                {showResults && searchResults.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto z-50">
+                    {searchResults.slice(0, 3).map((post) => (
+                      <div
+                        key={post.id}
+                        onClick={() => {
+                          handleResultClick(post.id);
+                          setIsMenuOpen(false);
+                        }}
+                        className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                      >
+                        <h4 className="font-medium text-gray-900 text-sm line-clamp-1">
+                          {post.title}
+                        </h4>
+                        <p className="text-gray-600 text-xs mt-1 line-clamp-1">
+                          {post.summary}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
