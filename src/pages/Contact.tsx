@@ -232,7 +232,7 @@ const Contact = () => {
             
             <div className="space-y-4">
               <a 
-                href="https://twitter.com/mustafaalin" 
+                href="https://x.com/mustafaalinn" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
@@ -242,7 +242,7 @@ const Contact = () => {
               </a>
               
               <a 
-                href="https://linkedin.com/in/mustafaalin" 
+                href="https://www.linkedin.com/in/mustafa-alin-3567411b2/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
