@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "migrate-posts": "tsx scripts/migratePosts.ts"
+    "migrate-posts": "tsx scripts/migratePosts.ts",
+    "migrate-json": "tsx scripts/migrateJsonToSupabase.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
