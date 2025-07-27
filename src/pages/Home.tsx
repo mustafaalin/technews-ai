@@ -3,11 +3,49 @@ import { Link } from 'react-router-dom';
 import { TrendingUp, Clock, Users, User } from 'lucide-react';
 import BlogCard from '../components/BlogCard';
 import NewsletterSignup from '../components/NewsletterSignup';
-import { blogPosts } from '../data/blogData';
+import { getAllBlogPosts } from '../data/blogData';
 
 const Home = () => {
+  const [blogPosts, setBlogPosts] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadBlogPosts = async () => {
+      try {
+        const posts = await getAllBlogPosts();
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlogPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Haberler yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
   const featuredPost = blogPosts[0];
   const recentPosts = blogPosts.slice(1, 7);
+
+  if (!featuredPost) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Henüz haber bulunmuyor</h2>
+        <p className="text-gray-600">Yakında yeni haberler eklenecek.</p>
+      </div>
+    );
+  }
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {

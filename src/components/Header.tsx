@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
-import { blogPosts } from '../data/blogData';
+import { getAllBlogPosts } from '../data/blogData';
+import { searchBlogPosts } from '../lib/blogService';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<typeof blogPosts>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ const Header = () => {
     return location.pathname === path;
   };
 
-  const handleSearch = (query: string) => {
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
     
     if (query.trim().length < 2) {
@@ -33,15 +35,36 @@ const Header = () => {
       return;
     }
 
-    const filtered = blogPosts.filter(post =>
-      post.title.toLowerCase().includes(query.toLowerCase()) ||
-      post.summary.toLowerCase().includes(query.toLowerCase()) ||
-      post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
-      post.content.toLowerCase().includes(query.toLowerCase())
-    );
+    setIsSearching(true);
+    
+    try {
+      // Önce Supabase'de ara
+      const supabaseResults = await searchBlogPosts(query.toLowerCase());
+      
+      // Sonra JSON verilerinde ara
+      const allPosts = await getAllBlogPosts();
+      const jsonResults = allPosts.filter(post =>
+        post.title.toLowerCase().includes(query.toLowerCase()) ||
+        post.summary.toLowerCase().includes(query.toLowerCase()) ||
+        post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+        post.content.toLowerCase().includes(query.toLowerCase())
+      );
 
-    setSearchResults(filtered);
-    setShowResults(true);
+      // Sonuçları birleştir ve benzersiz hale getir
+      const combinedResults = [...supabaseResults, ...jsonResults];
+      const uniqueResults = combinedResults.filter((post, index, self) => 
+        index === self.findIndex(p => p.id === post.id)
+      );
+      
+      setSearchResults(uniqueResults);
+      setShowResults(true);
+    } catch (error) {
+      console.error('Search error:', error);
+      setSearchResults([]);
+      setShowResults(false);
+    } finally {
+      setIsSearching(false);
+    }
   };
 
   const handleResultClick = (postId: string) => {

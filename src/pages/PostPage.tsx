@@ -1,11 +1,64 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
-import { blogPosts, categories } from '../data/blogData';
+import { getAllBlogPosts, getCategories } from '../data/blogData';
+import { fetchBlogPostById } from '../lib/blogService';
 
 const PostPage = () => {
   const { id } = useParams<{ id: string }>();
-  const post = blogPosts.find(p => p.id === id);
+  const [post, setPost] = React.useState<any>(null);
+  const [categories, setCategories] = React.useState<any[]>([]);
+  const [relatedPosts, setRelatedPosts] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadPostData = async () => {
+      if (!id) return;
+      
+      try {
+        // Önce Supabase'den dene
+        let foundPost = await fetchBlogPostById(id);
+        
+        // Supabase'de bulunamazsa JSON'dan ara
+        if (!foundPost) {
+          const allPosts = await getAllBlogPosts();
+          foundPost = allPosts.find(p => p.id === id) || null;
+        }
+        
+        setPost(foundPost);
+
+        if (foundPost) {
+          // Kategorileri yükle
+          const cats = await getCategories();
+          setCategories(cats);
+
+          // İlgili yazıları yükle
+          const allPosts = await getAllBlogPosts();
+          const related = allPosts
+            .filter(p => p.id !== foundPost.id && p.category === foundPost.category)
+            .slice(0, 2);
+          setRelatedPosts(related);
+        }
+      } catch (error) {
+        console.error('Error loading post data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPostData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Yazı yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -148,10 +201,7 @@ const PostPage = () => {
       <div className="border-t border-gray-200 pt-8">
         <h3 className="text-xl font-bold text-gray-900 mb-6">İlgili Yazılar</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {blogPosts
-            .filter(p => p.id !== post.id && p.category === post.category)
-            .slice(0, 2)
-            .map((relatedPost) => (
+          {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
                 to={`/post/${relatedPost.id}`}

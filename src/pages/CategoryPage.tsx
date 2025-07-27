@@ -2,12 +2,47 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import BlogCard from '../components/BlogCard';
-import { blogPosts, categories } from '../data/blogData';
+import { getBlogPostsByCategory, getCategories } from '../data/blogData';
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const category = categories.find(c => c.slug === slug);
-  const categoryPosts = blogPosts.filter(post => post.category === slug);
+  const [category, setCategory] = React.useState<any>(null);
+  const [categoryPosts, setCategoryPosts] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadCategoryData = async () => {
+      if (!slug) return;
+      
+      try {
+        // Kategorileri yükle
+        const categories = await getCategories();
+        const foundCategory = categories.find(c => c.slug === slug);
+        setCategory(foundCategory);
+
+        // Kategori yazılarını yükle
+        const posts = await getBlogPostsByCategory(slug);
+        setCategoryPosts(posts);
+      } catch (error) {
+        console.error('Error loading category data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCategoryData();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Kategori yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!category) {
     return (
