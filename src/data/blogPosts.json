@@ -1,5 +1,21 @@
 [
   {
+    "id": "1753581473723",
+    "title": "\"Microsoft'tan Çin Ekiplerine Güvenlik Duyarlılığı\"",
+    "summary": "Microsoft, Çin merkezli ekiplerden hizmet alımını sonlandırarak ulusal güvenlik kaygılarına yanıt veriyor. Bu değişim sektördeki güvenlik standartlarını etkileyebilir.",
+    "content": "Teknoloji dünyası, büyük kararların ardında yatan stratejilerle dolu. Bunun son örneği, dünyanın en büyük teknoloji şirketlerinden biri olan Microsoft'un, federal müşterilerine destek vermek için Çin merkezli ekiplerini kullanma kararını sonlandırması olmuş durumda. Bugün bu önemli haberi derinlemesine inceleyeceğiz ve bu değişikliğin ardındaki nedenlere, olası sonuçlara ve sektöre etkilerine göz atacağız.\n\nMicrosoft, yıllardır federal hükümet müşterileri için küresel bir iş gücüne dayanarak çözümler sunuyordu. Ancak, son zamanlardaki uluslararası gerilimler ve siber güvenlik endişeleri, bu durumu gözden geçirmesine yol açtı. Özellikle ABD Dönüşüm ve İnovasyon Ofisi'nin, ulusal güvenlik ve hassas bilgilerin korunması konusundaki baskılarının artmasıyla birlikte, Microsoft, Çin merkezli ekiplerden hizmet alımını sonlandırarak bu yükümlülüklere yanıt verme kararı aldı. Bilgilerin güvenliği konusunda atılan bu adım, birçok açıdan dikkate değer.\n\nBu değişikliğin ardında yatan teknik nedenler de dikkat çekici. Microsoft, Çin’in veri güvenliği yasalarının ve siber casusluk faaliyetlerinin yarattığı riskleri göz önünde bulundurarak, federal ağların savunmasında daha güvenilir kaynaklar kullanma gerekliliğini hissetmiş olabilir. Özellikle, ABD'nin savunma sanayiindeki hassas verilerin korunması kritik bir öneme sahip. Bu nedenle, yerel iş gücünün ve güvenilir yerli ortakların tercih edilmesi, şirketin ulusal güvenlik konusundaki taahhütlerini güçlendirecektir. Ayrıca, Microsoft’un bu tür hizmetleri sunacak yeni ekipler oluşturması, istihdamda ve yerel ekonomide olumlu bir etki yaratabilir.\n\nMicrosoft’un bu kararı, teknoloji alanındaki geniş bir etki yelpazesine sahip. Büyük teknoloji şirketleri için artan ulusal güvenlik kaygıları, iş modellerini ve stratejilerini yeniden şekillendirmeye başlamış durumda. Sadece Microsoft değil, diğer şirketler de benzer riskleri değerlendirmek ve iş gücünü yerel kaynaklarla desteklemek üzere harekete geçebilir. Bu durum, uluslararası iş gücünün dinamiklerini ve dağılımını etkileyebilir. Ayrıca, devletle iş yapan tüm teknoloji firmaları için yeni güvenlik standartlarının oluşturulması gerektiği anlamına gelmelidir. Böylece, gelecekte daha sıkı düzenleyici denetimlerin gelmesi de muhtemel.\n\nSonuç olarak, Microsoft’un Çin merkezli ekiplerle iş yapmama kararı, sadece bir şirket içi değişiklik değil, aynı zamanda uluslararası ilişkilere ve teknoloji sektörüne meydan okuyan küresel bir trendin de yansımasıdır. Bu durumdan etkilenecek birçok firma ve hükümetin, kendi stratejilerini gözden geçirmesi gerekecektir. Kişisel olarak, bu kararı oldukça yerinde buluyorum. Gelişen teknolojiyle birlikte, veri güvenliği ve gizlilik meseleleri daha da kritik hale geliyor. Özellikle ulusal güvenlik açısından, doğru adımların atılması büyük öneme sahip. Microsoft'un bu hamlesi, yalnızca kendi güvenliğini değil, aynı zamanda tüm bir ekosistem için güvenilirliği artırmaya yönelik bir adım olarak değerlendirilmeli. Gelişmeleri yakından takip etmek, teknoloji dünyasındaki güvenlik konularında atılacak adımları anlamamıza yardımcı olacaktır.",
+    "category": "startups",
+    "imageUrl": "/images/microsofttan-cin-ekiplerine-gu.png",
+    "sourceUrl": "https://arstechnica.com/security/2025/07/microsoft-to-stop-using-china-based-teams-to-support-department-of-defense/",
+    "publishDate": "2025-07-27",
+    "readTime": 2,
+    "tags": [
+      "TechCrunch",
+      "Machine Learning"
+    ],
+    "author": "AI Admin"
+  },
+  {
     "id": "1753567273043",
     "title": "\"Birleşik Krallık'ta Çocuk Güvenliği: Yaş Doğrulama Zorunluluğu\"",
     "summary": "Birleşik Krallık, pornografik içerik sağlayıcıların kullanıcı yaşını doğrulamasını zorunlu kıldı, güvenli internet deneyimi için önemli bir adım.",
@@ -8,7 +24,7 @@
     "imageUrl": "/images/birlesik-krallikta-cocuk-guven.png",
     "sourceUrl": "https://techcrunch.com/2025/07/26/u-k-starts-enforcing-online-age-check-rules/",
     "publishDate": "2025-07-26",
-    "readTime": 2, 
+    "readTime": 2,
     "tags": [
       "TechCrunch"
     ],
