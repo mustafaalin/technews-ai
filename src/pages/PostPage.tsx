@@ -117,15 +117,13 @@ const PostPage = () => {
       </div>
 
       {/* Content */}
-      <div className="prose max-w-none mb-12">
-        <div className="text-gray-800 leading-relaxed space-y-4">
-        <div className="text-gray-900 leading-relaxed space-y-4 text-lg">
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-12 border border-white/20">
+        <div className="text-gray-900 leading-relaxed space-y-6 text-lg text-justify">
           {post.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="mb-6 leading-relaxed">
+            <p key={index} className="leading-relaxed text-justify">
               {paragraph}
             </p>
           ))}
-        </div>
         </div>
       </div>
 
