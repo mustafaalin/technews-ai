@@ -1,6 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
 import allPostsData from './blogPosts.json';
-import { fetchBlogPosts, fetchBlogPostsByCategory } from '../lib/blogService';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
   { id: '1', name: 'Yapay Zeka & Makine Öğrenmesi', slug: 'ai-ml' },
@@ -20,18 +19,6 @@ export const calculateCategoryCounts = async (): Promise<{ [key: string]: number
     if (post.category) {
       categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
     }
-  }
-  
-  // Supabase'den blog yazılarını çek ve sayıları ekle
-  try {
-    const supabasePosts = await fetchBlogPosts();
-    for (const post of supabasePosts) {
-      if (post.category) {
-        categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
-      }
-    }
-  } catch (error) {
-    console.error('Error fetching Supabase posts for category counts:', error);
   }
   
   return categoryCounts;
@@ -65,12 +52,8 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
       is_published: true
     }));
     
-    // Supabase'den yazıları al
-    const supabasePosts = await fetchBlogPosts();
-    
-    // İkisini birleştir ve tarihe göre sırala
-    const combinedPosts = [...jsonPosts, ...supabasePosts];
-    return combinedPosts.sort((a, b) => 
+    // Tarihe göre sırala
+    return jsonPosts.sort((a, b) => 
       new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
     );
   } catch (error) {
@@ -115,12 +98,8 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
         is_published: true
       }));
     
-    // Supabase'den kategoriye ait yazıları al
-    const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
-    
-    // İkisini birleştir ve tarihe göre sırala
-    const combinedPosts = [...jsonPosts, ...supabasePosts];
-    return combinedPosts.sort((a, b) => 
+    // Tarihe göre sırala
+    return jsonPosts.sort((a, b) => 
       new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
     );
   } catch (error) {

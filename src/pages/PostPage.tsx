@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
 import { getAllBlogPosts, getCategories } from '../data/blogData';
-import { fetchBlogPostById } from '../lib/blogService';
 
 const PostPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,14 +15,9 @@ const PostPage = () => {
       if (!id) return;
       
       try {
-        // Önce Supabase'den dene
-        let foundPost = await fetchBlogPostById(id);
-        
-        // Supabase'de bulunamazsa JSON'dan ara
-        if (!foundPost) {
-          const allPosts = await getAllBlogPosts();
-          foundPost = allPosts.find(p => p.id === id) || null;
-        }
+        // JSON'dan ara
+        const allPosts = await getAllBlogPosts();
+        const foundPost = allPosts.find(p => p.id === id) || null;
         
         setPost(foundPost);
 

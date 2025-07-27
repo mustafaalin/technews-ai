@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
 import { getAllBlogPosts } from '../data/blogData';
-import { searchBlogPosts } from '../lib/blogService';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,10 +37,7 @@ const Header = () => {
     setIsSearching(true);
     
     try {
-      // Önce Supabase'de ara
-      const supabaseResults = await searchBlogPosts(query.toLowerCase());
-      
-      // Sonra JSON verilerinde ara
+      // JSON verilerinde ara
       const allPosts = await getAllBlogPosts();
       const jsonResults = allPosts.filter(post =>
         post.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -50,13 +46,7 @@ const Header = () => {
         post.content.toLowerCase().includes(query.toLowerCase())
       );
 
-      // Sonuçları birleştir ve benzersiz hale getir
-      const combinedResults = [...supabaseResults, ...jsonResults];
-      const uniqueResults = combinedResults.filter((post, index, self) => 
-        index === self.findIndex(p => p.id === post.id)
-      );
-      
-      setSearchResults(uniqueResults);
+      setSearchResults(jsonResults);
       setShowResults(true);
     } catch (error) {
       console.error('Search error:', error);
