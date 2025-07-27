@@ -24,7 +24,7 @@ const PostPage = () => {
           setPost(supabasePost);
         } else {
           // Supabase'de bulunamazsa JSON'dan ara
-          console.log('⚠️ Supabase'de bulunamadı, JSON verilerinde aranıyor');
+          console.log('⚠️ Supabase\'de bulunamadı, JSON verilerinde aranıyor');
         const allPosts = await getAllBlogPosts();
         const foundPost = allPosts.find(p => p.id === id) || null;
         setPost(foundPost);
