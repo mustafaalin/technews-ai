@@ -1,8 +1,13 @@
-import { supabase } from './supabase';
+import { supabase, isSupabaseAvailable } from './supabase';
 import { BlogPost } from '../types/blog';
 
 // Supabase'den blog yazılarını çek
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
+  if (!isSupabaseAvailable()) {
+    console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
+    return [];
+  }
+  
   try {
     const { data, error } = await supabase
       .from('blog_posts')
@@ -38,6 +43,11 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 
 // Kategoriye göre blog yazılarını çek
 export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPost[]> => {
+  if (!isSupabaseAvailable()) {
+    console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
+    return [];
+  }
+  
   try {
     const { data, error } = await supabase
       .from('blog_posts')
@@ -73,6 +83,11 @@ export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPo
 
 // ID'ye göre tek blog yazısı çek
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> => {
+  if (!isSupabaseAvailable()) {
+    console.log('⚠️ Supabase mevcut değil, null döndürülüyor');
+    return null;
+  }
+  
   try {
     const { data, error } = await supabase
       .from('blog_posts')
@@ -223,6 +238,11 @@ export const deleteBlogPost = async (id: string): Promise<boolean> => {
 
 // Arama fonksiyonu
 export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
+  if (!isSupabaseAvailable()) {
+    console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
+    return [];
+  }
+  
   try {
     const { data, error } = await supabase
       .from('blog_posts')

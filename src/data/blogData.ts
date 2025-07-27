@@ -1,4 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
+import { fetchBlogPosts, fetchBlogPostsByCategory, fetchBlogPostById } from '../lib/blogService';
 import allPostsData from './blogPosts.json';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
@@ -36,7 +37,16 @@ export const getCategories = async (): Promise<Category[]> => {
 // Blog yazılarını hem JSON hem Supabase'den çek
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
-    // JSON dosyasından yazıları al
+    // Önce Supabase'den dene
+    const supabasePosts = await fetchBlogPosts();
+    
+    if (supabasePosts.length > 0) {
+      console.log(`✅ Supabase'den ${supabasePosts.length} haber yüklendi`);
+      return supabasePosts;
+    }
+    
+    // Supabase'de veri yoksa JSON'dan al
+    console.log('⚠️ Supabase'de veri bulunamadı, JSON verilerini kullanıyor');
     const jsonPosts: BlogPost[] = allPostsData.map(post => ({
       id: post.id,
       title: post.title,
@@ -58,7 +68,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     );
   } catch (error) {
     console.error('Error fetching all blog posts:', error);
-    // Hata durumunda sadece JSON verilerini döndür
+    console.log('🔄 Hata nedeniyle JSON verilerine geçiliyor');
     return allPostsData.map(post => ({
       id: post.id,
       title: post.title,
@@ -80,7 +90,16 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
 // Kategoriye göre blog yazılarını çek
 export const getBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
   try {
-    // JSON dosyasından kategoriye ait yazıları al
+    // Önce Supabase'den dene
+    const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
+    
+    if (supabasePosts.length > 0) {
+      console.log(`✅ Supabase'den ${categorySlug} kategorisinde ${supabasePosts.length} haber yüklendi`);
+      return supabasePosts;
+    }
+    
+    // Supabase'de veri yoksa JSON'dan al
+    console.log(`⚠️ Supabase'de ${categorySlug} kategorisinde veri bulunamadı, JSON verilerini kullanıyor`);
     const jsonPosts: BlogPost[] = allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({
@@ -104,7 +123,7 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
     );
   } catch (error) {
     console.error('Error fetching blog posts by category:', error);
-    // Hata durumunda sadece JSON verilerini döndür
+    console.log(`🔄 Hata nedeniyle ${categorySlug} kategorisi için JSON verilerine geçiliyor`);
     return allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({

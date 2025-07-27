@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
 import { getAllBlogPosts, getCategories } from '../data/blogData';
+import { fetchBlogPostById } from '../lib/blogService';
 
 const PostPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,11 +16,19 @@ const PostPage = () => {
       if (!id) return;
       
       try {
-        // JSON'dan ara
+        // Önce Supabase'den dene
+        const supabasePost = await fetchBlogPostById(id);
+        
+        if (supabasePost) {
+          console.log(`✅ Supabase'den haber yüklendi: ${supabasePost.title}`);
+          setPost(supabasePost);
+        } else {
+          // Supabase'de bulunamazsa JSON'dan ara
+          console.log('⚠️ Supabase'de bulunamadı, JSON verilerinde aranıyor');
         const allPosts = await getAllBlogPosts();
         const foundPost = allPosts.find(p => p.id === id) || null;
-        
         setPost(foundPost);
+        }
 
         if (foundPost) {
           // Kategorileri yükle

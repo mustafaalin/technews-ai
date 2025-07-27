@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
 import { getAllBlogPosts } from '../data/blogData';
+import { searchBlogPosts } from '../lib/blogService';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,18 @@ const Header = () => {
     setIsSearching(true);
     
     try {
-      // JSON verilerinde ara
+      // Önce Supabase'de ara
+      const supabaseResults = await searchBlogPosts(query);
+      
+      if (supabaseResults.length > 0) {
+        console.log(`✅ Supabase'de ${supabaseResults.length} arama sonucu bulundu`);
+        setSearchResults(supabaseResults);
+        setShowResults(true);
+        return;
+      }
+      
+      // Supabase'de bulunamazsa JSON'da ara
+      console.log('⚠️ Supabase'de sonuç bulunamadı, JSON verilerinde aranıyor');
       const allPosts = await getAllBlogPosts();
       const jsonResults = allPosts.filter(post =>
         post.title.toLowerCase().includes(query.toLowerCase()) ||
