@@ -51,12 +51,19 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     // JSON dosyasından yazıları al
     const jsonPosts: BlogPost[] = allPostsData.map(post => ({
-      ...post,
-      imageUrl: post.imageUrl || post.image_url,
-      sourceUrl: post.sourceUrl || post.source_url,
-      publishDate: post.publishDate || post.publish_date,
-      readTime: post.readTime || post.read_time
-    })) as BlogPost[];
+      id: post.id,
+      title: post.title,
+      summary: post.summary,
+      content: post.content,
+      category: post.category,
+      imageUrl: post.imageUrl,
+      sourceUrl: post.sourceUrl,
+      publishDate: post.publishDate,
+      readTime: post.readTime,
+      tags: post.tags || [],
+      author: post.author,
+      is_published: true
+    }));
     
     // Supabase'den yazıları al
     const supabasePosts = await fetchBlogPosts();
@@ -70,12 +77,19 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     console.error('Error fetching all blog posts:', error);
     // Hata durumunda sadece JSON verilerini döndür
     return allPostsData.map(post => ({
-      ...post,
-      imageUrl: post.imageUrl || post.image_url,
-      sourceUrl: post.sourceUrl || post.source_url,
-      publishDate: post.publishDate || post.publish_date,
-      readTime: post.readTime || post.read_time
-    })) as BlogPost[];
+      id: post.id,
+      title: post.title,
+      summary: post.summary,
+      content: post.content,
+      category: post.category,
+      imageUrl: post.imageUrl,
+      sourceUrl: post.sourceUrl,
+      publishDate: post.publishDate,
+      readTime: post.readTime,
+      tags: post.tags || [],
+      author: post.author,
+      is_published: true
+    }));
   }
 };
 
@@ -86,12 +100,19 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
     const jsonPosts: BlogPost[] = allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({
-        ...post,
-        imageUrl: post.imageUrl || post.image_url,
-        sourceUrl: post.sourceUrl || post.source_url,
-        publishDate: post.publishDate || post.publish_date,
-        readTime: post.readTime || post.read_time
-      })) as BlogPost[];
+        id: post.id,
+        title: post.title,
+        summary: post.summary,
+        content: post.content,
+        category: post.category,
+        imageUrl: post.imageUrl,
+        sourceUrl: post.sourceUrl,
+        publishDate: post.publishDate,
+        readTime: post.readTime,
+        tags: post.tags || [],
+        author: post.author,
+        is_published: true
+      }));
     
     // Supabase'den kategoriye ait yazıları al
     const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
@@ -107,12 +128,19 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
     return allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({
-        ...post,
-        imageUrl: post.imageUrl || post.image_url,
-        sourceUrl: post.sourceUrl || post.source_url,
-        publishDate: post.publishDate || post.publish_date,
-        readTime: post.readTime || post.read_time
-      })) as BlogPost[];
+        id: post.id,
+        title: post.title,
+        summary: post.summary,
+        content: post.content,
+        category: post.category,
+        imageUrl: post.imageUrl,
+        sourceUrl: post.sourceUrl,
+        publishDate: post.publishDate,
+        readTime: post.readTime,
+        tags: post.tags || [],
+        author: post.author,
+        is_published: true
+      }));
   }
 };
 
