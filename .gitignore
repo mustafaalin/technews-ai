@@ -26,3 +26,4 @@ dist-ssr
 # Don't ignore public folder and its contents
 !public/
 !public/**/*
+.env
