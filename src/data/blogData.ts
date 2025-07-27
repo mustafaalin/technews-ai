@@ -1,5 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
-import allPostsJson from './blogPosts.json';
+import allPostsData from './blogPosts.json';
 import { fetchBlogPosts, fetchBlogPostsByCategory } from '../lib/blogService';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
@@ -16,7 +16,7 @@ export const calculateCategoryCounts = async (): Promise<{ [key: string]: number
   const categoryCounts: { [key: string]: number } = {};
   
   // JSON dosyasından sayıları hesapla
-  for (const post of allPostsJson) {
+  for (const post of allPostsData) {
     if (post.category) {
       categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
     }
@@ -50,7 +50,7 @@ export const getCategories = async (): Promise<Category[]> => {
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     // JSON dosyasından yazıları al
-    const jsonPosts: BlogPost[] = allPostsJson.map(post => ({
+    const jsonPosts: BlogPost[] = allPostsData.map(post => ({
       ...post,
       imageUrl: post.imageUrl || post.image_url,
       sourceUrl: post.sourceUrl || post.source_url,
@@ -69,7 +69,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   } catch (error) {
     console.error('Error fetching all blog posts:', error);
     // Hata durumunda sadece JSON verilerini döndür
-    return allPostsJson.map(post => ({
+    return allPostsData.map(post => ({
       ...post,
       imageUrl: post.imageUrl || post.image_url,
       sourceUrl: post.sourceUrl || post.source_url,
@@ -83,7 +83,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
 export const getBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
   try {
     // JSON dosyasından kategoriye ait yazıları al
-    const jsonPosts: BlogPost[] = allPostsJson
+    const jsonPosts: BlogPost[] = allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({
         ...post,
@@ -104,7 +104,7 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
   } catch (error) {
     console.error('Error fetching blog posts by category:', error);
     // Hata durumunda sadece JSON verilerini döndür
-    return allPostsJson
+    return allPostsData
       .filter(post => post.category === categorySlug)
       .map(post => ({
         ...post,
@@ -117,7 +117,7 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
 };
 
 // Backward compatibility için
-export const blogPosts: BlogPost[] = allPostsJson as BlogPost[];
+export const blogPosts: BlogPost[] = allPostsData as BlogPost[];
 export const categories: Category[] = baseCategories.map(category => ({
   ...category,
   count: 0, // Bu değer dinamik olarak güncellenecek

@@ -11,8 +11,6 @@ export interface BlogPost {
   tags: string[];
   author: string;
   is_published?: boolean;
-  created_at?: string;
-  updated_at?: string;
 }
 
 export interface Category {

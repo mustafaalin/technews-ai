@@ -28,9 +28,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       readTime: post.read_time,
       tags: post.tags || [],
       author: post.author,
-      is_published: post.is_published,
-      created_at: post.created_at,
-      updated_at: post.updated_at
+      is_published: post.is_published
     }));
   } catch (error) {
     console.error('Unexpected error fetching blog posts:', error);
@@ -65,9 +63,7 @@ export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPo
       readTime: post.read_time,
       tags: post.tags || [],
       author: post.author,
-      is_published: post.is_published,
-      created_at: post.created_at,
-      updated_at: post.updated_at
+      is_published: post.is_published
     }));
   } catch (error) {
     console.error('Unexpected error fetching blog posts by category:', error);
@@ -102,9 +98,7 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
       readTime: data.read_time,
       tags: data.tags || [],
       author: data.author,
-      is_published: data.is_published,
-      created_at: data.created_at,
-      updated_at: data.updated_at
+      is_published: data.is_published
     };
   } catch (error) {
     console.error('Unexpected error fetching blog post by ID:', error);
@@ -150,9 +144,7 @@ export const createBlogPost = async (post: Omit<BlogPost, 'id' | 'created_at' | 
       readTime: data.read_time,
       tags: data.tags || [],
       author: data.author,
-      is_published: data.is_published,
-      created_at: data.created_at,
-      updated_at: data.updated_at
+      is_published: data.is_published
     };
   } catch (error) {
     console.error('Unexpected error creating blog post:', error);
@@ -201,9 +193,7 @@ export const updateBlogPost = async (id: string, updates: Partial<BlogPost>): Pr
       readTime: data.read_time,
       tags: data.tags || [],
       author: data.author,
-      is_published: data.is_published,
-      created_at: data.created_at,
-      updated_at: data.updated_at
+      is_published: data.is_published
     };
   } catch (error) {
     console.error('Unexpected error updating blog post:', error);
@@ -258,9 +248,7 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
       readTime: post.read_time,
       tags: post.tags || [],
       author: post.author,
-      is_published: post.is_published,
-      created_at: post.created_at,
-      updated_at: post.updated_at
+      is_published: post.is_published
     }));
   } catch (error) {
     console.error('Unexpected error searching blog posts:', error);
