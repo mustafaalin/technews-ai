@@ -38,8 +38,8 @@ export default function PrivacyPolicy() {
         </li>
       </ul>
       <p className="mb-4">
-        İleride Google AdSense gibi reklam hizmetleri eklenirse, reklam
-        çerezleri de kullanılabilir. Bu çerezler kullanıcı tercihlerinizi
+        Google AdSense gibi reklam hizmetleri, reklam
+        çerezleri kullanabilir. Bu çerezler kullanıcı tercihlerinizi
         hatırlamak ve ilgi alanlarınıza yönelik reklamlar göstermek amacıyla
         kullanılabilir.
       </p>
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
         <li>Yeni haber ve içeriklerle ilgili size bildirim göndermek</li>
         <li>Site kullanımını analiz ederek kullanıcı deneyimini geliştirmek</li>
         <li>
-          İleride eklenecek reklam hizmetleri için kişiselleştirilmiş içerik
+          Reklam hizmetleri için kişiselleştirilmiş içerik
           sağlamak
         </li>
       </ul>
@@ -66,7 +66,7 @@ export default function PrivacyPolicy() {
           davranışlarını anonim olarak analiz eder.
         </li>
         <li>
-          <strong>Google AdSense (ileride):</strong> Kişiselleştirilmiş reklamlar
+          <strong>Google AdSense:</strong> Kişiselleştirilmiş reklamlar
           göstermek için çerezleri kullanabilir.
         </li>
       </ul>
@@ -88,7 +88,7 @@ export default function PrivacyPolicy() {
       </ul>
       <p className="mb-4">
         Talepleriniz için bizimle{" "}
-        <strong>[e-posta adresinizi buraya yazın]</strong> üzerinden iletişime
+        <strong>info@pulseoftech.net</strong> üzerinden iletişime
         geçebilirsiniz.
       </p>
 
