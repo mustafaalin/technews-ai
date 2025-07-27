@@ -93,6 +93,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   }
 };
 
+
 // Kategoriye göre blog yazılarını çek
 export const getBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
   try {
