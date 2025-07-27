@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { createClient } from '@supabase/supabase-js';
 import allPostsData from '../src/data/blogPosts.json';
 
