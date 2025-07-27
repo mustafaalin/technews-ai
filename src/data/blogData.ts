@@ -47,6 +47,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     
     // Supabase'de veri yoksa JSON'dan al
     console.log('⚠️ Supabase'de veri bulunamadı, JSON verilerini kullanıyor');
+    )
     const jsonPosts: BlogPost[] = allPostsData.map(post => ({
       id: post.id,
       title: post.title,
