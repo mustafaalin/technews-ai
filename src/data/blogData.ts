@@ -1,5 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
-import allPosts from './blogPosts.json';
+import allPostsJson from './blogPosts.json';
 import { fetchBlogPosts, fetchBlogPostsByCategory } from '../lib/blogService';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
@@ -16,7 +16,7 @@ export const calculateCategoryCounts = async (): Promise<{ [key: string]: number
   const categoryCounts: { [key: string]: number } = {};
   
   // JSON dosyasından sayıları hesapla
-  for (const post of allPosts) {
+  for (const post of allPostsJson) {
     if (post.category) {
       categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
     }
@@ -50,7 +50,7 @@ export const getCategories = async (): Promise<Category[]> => {
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     // JSON dosyasından yazıları al
-    const jsonPosts: BlogPost[] = allPosts.map(post => ({
+    const jsonPosts: BlogPost[] = allPostsJson.map(post => ({
       ...post,
       imageUrl: post.imageUrl || post.image_url,
       sourceUrl: post.sourceUrl || post.source_url,
@@ -62,14 +62,14 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     const supabasePosts = await fetchBlogPosts();
     
     // İkisini birleştir ve tarihe göre sırala
-    const allPosts = [...jsonPosts, ...supabasePosts];
-    return allPosts.sort((a, b) => 
+    const combinedPosts = [...jsonPosts, ...supabasePosts];
+    return combinedPosts.sort((a, b) => 
       new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
     );
   } catch (error) {
     console.error('Error fetching all blog posts:', error);
     // Hata durumunda sadece JSON verilerini döndür
-    return allPosts.map(post => ({
+    return allPostsJson.map(post => ({
       ...post,
       imageUrl: post.imageUrl || post.image_url,
       sourceUrl: post.sourceUrl || post.source_url,
@@ -83,7 +83,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
 export const getBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
   try {
     // JSON dosyasından kategoriye ait yazıları al
-    const jsonPosts: BlogPost[] = allPosts
+    const jsonPosts: BlogPost[] = allPostsJson
       .filter(post => post.category === categorySlug)
       .map(post => ({
         ...post,
@@ -97,14 +97,14 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
     const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
     
     // İkisini birleştir ve tarihe göre sırala
-    const allPosts = [...jsonPosts, ...supabasePosts];
-    return allPosts.sort((a, b) => 
+    const combinedPosts = [...jsonPosts, ...supabasePosts];
+    return combinedPosts.sort((a, b) => 
       new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
     );
   } catch (error) {
     console.error('Error fetching blog posts by category:', error);
     // Hata durumunda sadece JSON verilerini döndür
-    return allPosts
+    return allPostsJson
       .filter(post => post.category === categorySlug)
       .map(post => ({
         ...post,
@@ -117,7 +117,7 @@ export const getBlogPostsByCategory = async (categorySlug: string): Promise<Blog
 };
 
 // Backward compatibility için
-export const blogPosts: BlogPost[] = allPosts as BlogPost[];
+export const blogPosts: BlogPost[] = allPostsJson as BlogPost[];
 export const categories: Category[] = baseCategories.map(category => ({
   ...category,
   count: 0, // Bu değer dinamik olarak güncellenecek
