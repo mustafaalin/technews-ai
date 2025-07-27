@@ -1,6 +1,11 @@
 import 'dotenv/config';
 import { createClient } from '@supabase/supabase-js';
-import allPostsData from '../src/data/blogPosts.json';
+import * as fs from 'fs';
+import * as path from 'path';
+
+// JSON dosyasını doğrudan oku
+const jsonPath = path.join(process.cwd(), 'src/data/blogPosts.json');
+const allPostsData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 
 // Environment variables'ları kontrol et
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -19,6 +24,8 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 async function migrateJsonToSupabase() {
   console.log('🚀 JSON verilerini Supabase\'e aktarma başlıyor...');
   console.log(`📊 Toplam ${allPostsData.length} haber aktarılacak`);
+  console.log(`🔗 Supabase URL: ${supabaseUrl}`);
+  console.log(`🔑 Service Key mevcut: ${supabaseServiceKey ? 'Evet' : 'Hayır'}`);
   
   let successCount = 0;
   let errorCount = 0;
@@ -26,6 +33,8 @@ async function migrateJsonToSupabase() {
 
   for (let i = 0; i < allPostsData.length; i++) {
     const post = allPostsData[i];
+    
+    console.log(`\n📝 ${i + 1}/${allPostsData.length} - İşleniyor: ${post.title.substring(0, 50)}...`);
     
     try {
       // Önce bu ID'de bir kayıt var mı kontrol et
@@ -36,15 +45,14 @@ async function migrateJsonToSupabase() {
         .single();
 
       if (existingPost) {
-        console.log(`⏭️  ${i + 1}/${allPostsData.length} - Zaten mevcut: ${post.title.substring(0, 50)}...`);
+        console.log(`⏭️  Zaten mevcut, atlanıyor`);
         continue;
       }
 
       // Yeni kayıt ekle
       const { error } = await supabase
         .from('blog_posts')
-        .insert({
-          id: post.id,
+        .insert([{
           title: post.title,
           summary: post.summary,
           content: post.content,
@@ -56,27 +64,29 @@ async function migrateJsonToSupabase() {
           tags: post.tags || [],
           author: post.author,
           is_published: true
-        });
+        }]);
 
       if (error) {
-        console.error(`❌ ${i + 1}/${allPostsData.length} - Hata: ${post.title.substring(0, 50)}...`);
+        console.error(`❌ Hata oluştu!`);
         console.error(`   Detay: ${error.message}`);
+        console.error(`   Kod: ${error.code}`);
         errors.push(`${post.title}: ${error.message}`);
         errorCount++;
       } else {
-        console.log(`✅ ${i + 1}/${allPostsData.length} - Başarılı: ${post.title.substring(0, 50)}...`);
+        console.log(`✅ Başarıyla kaydedildi!`);
         successCount++;
       }
     } catch (error) {
-      console.error(`💥 ${i + 1}/${allPostsData.length} - Beklenmeyen hata: ${post.title.substring(0, 50)}...`);
+      console.error(`💥 Beklenmeyen hata!`);
       console.error(`   Detay: ${error}`);
       errors.push(`${post.title}: ${error}`);
       errorCount++;
     }
 
     // Her 10 kayıtta bir kısa bekleme (rate limiting için)
-    if (i % 10 === 0 && i > 0) {
-      await new Promise(resolve => setTimeout(resolve, 100));
+    if (i % 5 === 0 && i > 0) {
+      console.log(`⏸️  Kısa mola (rate limiting)...`);
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
   }
 
