@@ -210,10 +210,10 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">E-posta</h3>
                 <a 
-                  href="mailto:mustafaalin@outlook.com" 
+                  href="mailto:info@pulseoftech.net" 
                   className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
                 >
-                  mustafaalin@outlook.com
+                  info@pulseoftech.net
                 </a>
               </div>
               
