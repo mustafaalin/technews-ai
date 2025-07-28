@@ -19,7 +19,6 @@ const Footer = () => {
       { name: 'İletişim', href: '/contact' },
       { name: 'Gizlilik Politikası', href: '/privacy-policy' },
       { name: 'Kullanım Şartları', href: '/terms-of-service' },
-      { name: 'RSS Beslemesi', href: '#' },
     ],
   };
 
@@ -101,7 +100,7 @@ const Footer = () => {
             © {currentYear} Pulse of Tech. Tüm hakları saklıdır.
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
-            Yapay Zeka Destekli • Günlük Güncelleme • ❤️ ile Yapıldı
+            Yapay Zeka Destekli • Günlük Güncellemeler • Teknoloji Haberleri
           </p>
         </div>
       </div>
