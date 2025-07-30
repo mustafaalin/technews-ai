@@ -58,3 +58,7 @@ export const getBlogPostsByCategory = async (
     return [];
   }
 };
+export const categories: Category[] = baseCategories.map((category) => ({
+  ...category,
+  count: 0
+}));

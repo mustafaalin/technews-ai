@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, ExternalLink, User } from 'lucide-react';
 import { BlogPost } from '../types/blog';
-import { categories } from '../data/blogData';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -17,9 +16,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
     });
   };
 
-  // Find the category name from the slug
-  const categoryData = categories.find(cat => cat.slug === post.category);
-  const categoryName = categoryData ? categoryData.name : post.category;
+  const categoryMap: Record<string, string> = {
+  'ai-ml': 'Yapay Zeka & Makine Öğrenmesi',
+  'web-dev': 'Web Geliştirme',
+  'mobile': 'Mobil Teknoloji',
+  'cloud': 'Bulut Bilişim',
+  'security': 'Siber Güvenlik',
+  'startups': 'Girişimcilik',
+};
+
+const categoryName = categoryMap[post.category] || post.category;
 
   return (
     <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border border-gray-200">
