@@ -1,5 +1,23 @@
 [
   {
+    "id": "1753880158444",
+    "title": "TikTok'ta Yeni Bir Dönem: Faydalı Notlar ile Kitle Kaynaklı Doğrulama",
+    "summary": "TikTok, ABD'deki tüm kullanıcıların faydalı olarak değerlendirilen notlara erişim sağlamasına ve kendilerinin de oylama yapmasına olanak tanıyor. Bu yenilik, platformda güvenilir bilgilere ulaşmayı kolaylaştırmayı hedefliyor.",
+    "content": "Son zamanlarda sosyal medya platformları günden güne evrim geçirirken, TikTok bu trendin öncüsü olmaya devam ediyor. En yeni gelişmelerden biri, ABD’deki tüm kullanıcıların faydalı olarak işaretlenmiş notları görüntüleme ve kendi değerlendirmelerini ekleme fırsatı bulması oldu. Bu özellik, TikTok'un 'Footnotes' adı verilen kitle kaynaklı bir doğrulama sisteminin parçası olarak ortaya çıktı. Kullanıcılar, belirli notları değerlendirerek yalnızca kendi düşüncelerini paylaşmakla kalmayacak, aynı zamanda platformdaki bilgi kalitesini de artırmaya yardımcı olacaklar. Bu girişim, bilgi kirliliğinin önlenmesi açısından son derece büyük bir adım olarak değerlendiriliyor.\n\nTikTok, özellikle genç nesil arasında bilgi paylaşımını sağlamakta oldukça hızlı büyüyen bir platform. Ancak, içeriklerin doğruluğu konusunda endişeler her zaman söz konusu olmuştur. Kitle kaynaklı doğrulama, kullanıcıların daha fazla etkileşimde bulunmasını sağlarken, aynı zamanda doğru bilgilere ulaşmalarını da kolaylaştırıyor. Kullanıcıların belirli notları oylayabilmeleri, içerik oluşturuculara geri bildirim sağlamakla kalmayıp, aynı zamanda izleyicilerin de bilgiye karşı daha eleştirel bir yaklaşım geliştirmesine olanak tanıyor.\n\nBu yeni sistemin teknik detaylarına baktığımızda, kullanıcıların notları nasıl değerlendireceği ve tercih ettikleri içerikleri nasıl seçecekleri üzerine bazı önemli noktalar bulunmaktadır. TikTok'un algoritması, kullanıcı etkileşimlerini analiz ederek en çok oylanan ve faydalı bulunan notları öncelikle öne çıkaracak şekilde tasarlanmıştır. Bu, kullanıcıların yalnızca doğru ve güvenilir bilgilere ulaşmalarını sağlamakla kalmayacak, aynı zamanda TikTok’un topluluk kurallarını ihlal eden içeriklerin de hızla tespit edilmesine ve kaldırılmasına olanak tanıyacak.\n\nSektördeki etkilere geldiğimizde, TikTok'un bu hamlesinin diğer sosyal medya platformlarına da ilham vereceği kesin. Özellikle Facebook ve Twitter gibi platformlar, yanlış bilgi yayılımını önlemek için benzer yöntemler kullanma yoluna gidebilir. Bu tür gelişmeler, kullanıcıların bilgiye erişimini daha güvenilir hale getirecek ve sosyal medya içeriklerinin güvenilirliğini artıracak. Kullanıcılara sağlanan bu yeni özellik, onları daha sorumlu bir şekilde içerik üretmeye ve tüketmeye yönlendirecektir.\n\nSonuç olarak, TikTok'un 'Footnotes' sisteminin hayata geçmesi, sosyal medya platformlarının bilgi akışını nasıl etkilediğini gözler önüne seriyor. Bu tür yenilikler, bilgi kirliliği ile mücadelede önemli bir adım olmanın yanı sıra, kullanıcıların bilinçli ve eleştirel düşünmelerini teşvik ediyor. Kendi deneyimlerimi de paylaşmak gerekirse, sosyal medya platformlarının kullanıcılarına sorumluluk yüklemesi, hem içerik üreticileri hem de tüketiciler için büyük önem taşımaktadır. Gelecekte daha fazla platformun benzer özellikler geliştirerek bu konuda devrim yaratması umuduyla, TikTok bu alandaki öncülüğünü sürdürüyor. Bilgiye erişim ve doğruluk konularında daha aktif bir kullanıcı deneyimi arayışında olanlar için bu yenilik, oldukça heyecan verici bir adım olarak dikkat çekiyor.",
+    "category": "social-media",
+    "imageUrl": "/images/tiktokta-yeni-bir-donem-faydal.png",
+    "sourceUrl": "https://techcrunch.com/2025/07/30/tiktoks-crowdsourced-fact-checks-called-footnotes-launch-in-the-u-s/",
+    "publishDate": "2025-07-30",
+    "readTime": 2,
+    "tags": [
+      "TechCrunch",
+      "0",
+      "1",
+      "2"
+    ],
+    "author": "Admin"
+  },
+  {
     "id": "1753876835090",
     "title": "Gemini CLI Güvenlik Açığı: Cihaz Kontrolü Tehdit Altında!",
     "summary": "Gemini CLI'deki güvenlik açığı, kullanıcıların cihaz kontrolünü ele geçirme riski taşıyor; geliştiricilerin yazılımlarını güvenli hale getirmesi önemli.",
