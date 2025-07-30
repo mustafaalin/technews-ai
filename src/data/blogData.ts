@@ -33,8 +33,8 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     const supabasePosts = await fetchBlogPosts();
     return supabasePosts.sort(
       (a, b) =>
-        new Date(b.publishDate).getTime() -
-        new Date(a.publishDate).getTime()
+        new Date(b.publish_date).getTime() -
+        new Date(a.publish_date).getTime()
     );
   } catch (error) {
     console.error('Error fetching blog posts:', error);
@@ -50,8 +50,8 @@ export const getBlogPostsByCategory = async (
     const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
     return supabasePosts.sort(
       (a, b) =>
-        new Date(b.publishDate).getTime() -
-        new Date(a.publishDate).getTime()
+        new Date(b.publish_date).getTime() -
+        new Date(a.publish_date).getTime()
     );
   } catch (error) {
     console.error('Error fetching blog posts by category:', error);
