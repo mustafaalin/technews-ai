@@ -1,5 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
-import { fetchBlogPosts, fetchBlogPostsByCategory } from '../lib/blogService';
+import { fetchBlogPosts, fetchBlogPostsByCategory, fetchCategories } from '../lib/blogService';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
   { id: '1', name: 'Yapay Zeka & Makine Öğrenmesi', slug: 'ai-ml' },
@@ -12,19 +12,19 @@ export const baseCategories: Omit<Category, 'count'>[] = [
 
 // Supabase verisine göre kategori sayıları
 export const getCategories = async (): Promise<Category[]> => {
-  const posts = await fetchBlogPosts();
-  const categoryCounts: { [key: string]: number } = {};
-
-  for (const post of posts) {
-    if (post.category) {
-      categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
+  try {
+    // Supabase'den kategorileri ve post sayılarını çek
+    const categories = await fetchCategories();
+    return categories;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    // Fallback olarak base kategorileri döndür
+    return baseCategories.map((category) => ({
+      ...category,
+      count: 0,
+    }));
     }
   }
-
-  return baseCategories.map((category) => ({
-    ...category,
-    count: categoryCounts[category.slug] || 0,
-  }));
 };
 
 // Tüm blog yazılarını Supabase'den çek

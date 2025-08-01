@@ -1,6 +1,40 @@
 import { supabase, isSupabaseAvailable } from './supabase';
-import { BlogPost, SupabaseBlogPost } from "../types/blog";
+import { BlogPost, SupabaseBlogPost, Category } from "../types/blog";
 
+// Kategorileri çek
+export const fetchCategories = async (): Promise<Category[]> => {
+  if (!isSupabaseAvailable()) {
+    console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
+    return [];
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('categories')
+      .select(`
+        id,
+        name,
+        slug,
+        blog_posts!blog_posts_category_id_fkey(count)
+      `)
+      .order('id');
+
+    if (error) {
+      console.error('Categories fetch error:', error);
+      return [];
+    }
+
+    return data.map((category: any) => ({
+      id: category.id.toString(),
+      name: category.name,
+      slug: category.slug,
+      count: category.blog_posts?.length || 0,
+    }));
+  } catch (error) {
+    console.error('Unexpected error fetching categories:', error);
+    return [];
+  }
+};
 
 // Supabase'den blog yazılarını çek
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
