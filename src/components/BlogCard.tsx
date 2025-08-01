@@ -16,16 +16,19 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
     });
   };
 
-  const categoryMap: Record<string, string> = {
-  'ai-ml': 'Yapay Zeka & Makine Öğrenmesi',
-  'web-dev': 'Web Geliştirme',
-  'mobile': 'Mobil Teknoloji',
-  'cloud': 'Bulut Bilişim',
-  'security': 'Siber Güvenlik',
-  'startups': 'Girişimcilik',
-};
+  const categorySlug = post.category || post.categories?.slug || "diger";
 
-const categoryName = categoryMap[post.category] || post.category;
+  const categoryMap: Record<string, string> = {
+    "ai-ml": "Yapay Zeka & Makine Öğrenmesi",
+    "web-dev": "Web Geliştirme",
+    "mobile": "Mobil Teknoloji",
+    "cloud": "Bulut Bilişim",
+    "security": "Siber Güvenlik",
+    "startups": "Girişimcilik",
+    "diger": "Diğer",
+  };
+
+  const categoryName = categoryMap[categorySlug] || "Diğer";
 
   return (
     <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border border-gray-200">

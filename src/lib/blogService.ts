@@ -29,7 +29,6 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       title: post.title,
       summary: post.summary,
       content: post.content,
-      // 🔹 Artık kategori bilgisi join'den geliyor
       category: post.categories?.slug || "diger",   // slug (URL için)
       categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
       imageUrl: post.image_url,
@@ -72,7 +71,8 @@ export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPo
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.category,
+      category: post.categories?.slug || "diger",   // slug (URL için)
+      categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
@@ -112,7 +112,8 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.category,
+      category: post.categories?.slug || "diger",   // slug (URL için)
+      categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -136,7 +137,8 @@ export const createBlogPost = async (post: Omit<BlogPost, 'id' | 'created_at' | 
         title: post.title,
         summary: post.summary,
         content: post.content,
-        category: post.category,
+        category: post.categories?.slug || "diger",      // 🔹 burası değişti
+        categoryName: post.categories?.name || "Diğer", // 🔹 yeni eklendi
         image_url: post.imageUrl,
         source_url: post.sourceUrl,
         publish_date: post.publishDate,
@@ -158,7 +160,8 @@ export const createBlogPost = async (post: Omit<BlogPost, 'id' | 'created_at' | 
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.category,
+      category: post.categories?.slug || "diger",      // 🔹 burası değişti
+      categoryName: post.categories?.name || "Diğer", // 🔹 yeni eklendi
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -207,7 +210,8 @@ export const updateBlogPost = async (id: string, updates: Partial<BlogPost>): Pr
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.category,
+      category: post.categories?.slug || "diger",      // 🔹 burası değişti
+      categoryName: post.categories?.name || "Diğer", // 🔹 yeni eklendi
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -267,7 +271,8 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.category,
+      category: post.categories?.slug || "diger",      // 🔹 burası değişti
+      categoryName: post.categories?.name || "Diğer", // 🔹 yeni eklendi
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
