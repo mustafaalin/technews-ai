@@ -159,7 +159,7 @@ const PostPage = () => {
         <img
           src={post.imageUrl}
           alt={post.title}
-          className="w-full h-64 md:h-96 object-cover rounded-xl shadow-lg"
+          className="w-full aspect-square object-cover rounded-xl shadow-lg"
         />
       </div>
 
