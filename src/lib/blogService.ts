@@ -7,13 +7,16 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
     return [];
   }
-  
+
   try {
     const { data, error } = await supabase
       .from('blog_posts')
-      .select('*')
-      .eq('is_published', true)
-      .order('publish_date', { ascending: false });
+      .select(`
+    id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+    categories (id, name, slug)
+  `)
+      .eq("is_published", true)
+      .order("publish_date", { ascending: false });
 
     if (error) {
       console.error('Blog posts fetch error:', error);
@@ -26,7 +29,9 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.category,
+      // 🔹 Artık kategori bilgisi join'den geliyor
+      category: post.categories?.slug || "diger",   // slug (URL için)
+      categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
@@ -35,6 +40,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       author: post.author,
       is_published: post.is_published
     }));
+
   } catch (error) {
     console.error('Unexpected error fetching blog posts:', error);
     return [];

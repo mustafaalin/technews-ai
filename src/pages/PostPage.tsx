@@ -81,9 +81,9 @@ const PostPage = () => {
     });
   };
 
-  // Find the category name from the slug
-  const categoryData = categories.find(cat => cat.slug === post.category);
-  const categoryName = categoryData ? categoryData.name : post.category;
+  // Artık Supabase'den gelen post verisinde categories alanı var
+const categoryName = post.categories?.name || "Diğer";
+const categorySlug = post.categories?.slug || "diger";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -103,7 +103,7 @@ const PostPage = () => {
       <header className="mb-8">
         <div className="flex items-center mb-4">
           <Link
-            to={`/category/${post.category}`}
+            to={`/category/${categorySlug}`}
             className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200"
           >
             {categoryName}
