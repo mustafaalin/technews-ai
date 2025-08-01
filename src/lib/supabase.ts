@@ -1,37 +1,32 @@
-// import { createClient } from '@supabase/supabase-js';
-
-// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-// const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-
-// // Create Supabase client - will be null if env vars are missing
-// export const supabase = supabaseUrl && supabaseAnonKey 
-//   ? createClient(supabaseUrl, supabaseAnonKey)
-//   : null;
-
-// // Helper function to check if Supabase is available
-// export const isSupabaseAvailable = () => {
-//   return supabase !== null && supabaseUrl && supabaseAnonKey;
-// };
 import { createClient } from '@supabase/supabase-js';
 
-// Ortam değişkenlerini al
+// Get environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Debug için log ekleyelim
+// Debug logging
 console.log("Supabase URL:", supabaseUrl);
-console.log("Supabase Key:", supabaseAnonKey ? "KEY OK" : "KEY YOK");
+console.log("Supabase Key:", supabaseAnonKey ? "KEY OK" : "KEY MISSING");
 
-// Eğer değerler yoksa hata logla
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error("❌ Supabase environment variables tanımlı değil!");
+// Check if environment variables are properly configured
+if (!supabaseUrl || !supabaseAnonKey || 
+    supabaseUrl === 'your_supabase_project_url_here' || 
+    supabaseAnonKey === 'your_supabase_anon_key_here') {
+  console.warn("⚠️ Supabase environment variables are not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.");
 }
 
-// Supabase client oluştur
-export const supabase = createClient(supabaseUrl!, supabaseAnonKey!);
+// Create Supabase client - will be null if env vars are missing or placeholder values
+export const supabase = (supabaseUrl && supabaseAnonKey && 
+                         supabaseUrl !== 'your_supabase_project_url_here' && 
+                         supabaseAnonKey !== 'your_supabase_anon_key_here') 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
-// Supabase hazır mı kontrol fonksiyonu
+// Helper function to check if Supabase is available
 export const isSupabaseAvailable = () => {
-  return !!supabaseUrl && !!supabaseAnonKey;
+  return supabase !== null && 
+         !!supabaseUrl && 
+         !!supabaseAnonKey && 
+         supabaseUrl !== 'your_supabase_project_url_here' && 
+         supabaseAnonKey !== 'your_supabase_anon_key_here';
 };
-console.log("import.meta.env", import.meta.env);
