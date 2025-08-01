@@ -12,15 +12,22 @@ export const fetchCategories = async (): Promise<Category[]> => {
     const { data: categoriesData, error: categoriesError } = await supabase
       .from('categories')
       .select('id, name, slug')
-      .order('id');
+      .order('id')
+      .neq('id', 99); // Diğer kategorisini ayrı olarak ekleyeceğiz
 
     if (categoriesError) {
       console.error('Categories fetch error:', categoriesError);
       return [];
     }
 
+    // Diğer kategorisini ayrı olarak çek
+    const { data: digerCategory, error: digerError } = await supabase
+      .from('categories')
+      .select('id, name, slug')
+      .eq('id', 99)
+      .single();
     // Her kategori için ayrı ayrı post sayısını hesapla
-    const categoriesWithCounts = await Promise.all(
+    const mainCategoriesWithCounts = await Promise.all(
       categoriesData.map(async (category: any) => {
         const { count, error: countError } = await supabase
           .from('blog_posts')
@@ -41,7 +48,34 @@ export const fetchCategories = async (): Promise<Category[]> => {
       })
     );
 
-    return categoriesWithCounts;
+    // Diğer kategorisi için post sayısını hesapla
+    let digerCategoryWithCount = null;
+    if (digerCategory && !digerError) {
+      const { count, error: digerCountError } = await supabase
+        .from('blog_posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('category_id', 99)
+        .eq('is_published', true);
+
+      if (digerCountError) {
+        console.error('Error counting posts for Diğer category:', digerCountError);
+      }
+
+      digerCategoryWithCount = {
+        id: '99',
+        name: digerCategory.name,
+        slug: digerCategory.slug,
+        count: count || 0,
+      };
+    }
+
+    // Ana kategorileri ve Diğer kategorisini birleştir
+    const allCategories = [...mainCategoriesWithCounts];
+    if (digerCategoryWithCount && digerCategoryWithCount.count > 0) {
+      allCategories.push(digerCategoryWithCount);
+    }
+
+    return allCategories;
   } catch (error) {
     console.error('Unexpected error fetching categories:', error);
     return [];

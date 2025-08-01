@@ -8,6 +8,7 @@ export const baseCategories: Omit<Category, 'count'>[] = [
   { id: '4', name: 'Bulut Bilişim', slug: 'cloud' },
   { id: '5', name: 'Siber Güvenlik', slug: 'security' },
   { id: '6', name: 'Girişimcilik', slug: 'startups' },
+  { id: '99', name: 'Diğer', slug: 'diger' },
 ];
 
 // Supabase verisine göre kategori sayıları
