@@ -9,27 +9,39 @@ export const fetchCategories = async (): Promise<Category[]> => {
   }
 
   try {
-    const { data, error } = await supabase
+    const { data: categoriesData, error: categoriesError } = await supabase
       .from('categories')
-      .select(`
-        id,
-        name,
-        slug,
-        blog_posts!blog_posts_category_id_fkey(count)
-      `)
+      .select('id, name, slug')
       .order('id');
 
-    if (error) {
-      console.error('Categories fetch error:', error);
+    if (categoriesError) {
+      console.error('Categories fetch error:', categoriesError);
       return [];
     }
 
-    return data.map((category: any) => ({
-      id: category.id.toString(),
-      name: category.name,
-      slug: category.slug,
-      count: category.blog_posts?.length || 0,
-    }));
+    // Her kategori için ayrı ayrı post sayısını hesapla
+    const categoriesWithCounts = await Promise.all(
+      categoriesData.map(async (category: any) => {
+        const { count, error: countError } = await supabase
+          .from('blog_posts')
+          .select('*', { count: 'exact', head: true })
+          .eq('category_id', category.id)
+          .eq('is_published', true);
+
+        if (countError) {
+          console.error(`Error counting posts for category ${category.slug}:`, countError);
+        }
+
+        return {
+          id: category.id.toString(),
+          name: category.name,
+          slug: category.slug,
+          count: count || 0,
+        };
+      })
+    );
+
+    return categoriesWithCounts;
   } catch (error) {
     console.error('Unexpected error fetching categories:', error);
     return [];
