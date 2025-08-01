@@ -24,21 +24,23 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     }
 
     // Supabase field names'lerini frontend format'ına çevir
-    return data.map(post => ({
-      id: post.id,
-      title: post.title,
-      summary: post.summary,
-      content: post.content,
-      category: post.categories?.slug || "diger",   // slug (URL için)
-      categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
-      imageUrl: post.image_url,
-      sourceUrl: post.source_url,
-      publishDate: post.publish_date,
-      readTime: post.read_time,
-      tags: post.tags || [],
-      author: post.author,
-      is_published: post.is_published
-    }));
+    return data.map((post) => ({
+  id: post.id,
+  title: post.title,
+  summary: post.summary,
+  content: post.content,
+  categoryId: post.category_id,              // ✅ DB'deki id
+  category: post.categories?.slug || "diger",
+  categoryName: post.categories?.name || "Diğer",
+  imageUrl: post.image_url,
+  sourceUrl: post.source_url,
+  publishDate: post.publish_date,
+  readTime: post.read_time,
+  tags: post.tags || [],
+  author: post.author,
+  is_published: post.is_published,
+}));
+
 
   } catch (error) {
     console.error('Unexpected error fetching blog posts:', error);
@@ -47,42 +49,54 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 };
 
 // Kategoriye göre blog yazılarını çek
-export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPost[]> => {
+export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
   if (!isSupabaseAvailable()) {
-    console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
+    console.log("⚠️ Supabase mevcut değil, boş array döndürülüyor");
     return [];
   }
   
   try {
-    const { data, error } = await supabase
-      .from('blog_posts')
+    // 1️⃣ Önce category_id'yi bul
+    const { data: categoryData, error: categoryError } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("slug", categorySlug)
+      .single();
+
+    if (categoryError || !categoryData) {
+      console.error("Kategori bulunamadı:", categoryError);
+      return [];
+    }
+
+       const { data, error } = await supabase
+      .from("blog_posts")
       .select(`
-    id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
-    categories (id, name, slug)
-  `)
-  .eq('is_published', true)
-  .eq('categories.slug', category) // kategori slug'ına göre filtreleme
-  .order('publish_date', { ascending: false });
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        categories (id, name, slug)
+      `)
+      .eq("is_published", true)
+      .eq("category_id", categoryData.id) // ✅ artık category_id üzerinden filtreleme
+      .order("publish_date", { ascending: false });
 
     if (error) {
       console.error('Blog posts by category fetch error:', error);
       return [];
     }
 
-    return data.map(post => ({
+    return data.map((post) => ({
       id: post.id,
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.categories?.slug || "diger",   // slug (URL için)
-      categoryName: post.categories?.name || "Diğer", // isim (görünen ad)
+      category: post.categories?.slug || "diger",
+      categoryName: post.categories?.name || "Diğer",
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
       readTime: post.read_time,
       tags: post.tags || [],
       author: post.author,
-      is_published: post.is_published
+      is_published: post.is_published,
     }));
   } catch (error) {
     console.error('Unexpected error fetching blog posts by category:', error);
