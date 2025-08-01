@@ -18,27 +18,26 @@ const PostPage = () => {
       try {
         // Önce Supabase'den dene
         const supabasePost = await fetchBlogPostById(id);
+        let currentPost = null;
         
         if (supabasePost) {
-          console.log(`✅ Supabase'den haber yüklendi: ${supabasePost.title}`);
           setPost(supabasePost);
+          currentPost = supabasePost;
         } else {
           // Supabase'de bulunamazsa JSON'dan ara
-          console.log('⚠️ Supabase\'de bulunamadı, JSON verilerinde aranıyor');
         const allPosts = await getAllBlogPosts();
         const foundPost = allPosts.find(p => p.id === id) || null;
         setPost(foundPost);
+        currentPost = foundPost;
         }
 
-        if (foundPost) {
-          // Kategorileri yükle
+        if (currentPost) {
           const cats = await getCategories();
           setCategories(cats);
 
-          // İlgili yazıları yükle
           const allPosts = await getAllBlogPosts();
           const related = allPosts
-            .filter(p => p.id !== foundPost.id && p.category === foundPost.category)
+            .filter(p => p.id !== currentPost.id && p.category === currentPost.category)
             .slice(0, 2);
           setRelatedPosts(related);
         }
