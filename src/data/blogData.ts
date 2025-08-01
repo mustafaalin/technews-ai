@@ -23,7 +23,6 @@ export const getCategories = async (): Promise<Category[]> => {
       ...category,
       count: 0,
     }));
-    }
   }
 };
 
