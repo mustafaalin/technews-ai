@@ -22,3 +22,23 @@ export interface Category {
   slug: string;
   count: number;
 }
+
+export interface SupabaseBlogPost {
+  id: number;
+  title: string;
+  summary: string;
+  content: string;
+  image_url: string;
+  source_url: string;
+  publish_date: string;
+  read_time: number;
+  tags: string[];
+  author: string;
+  is_published: boolean;
+  category_id: number;
+  categories?: {
+    id: number;
+    name: string;
+    slug: string;
+  }[]; // ✅ Array olarak tanımlıyoruz
+}

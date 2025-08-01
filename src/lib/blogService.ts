@@ -1,5 +1,6 @@
 import { supabase, isSupabaseAvailable } from './supabase';
-import { BlogPost } from '../types/blog';
+import { BlogPost, SupabaseBlogPost } from "../types/blog";
+
 
 // Supabase'den blog yazılarını çek
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
@@ -12,7 +13,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-    id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+    id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
     categories (id, name, slug)
   `)
       .eq("is_published", true)
@@ -25,21 +26,21 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 
     // Supabase field names'lerini frontend format'ına çevir
     return data.map((post) => ({
-  id: post.id,
-  title: post.title,
-  summary: post.summary,
-  content: post.content,
-  categoryId: post.category_id,              // ✅ DB'deki id
-  category: post.categories?.slug || "diger",
-  categoryName: post.categories?.name || "Diğer",
-  imageUrl: post.image_url,
-  sourceUrl: post.source_url,
-  publishDate: post.publish_date,
-  readTime: post.read_time,
-  tags: post.tags || [],
-  author: post.author,
-  is_published: post.is_published,
-}));
+      id: post.id,
+      title: post.title,
+      summary: post.summary,
+      content: post.content,
+      categoryId: post.category_id,
+      category: post.categories?.[0]?.slug || "diger",
+      categoryName: post.categories?.[0]?.name || "Diğer",
+      imageUrl: post.image_url,
+      sourceUrl: post.source_url,
+      publishDate: post.publish_date,
+      readTime: post.read_time,
+      tags: post.tags || [],
+      author: post.author,
+      is_published: post.is_published,
+    }));
 
 
   } catch (error) {
@@ -71,7 +72,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
        const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
         categories (id, name, slug)
       `)
       .eq("is_published", true)
@@ -83,13 +84,14 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
       return [];
     }
 
-    return data.map((post) => ({
+    return (data as SupabaseBlogPost[]).map((post) => ({
       id: post.id,
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.categories?.slug || "diger",
-      categoryName: post.categories?.name || "Diğer",
+      categoryId: post.category_id,
+      category: post.categories?.[0]?.slug || "diger",
+      categoryName: post.categories?.[0]?.name || "Diğer",
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
@@ -114,7 +116,7 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
         categories (id, name, slug)
       `)
       .eq("id", id)
@@ -130,8 +132,9 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.categories?.slug || "diger",
-      categoryName: data.categories?.name || "Diğer", 
+      categoryId: data.category_id,
+      category: data.categories?.[0]?.slug || "diger",
+      categoryName: data.categories?.[0]?.name || "Diğer",
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -170,7 +173,7 @@ export const createBlogPost = async (
       ])
       .select(
         `
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
         categories (id, name, slug)
       `
       )
@@ -186,8 +189,9 @@ export const createBlogPost = async (
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.categories?.slug || "diger",      // slug (URL için)
-      categoryName: data.categories?.name || "Diğer", // görünen isim
+      categoryId: data.category_id,
+      category: data.categories?.[0]?.slug || "diger",
+      categoryName: data.categories?.[0]?.name || "Diğer",
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -230,7 +234,7 @@ export const updateBlogPost = async (
       .eq("id", id)
       .select(
         `
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
         categories (id, name, slug)
       `
       )
@@ -246,8 +250,9 @@ export const updateBlogPost = async (
       title: data.title,
       summary: data.summary,
       content: data.content,
-      category: data.categories?.slug || "diger", // ✅ slug
-      categoryName: data.categories?.name || "Diğer", // ✅ görünen ad
+      categoryId: data.category_id,
+      category: data.categories?.[0]?.slug || "diger",
+      categoryName: data.categories?.[0]?.name || "Diğer",
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -294,7 +299,7 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
     const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,
+        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
         categories (id, name, slug)
       `) // ✅ categories join edildi
       .eq("is_published", true)
@@ -313,8 +318,9 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
       title: post.title,
       summary: post.summary,
       content: post.content,
-      category: post.categories?.slug || "diger", // ✅ slug
-      categoryName: post.categories?.name || "Diğer", // ✅ görünen ad
+      categoryId: post.category_id,
+      category: post.categories?.[0]?.slug || "diger",
+      categoryName: post.categories?.[0]?.name || "Diğer",
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
