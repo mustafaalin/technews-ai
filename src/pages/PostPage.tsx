@@ -81,14 +81,14 @@ const PostPage = () => {
     });
   };
 
-  // Artık Supabase'den gelen post verisinde categories alanı var
-const categoryName = post.categories?.name || "Diğer";
-const categorySlug = post.categories?.slug || "diger";
+  const categoryName = post.categoryName || "Diğer";
+  const categorySlug = post.category || "diger";
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Navigation */}
+        {/* Navigation */}
       <div className="mb-8">
         <Link
           to="/"

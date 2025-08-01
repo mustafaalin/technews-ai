@@ -16,7 +16,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
     });
   };
 
-  const categorySlug = post.category || post.categories?.slug || "diger";
+  const categorySlug = post.category || "diger";
 
   const categoryMap: Record<string, string> = {
     "ai-ml": "Yapay Zeka & Makine Öğrenmesi",
@@ -28,7 +28,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
     "diger": "Diğer",
   };
 
-  const categoryName = categoryMap[categorySlug] || "Diğer";
+  const categoryName = post.categoryName || categoryMap[categorySlug] || "Diğer";
 
   return (
     <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border border-gray-200">

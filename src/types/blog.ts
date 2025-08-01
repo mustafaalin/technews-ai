@@ -40,5 +40,5 @@ export interface SupabaseBlogPost {
     id: number;
     name: string;
     slug: string;
-  }[]; // ✅ Array olarak tanımlıyoruz
+  } | null;
 }
