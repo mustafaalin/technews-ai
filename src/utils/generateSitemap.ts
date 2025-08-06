@@ -40,7 +40,12 @@ export const generateSitemap = async (): Promise<string> => {
   // Blog yazılarını ekle
   blogPosts.forEach(post => {
     const postDate = new Date(post.publishDate).toISOString().split('T')[0];
-    const seoUrl = createSeoUrl(post);
+    const seoUrl = createSeoUrl({
+      id: post.id,
+      title: post.title,
+      category: post.category,
+      publishDate: post.publishDate
+    });
     sitemap += `
   <url>
     <loc>${baseUrl}${seoUrl}</loc>
