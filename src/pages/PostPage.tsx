@@ -52,6 +52,14 @@ const PostPage = () => {
     loadPostData();
   }, [id]);
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('tr-TR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   if (loading) {
     return (
       <>
@@ -70,6 +78,29 @@ const PostPage = () => {
   }
 
   if (!post) {
+    return (
+      <>
+        <SEOHead
+          title="Yazı Bulunamadı | Pulse of Tech"
+          description="Aradığınız yazı bulunamadı."
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı Bulunamadı</h1>
+            <p className="text-gray-600 mb-8">Aradığınız yazı mevcut değil veya kaldırılmış olabilir.</p>
+            <Link
+              to="/"
+              className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Ana Sayfaya Dön
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const categoryName = post.categoryName || "Diğer";
   const categorySlug = post.category || "diger";
 
