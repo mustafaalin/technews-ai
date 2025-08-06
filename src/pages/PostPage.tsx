@@ -4,9 +4,10 @@ import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-r
 import SEOHead from '../components/SEOHead';
 import { getAllBlogPosts, getCategories } from '../data/blogData';
 import { fetchBlogPostById } from '../lib/blogService';
+import { createSeoUrl, parseSeoUrl } from '../utils/urlHelpers';
 
 const PostPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { '*': urlPath } = useParams<{ '*': string }>();
   const [post, setPost] = React.useState<any>(null);
   const [categories, setCategories] = React.useState<any[]>([]);
   const [relatedPosts, setRelatedPosts] = React.useState<any[]>([]);
@@ -14,22 +15,37 @@ const PostPage = () => {
 
   React.useEffect(() => {
     const loadPostData = async () => {
-      if (!id) return;
+      if (!urlPath) return;
       
       try {
-        // Önce Supabase'den dene
-        const supabasePost = await fetchBlogPostById(id);
+        // URL'yi parse et
+        const parsedUrl = parseSeoUrl(`/post/${urlPath}`);
+        
+        if (!parsedUrl) {
+          // Eski format ID kontrolü
+          const allPosts = await getAllBlogPosts();
+          const foundPost = allPosts.find(p => p.id.toString() === urlPath) || null;
+          setPost(foundPost);
+          return;
+        }
+        
+        // Yeni SEO URL formatı - title slug ile post bul
+        const allPosts = await getAllBlogPosts();
+        const foundPost = allPosts.find(post => {
+          const postSeoUrl = createSeoUrl(post);
+          return postSeoUrl === `/post/${urlPath}`;
+        });
+        
         let currentPost = null;
         
-        if (supabasePost) {
-          setPost(supabasePost);
-          currentPost = supabasePost;
+        if (foundPost) {
+          setPost(foundPost);
+          currentPost = foundPost;
         } else {
-          // Supabase'de bulunamazsa JSON'dan ara
-        const allPosts = await getAllBlogPosts();
-        const foundPost = allPosts.find(p => p.id === id) || null;
-        setPost(foundPost);
-        currentPost = foundPost;
+          // ID ile de dene (geriye uyumluluk)
+          const postById = allPosts.find(p => p.id.toString() === urlPath);
+          setPost(postById);
+          currentPost = postById;
         }
 
         if (currentPost) {
@@ -50,7 +66,7 @@ const PostPage = () => {
     };
 
     loadPostData();
-  }, [id]);
+  }, [urlPath]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('tr-TR', {
@@ -105,7 +121,7 @@ const PostPage = () => {
   const categorySlug = post.category || "diger";
 
   // SEO için URL oluştur
-  const postUrl = `https://pulseoftech.net/post/${post.id}`;
+  const postUrl = `https://pulseoftech.net/post/${urlPath}`;
   
   // SEO için title oluştur
   const seoTitle = `${post.title} | Pulse of Tech`;
@@ -259,7 +275,7 @@ const PostPage = () => {
           {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
-                to={`/post/${relatedPost.id}`}
+                to={createSeoUrl(relatedPost)}
                 className="block group"
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">

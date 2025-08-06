@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
 import NewsletterSignup from '../components/NewsletterSignup';
 import { getAllBlogPosts } from '../data/blogData';
+import { createSeoUrl } from '../utils/urlHelpers';
 
 const Home = () => {
   const [blogPosts, setBlogPosts] = React.useState<any[]>([]);
@@ -120,7 +121,7 @@ const Home = () => {
               
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 <Link
-                  to={`/post/${featuredPost.id}`}
+                  to={createSeoUrl(featuredPost)}
                   className="hover:text-blue-600 transition-colors duration-200"
                 >
                   {featuredPost.title}
@@ -140,7 +141,7 @@ const Home = () => {
               </div>
               
               <Link
-                to={`/post/${featuredPost.id}`}
+                to={createSeoUrl(featuredPost)}
                 className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-200 font-medium inline-block shadow-lg"
               >
                 Tam Haberi Oku

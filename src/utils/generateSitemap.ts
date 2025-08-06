@@ -1,4 +1,5 @@
 import { getAllBlogPosts } from '../data/blogData';
+import { createSeoUrl } from './urlHelpers';
 
 export const generateSitemap = async (): Promise<string> => {
   const baseUrl = 'https://pulseoftech.net';
@@ -39,9 +40,10 @@ export const generateSitemap = async (): Promise<string> => {
   // Blog yazılarını ekle
   blogPosts.forEach(post => {
     const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+    const seoUrl = createSeoUrl(post);
     sitemap += `
   <url>
-    <loc>${baseUrl}/post/${post.id}</loc>
+    <loc>${baseUrl}${seoUrl}</loc>
     <lastmod>${postDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

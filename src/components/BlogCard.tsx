@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, ExternalLink, User } from 'lucide-react';
 import { BlogPost } from '../types/blog';
+import { createSeoUrl } from '../utils/urlHelpers';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -58,7 +59,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
           <Link
-            to={`/post/${post.id}`}
+            to={createSeoUrl(post)}
             className="hover:text-blue-600 transition-colors duration-200"
           >
             {post.title}
@@ -83,7 +84,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           
           <div className="flex items-center space-x-2">
             <Link
-              to={`/post/${post.id}`}
+              to={createSeoUrl(post)}
              className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
             >
               Devamını oku
