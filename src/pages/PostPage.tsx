@@ -54,23 +54,35 @@ const PostPage = () => {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Yazı yükleniyor...</p>
+      <>
+        <SEOHead
+          title="Yükleniyor... | Pulse of Tech"
+          description="İçerik yükleniyor..."
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Yazı yükleniyor...</p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (!post) {
     return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı bulunamadı</h1>
-        <Link to="/" className="text-blue-600 hover:text-blue-800">
-          Ana sayfaya dön
-        </Link>
-      </div>
+      <>
+        <SEOHead
+          title="Yazı Bulunamadı | Pulse of Tech"
+          description="Aradığınız yazı bulunamadı. Ana sayfaya dönün."
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı bulunamadı</h1>
+          <Link to="/" className="text-blue-600 hover:text-blue-800">
+            Ana sayfaya dön
+          </Link>
+        </div>
+      </>
     );
   }
 
@@ -91,6 +103,11 @@ const PostPage = () => {
   // SEO için title oluştur
   const seoTitle = `${post.title} | Pulse of Tech`;
   
+  // SEO için description oluştur (160 karakter sınırı)
+  const seoDescription = post.summary.length > 160 
+    ? post.summary.substring(0, 157) + '...' 
+    : post.summary;
+  
   // SEO için keywords oluştur
   const seoKeywords = [
     ...post.tags,
@@ -102,10 +119,10 @@ const PostPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <>
       <SEOHead
         title={seoTitle}
-        description={post.summary}
+        description={seoDescription}
         keywords={seoKeywords}
         image={post.imageUrl}
         url={postUrl}
@@ -115,6 +132,7 @@ const PostPage = () => {
         category={categoryName}
         tags={post.tags}
       />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Navigation */}
       <div className="mb-8">
@@ -257,7 +275,8 @@ const PostPage = () => {
         </div>
       </div>
       </article>
-    </div>
+      </div>
+    </>
   );
 };
 
