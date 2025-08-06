@@ -70,30 +70,6 @@ const PostPage = () => {
   }
 
   if (!post) {
-    return (
-      <>
-        <SEOHead
-          title="Yazı Bulunamadı | Pulse of Tech"
-          description="Aradığınız yazı bulunamadı. Ana sayfaya dönün."
-        />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı bulunamadı</h1>
-          <Link to="/" className="text-blue-600 hover:text-blue-800">
-            Ana sayfaya dön
-          </Link>
-        </div>
-      </>
-    );
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
   const categoryName = post.categoryName || "Diğer";
   const categorySlug = post.category || "diger";
 

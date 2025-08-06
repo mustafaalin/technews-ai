@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
 import { getAllBlogPosts } from '../data/blogData';
 import { searchBlogPosts } from '../lib/blogService';
+import { createSeoUrl } from '../utils/urlHelpers';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,7 +71,11 @@ const Header = () => {
   };
 
   const handleResultClick = (postId: string) => {
-    navigate(`/post/${postId}`);
+    // Post ID'si ile post'u bul ve SEO URL'ye yönlendir
+    const post = searchResults.find(p => p.id.toString() === postId);
+    if (post) {
+      navigate(createSeoUrl(post));
+    }
     setSearchQuery('');
     setShowResults(false);
   };
@@ -219,7 +224,7 @@ const Header = () => {
                       <div
                         key={post.id}
                         onClick={() => {
-                          handleResultClick(post.id);
+                          handleResultClick(post.id.toString());
                           setIsMenuOpen(false);
                         }}
                         className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
