@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +50,13 @@ const Contact = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEOHead
+        title="İletişim | Pulse of Tech"
+        description="Sorularınız, önerileriniz veya işbirliği teklifleriniz için bizimle iletişime geçin. Pulse of Tech ekibi ile doğrudan iletişim kurun."
+        keywords={['iletişim', 'pulse of tech', 'teknoloji haberleri', 'mustafa alin', 'işbirliği']}
+        url="https://pulseoftech.net/contact"
+        type="website"
+      />
       {/* Navigation */}
       <div className="mb-8">
         <Link

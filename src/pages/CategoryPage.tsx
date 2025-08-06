@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
 import { getBlogPostsByCategory, getCategories } from '../data/blogData';
 
@@ -55,8 +56,27 @@ const CategoryPage = () => {
     );
   }
 
+  // SEO için URL ve bilgiler oluştur
+  const categoryUrl = `https://pulseoftech.net/category/${category.slug}`;
+  const seoTitle = `${category.name} Haberleri | Pulse of Tech`;
+  const seoDescription = `${category.name} kategorisindeki en son teknoloji haberlerini keşfedin. ${categoryPosts.length} makale ile güncel kalın.`;
+  const seoKeywords = [
+    category.name.toLowerCase(),
+    'teknoloji haberleri',
+    'yapay zeka',
+    'teknoloji',
+    category.slug
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        url={categoryUrl}
+        type="website"
+      />
       {/* Navigation */}
       <div className="mb-8">
         <Link

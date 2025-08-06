@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Clock, Users, User } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
 import NewsletterSignup from '../components/NewsletterSignup';
 import { getAllBlogPosts } from '../data/blogData';
@@ -57,6 +58,13 @@ const Home = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEOHead
+        title="Pulse of Tech - Yapay Zeka Destekli Teknoloji Haberleri"
+        description="Günlük yapay zeka destekli teknoloji haberi özetleriyle güncel kalın. Teknoloji dünyasından içgörüleri saatlerce değil, dakikalar içinde edinin."
+        keywords={['teknoloji haberleri', 'yapay zeka', 'AI', 'teknoloji', 'makine öğrenmesi', 'web geliştirme', 'bulut bilişim', 'siber güvenlik', 'girişimcilik']}
+        url="https://pulseoftech.net"
+        type="website"
+      />
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">

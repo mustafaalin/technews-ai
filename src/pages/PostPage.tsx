@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import { getAllBlogPosts, getCategories } from '../data/blogData';
 import { fetchBlogPostById } from '../lib/blogService';
 
@@ -84,9 +85,36 @@ const PostPage = () => {
   const categoryName = post.categoryName || "Diğer";
   const categorySlug = post.category || "diger";
 
+  // SEO için URL oluştur
+  const postUrl = `https://pulseoftech.net/post/${post.id}`;
+  
+  // SEO için title oluştur
+  const seoTitle = `${post.title} | Pulse of Tech`;
+  
+  // SEO için keywords oluştur
+  const seoKeywords = [
+    ...post.tags,
+    categoryName,
+    'teknoloji haberleri',
+    'yapay zeka',
+    'teknoloji',
+    post.author.toLowerCase()
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      <SEOHead
+        title={seoTitle}
+        description={post.summary}
+        keywords={seoKeywords}
+        image={post.imageUrl}
+        url={postUrl}
+        type="article"
+        author={post.author}
+        publishedTime={new Date(post.publishDate).toISOString()}
+        category={categoryName}
+        tags={post.tags}
+      />
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Navigation */}
       <div className="mb-8">

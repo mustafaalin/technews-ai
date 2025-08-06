@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Zap, Target, Users, Award } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 
 const About = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEOHead
+        title="Hakkımızda | Pulse of Tech"
+        description="Pulse of Tech, teknoloji dünyasının nabzını tutan, yapay zeka destekli haber platformudur. Misyonumuz ve değerlerimiz hakkında bilgi edinin."
+        keywords={['hakkımızda', 'pulse of tech', 'teknoloji haberleri', 'yapay zeka', 'mustafa alin']}
+        url="https://pulseoftech.net/about"
+        type="website"
+      />
       {/* Navigation */}
       <div className="mb-8">
         <Link
