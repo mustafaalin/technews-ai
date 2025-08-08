@@ -2,69 +2,105 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pulseoftech.net/</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/ai-ml</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/web-dev</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/mobile</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/cloud</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/security</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/category/startups</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/about</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/contact</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/privacy-policy</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/terms-of-service</loc>
-    <lastmod>2025-08-06</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/cloud/2025-08-08/fccnin-genis-bant-calismalari-uzerine-elestiriler-saglikli-bir-bakis-acisi-mi</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/diger/2025-08-07/instagramda-konum-paylasimi-guvenlik-endiseleri-ve-kullanici-rahatligi</loc>
+    <lastmod>2025-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/diger/2025-08-07/antijenik-degisim-asilardaki-yanlis-anlayislar-ve-saglik-uzerindeki-etkileri</loc>
+    <lastmod>2025-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/cloud/2025-08-07/the-browser-company-dia-pro-ile-ilk-ucretli-planini-duyurdu</loc>
+    <lastmod>2025-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/diger/2025-08-07/tornado-cash-ve-kuzey-koreli-hackerler-gizlilik-mi-suc-birligi-mi</loc>
+    <lastmod>2025-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/post/startups/2025-08-06/upwork-bubty-ve-asceni-birlestirerek-yeni-bir-kurulus-olusturuyor</loc>
+    <lastmod>2025-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/post/startups/2025-08-06/ultra-islenmis-gidalarin-birakilmasi-ile-kilo-kaybi-el-yapimi-yemeklerin-onemi</loc>
