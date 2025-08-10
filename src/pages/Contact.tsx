@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 
 const Contact = () => {
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,6 +14,9 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Get current language prefix
+  const langPrefix = `/${language}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -51,28 +56,28 @@ const Contact = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <SEOHead
-        title="İletişim | Pulse of Tech"
-        description="Sorularınız, önerileriniz veya işbirliği teklifleriniz için bizimle iletişime geçin. Pulse of Tech ekibi ile doğrudan iletişim kurun."
-        keywords={['iletişim', 'pulse of tech', 'teknoloji haberleri', 'mustafa alin', 'işbirliği']}
-        url="https://pulseoftech.net/contact"
+        title={`${t('contact.title')} | Pulse of Tech`}
+        description={t('contact.subtitle')}
+        keywords={language === 'en' ? ['contact', 'pulse of tech', 'tech news', 'mustafa alin', 'collaboration'] : ['iletişim', 'pulse of tech', 'teknoloji haberleri', 'mustafa alin', 'işbirliği']}
+        url={`https://pulseoftech.net${langPrefix}/contact`}
         type="website"
       />
       {/* Navigation */}
       <div className="mb-8">
         <Link
-          to="/"
+          to={langPrefix}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Ana sayfaya dön
+          {t('common.backToHome')}
         </Link>
       </div>
 
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">İletişim</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('contact.title')}</h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Sorularınız, önerileriniz veya işbirliği teklifleriniz için bizimle iletişime geçin.
+          {t('contact.subtitle')}
         </p>
       </div>
 
@@ -81,13 +86,13 @@ const Contact = () => {
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="flex items-center mb-6">
             <MessageSquare className="w-6 h-6 text-blue-600 mr-3" />
-            <h2 className="text-2xl font-bold text-gray-900">Mesaj Gönder</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{t('contact.sendMessage')}</h2>
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Ad Soyad *
+                {t('contact.form.name')} {t('contact.form.required')}
               </label>
               <input
                 type="text"
@@ -97,13 +102,13 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Adınızı ve soyadınızı girin"
+                placeholder={t('contact.form.namePlaceholder')}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                E-posta Adresi *
+                {t('contact.form.email')} {t('contact.form.required')}
               </label>
               <input
                 type="email"
@@ -113,13 +118,13 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="ornek@email.com"
+                placeholder={t('contact.form.emailPlaceholder')}
               />
             </div>
 
             <div>
               <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                Konu *
+                {t('contact.form.subject')} {t('contact.form.required')}
               </label>
               <select
                 id="subject"
@@ -129,19 +134,19 @@ const Contact = () => {
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">Konu seçin</option>
-                <option value="genel">Genel Soru</option>
-                <option value="icerik">İçerik Önerisi</option>
-                <option value="teknik">Teknik Destek</option>
-                <option value="isbirligi">İşbirliği Teklifi</option>
-                <option value="reklam">Reklam ve Sponsorluk</option>
-                <option value="diger">Diğer</option>
+                <option value="">{t('contact.form.selectSubject')}</option>
+                <option value="genel">{t('contact.form.general')}</option>
+                <option value="icerik">{t('contact.form.content')}</option>
+                <option value="teknik">{t('contact.form.technical')}</option>
+                <option value="isbirligi">{t('contact.form.collaboration')}</option>
+                <option value="reklam">{t('contact.form.advertising')}</option>
+                <option value="diger">{t('contact.form.other')}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Mesaj *
+                {t('contact.form.message')} {t('contact.form.required')}
               </label>
               <textarea
                 id="message"
@@ -151,7 +156,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Mesajınızı buraya yazın..."
+                placeholder={t('contact.form.messagePlaceholder')}
               />
             </div>
 
@@ -166,7 +171,7 @@ const Contact = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-green-800">
-                      Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+                      {t('contact.form.success')}
                     </p>
                   </div>
                 </div>
@@ -183,7 +188,7 @@ const Contact = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-red-800">
-                      Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan e-posta gönderin.
+                      {t('contact.form.error')}
                     </p>
                   </div>
                 </div>
@@ -200,7 +205,7 @@ const Contact = () => {
               }`}
             >
               <Send className="w-4 h-4 mr-2" />
-              {isSubmitting ? 'Gönderiliyor...' : 'Mesaj Gönder'}
+              {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
             </button>
           </form>
         </div>
@@ -211,12 +216,12 @@ const Contact = () => {
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="flex items-center mb-6">
               <Mail className="w-6 h-6 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-900">Doğrudan İletişim</h2>
+              <h2 className="text-2xl font-bold text-gray-900">{t('contact.directContact')}</h2>
             </div>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">E-posta</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">{t('contact.email')}</h3>
                 <a 
                   href="mailto:info@pulseoftech.net" 
                   className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
@@ -226,9 +231,9 @@ const Contact = () => {
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Yanıt Süresi</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">{t('contact.responseTime')}</h3>
                 <p className="text-gray-700">
-                  Genellikle 24 saat içinde yanıtlıyoruz
+                  {t('contact.responseTimeText')}
                 </p>
               </div>
             </div>
@@ -236,7 +241,7 @@ const Contact = () => {
 
           {/* Social Media */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Sosyal Medya</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('contact.socialMedia')}</h2>
             
             <div className="space-y-4">
               <a 
@@ -273,27 +278,27 @@ const Contact = () => {
 
           {/* FAQ */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Sık Sorulan Sorular</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('contact.faq')}</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">İçerik önerisi nasıl yapabilirim?</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">{t('contact.faqContent1')}</h3>
                 <p className="text-gray-700 text-sm">
-                  Yukarıdaki formu kullanarak "İçerik Önerisi" konusunu seçin ve önerinizi detaylandırın.
+                  {t('contact.faqAnswer1')}
                 </p>
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Reklam verebilir miyim?</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">{t('contact.faqContent2')}</h3>
                 <p className="text-gray-700 text-sm">
-                  Sponsorluk ve reklam fırsatları için "Reklam ve Sponsorluk" konusunu seçerek bizimle iletişime geçin.
+                  {t('contact.faqAnswer2')}
                 </p>
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Teknik sorun bildirimi</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">{t('contact.faqContent3')}</h3>
                 <p className="text-gray-700 text-sm">
-                  Websitede karşılaştığınız teknik sorunları "Teknik Destek" konusu altında bildirebilirsiniz.
+                  {t('contact.faqAnswer3')}
                 </p>
               </div>
             </div>
