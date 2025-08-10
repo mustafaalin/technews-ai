@@ -1,28 +1,32 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
 import { getBlogPostsByCategory, getCategories } from '../data/blogData';
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { language, t } = useLanguage();
   const [category, setCategory] = React.useState<any>(null);
   const [categoryPosts, setCategoryPosts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
 
+  // Get current language prefix
+  const langPrefix = `/${language}`;
   React.useEffect(() => {
     const loadCategoryData = async () => {
       if (!slug) return;
       
       try {
         // Kategorileri yükle
-        const categories = await getCategories();
+        const categories = await getCategories(language);
         const foundCategory = categories.find(c => c.slug === slug);
         setCategory(foundCategory);
 
         // Kategori yazılarını yükle
-        const posts = await getBlogPostsByCategory(slug);
+        const posts = await getBlogPostsByCategory(slug, language);
         setCategoryPosts(posts);
       } catch (error) {
         console.error('Error loading category data:', error);
@@ -32,14 +36,14 @@ const CategoryPage = () => {
     };
 
     loadCategoryData();
-  }, [slug]);
+  }, [slug, language]);
 
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Kategori yükleniyor...</p>
+          <p className="mt-4 text-gray-600">{t('category.loading')}</p>
         </div>
       </div>
     );
@@ -48,23 +52,27 @@ const CategoryPage = () => {
   if (!category) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Kategori bulunamadı</h1>
-        <Link to="/" className="text-blue-600 hover:text-blue-800">
-          Ana sayfaya dön
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('category.notFound')}</h1>
+        <Link to={langPrefix} className="text-blue-600 hover:text-blue-800">
+          {t('common.backToHome')}
         </Link>
       </div>
     );
   }
 
   // SEO için URL ve bilgiler oluştur
-  const categoryUrl = `https://pulseoftech.net/category/${category.slug}`;
-  const seoTitle = `${category.name} Haberleri | Pulse of Tech`;
-  const seoDescription = `${category.name} kategorisindeki en son teknoloji haberlerini keşfedin. ${categoryPosts.length} makale ile güncel kalın.`;
+  const categoryUrl = `https://pulseoftech.net${langPrefix}/category/${category.slug}`;
+  const seoTitle = language === 'en' 
+    ? `${category.name} News | Pulse of Tech`
+    : `${category.name} Haberleri | Pulse of Tech`;
+  const seoDescription = language === 'en'
+    ? `Discover the latest technology news in ${category.name} category. Stay updated with ${categoryPosts.length} articles.`
+    : `${category.name} kategorisindeki en son teknoloji haberlerini keşfedin. ${categoryPosts.length} makale ile güncel kalın.`;
   const seoKeywords = [
     category.name.toLowerCase(),
-    'teknoloji haberleri',
-    'yapay zeka',
-    'teknoloji',
+    language === 'en' ? 'tech news' : 'teknoloji haberleri',
+    language === 'en' ? 'artificial intelligence' : 'yapay zeka',
+    language === 'en' ? 'technology' : 'teknoloji',
     category.slug
   ];
 
@@ -80,11 +88,11 @@ const CategoryPage = () => {
       {/* Navigation */}
       <div className="mb-8">
         <Link
-          to="/"
+          to={langPrefix}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Tüm yazılara dön
+          {t('common.backToPosts')}
         </Link>
       </div>
 
@@ -94,7 +102,10 @@ const CategoryPage = () => {
           {category.name}
         </h1>
         <p className="text-gray-600 text-lg">
-          Bu kategoride {categoryPosts.length} {categoryPosts.length === 1 ? 'makale' : 'makale'}
+          {language === 'en' 
+            ? `${categoryPosts.length} ${categoryPosts.length === 1 ? 'article' : 'articles'} in this category`
+            : `Bu kategoride ${categoryPosts.length} ${categoryPosts.length === 1 ? 'makale' : 'makale'}`
+          }
         </p>
       </div>
 
@@ -107,12 +118,12 @@ const CategoryPage = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">Bu kategoride henüz yazı bulunamadı.</p>
+          <p className="text-gray-500 text-lg">{t('category.noPosts')}</p>
           <Link
-            to="/"
+            to={langPrefix}
             className="text-blue-600 hover:text-blue-800 mt-4 inline-block"
           >
-            Tüm yazılara göz at
+            {t('category.viewAll')}
           </Link>
         </div>
       )}

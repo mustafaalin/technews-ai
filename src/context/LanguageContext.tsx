@@ -41,6 +41,7 @@ const translations = {
     'common.loading': 'Yükleniyor...',
     'common.backToHome': 'Ana sayfaya dön',
     'common.backToPosts': 'Tüm yazılara dön',
+    'common.backToPosts': 'Tüm yazılara dön',
     'common.viewSource': 'Orijinal kaynağı görüntüle',
     'common.share': 'Paylaş',
     
@@ -232,6 +233,7 @@ const translations = {
     'common.author': 'Author',
     'common.loading': 'Loading...',
     'common.backToHome': 'Back to home',
+    'common.backToPosts': 'Back to all posts',
     'common.backToPosts': 'Back to all posts',
     'common.viewSource': 'View original source',
     'common.share': 'Share',
