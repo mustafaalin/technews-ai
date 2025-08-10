@@ -441,9 +441,47 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       pathSegments.shift();
     }
     
+    // Handle category slug translation
+    if (pathSegments[0] === 'category' && pathSegments[1]) {
+      const currentSlug = pathSegments[1];
+      const translatedSlug = translateCategorySlug(currentSlug, lang);
+      pathSegments[1] = translatedSlug;
+    }
+    
     // Add new language prefix
     const newPath = `/${lang}${pathSegments.length > 0 ? '/' + pathSegments.join('/') : ''}`;
     navigate(newPath);
+  };
+
+  // Translate category slugs between languages
+  const translateCategorySlug = (slug: string, targetLang: Language): string => {
+    const slugMappings = {
+      // Turkish to English
+      'yapay-zeka-ml': 'ai-ml',
+      'web-gelistirme': 'web-dev',
+      'mobil-teknoloji': 'mobile',
+      'bulut-bilisim': 'cloud',
+      'siber-guvenlik': 'security',
+      'girisimcilik': 'startups',
+      'diger': 'other',
+      
+      // English to Turkish
+      'ai-ml': 'yapay-zeka-ml',
+      'web-dev': 'web-gelistirme',
+      'mobile': 'mobil-teknoloji',
+      'cloud': 'bulut-bilisim',
+      'security': 'siber-guvenlik',
+      'startups': 'girisimcilik',
+      'other': 'diger'
+    };
+
+    // If we have a mapping for this slug, use it
+    if (slugMappings[slug]) {
+      return slugMappings[slug];
+    }
+
+    // If no mapping found, return the original slug
+    return slug;
   };
 
   // Update language when URL changes

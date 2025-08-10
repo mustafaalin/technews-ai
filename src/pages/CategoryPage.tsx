@@ -20,13 +20,19 @@ const CategoryPage = () => {
       if (!slug) return;
       
       try {
+        console.log('Loading category data for slug:', slug, 'language:', language);
+        
         // Kategorileri yükle
         const categories = await getCategories(language);
+        console.log('Available categories:', categories.map(c => ({ name: c.name, slug: c.slug })));
+        
         const foundCategory = categories.find(c => c.slug === slug);
+        console.log('Found category:', foundCategory);
         setCategory(foundCategory);
 
         // Kategori yazılarını yükle
         const posts = await getBlogPostsByCategory(slug, language);
+        console.log('Found posts:', posts.length);
         setCategoryPosts(posts);
       } catch (error) {
         console.error('Error loading category data:', error);
