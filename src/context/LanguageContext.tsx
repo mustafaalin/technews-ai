@@ -520,23 +520,27 @@ export const translateCategorySlug = (slug: string, targetLang: Language): strin
   console.log('🔄 Translating slug:', slug, 'to language:', targetLang);
   
   const slugMappings = {
-    // Turkish to English
-    'ai-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    // Turkish slugs
     'yapay-zeka-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
-    'web-dev': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
-    'web-gelistirme': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
-    'mobile': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
-    'mobile-technology': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
-    'mobile-technology': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
-    'mobil-teknoloji': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
-    'cloud': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
-    'bulut-bilisim': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
-    'security': targetLang === 'en' ? 'security' : 'siber-guvenlik',
-    'siber-guvenlik': targetLang === 'en' ? 'security' : 'siber-guvenlik',
-    'startups': targetLang === 'en' ? 'startups' : 'girisimcilik',
+    'web-gelistirme': targetLang === 'en' ? 'web-development' : 'web-gelistirme',
+    'mobil-teknoloji': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
+    'bulut-bilisim': targetLang === 'en' ? 'cloud-computing' : 'bulut-bilisim',
+    'siber-guvenlik': targetLang === 'en' ? 'cybersecurity' : 'siber-guvenlik',
     'girisimcilik': targetLang === 'en' ? 'startups' : 'girisimcilik',
-    'other': targetLang === 'en' ? 'other' : 'diger',
-    'diger': targetLang === 'en' ? 'other' : 'diger'
+    'diger': targetLang === 'en' ? 'other' : 'diger',
+    
+    // English slugs
+    'ai-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    'web-development': targetLang === 'en' ? 'web-development' : 'web-gelistirme',
+    'web-dev': targetLang === 'en' ? 'web-development' : 'web-gelistirme', // Legacy support
+    'mobile-technology': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
+    'mobile': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji', // Legacy support
+    'cloud-computing': targetLang === 'en' ? 'cloud-computing' : 'bulut-bilisim',
+    'cloud': targetLang === 'en' ? 'cloud-computing' : 'bulut-bilisim', // Legacy support
+    'cybersecurity': targetLang === 'en' ? 'cybersecurity' : 'siber-guvenlik',
+    'security': targetLang === 'en' ? 'cybersecurity' : 'siber-guvenlik', // Legacy support
+    'startups': targetLang === 'en' ? 'startups' : 'girisimcilik',
+    'other': targetLang === 'en' ? 'other' : 'diger'
   };
     
   const translatedSlug = slugMappings[slug] || slug;

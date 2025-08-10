@@ -21,11 +21,11 @@ const Header = () => {
 
   const navigation = [
     { name: t('nav.home'), href: langPrefix },
-    { name: t('nav.ai'), href: `${langPrefix}/category/${translateCategorySlug('ai-ml', language)}` },
-    { name: t('nav.webdev'), href: `${langPrefix}/category/${translateCategorySlug('web-dev', language)}` },
-    { name: t('nav.mobile'), href: `${langPrefix}/category/${translateCategorySlug('mobile', language)}` },
-    { name: t('nav.cloud'), href: `${langPrefix}/category/${translateCategorySlug('cloud', language)}` },
-    { name: t('nav.security'), href: `${langPrefix}/category/${translateCategorySlug('security', language)}` },
+    { name: t('nav.ai'), href: `${langPrefix}/category/${language === 'en' ? 'ai-ml' : 'yapay-zeka-ml'}` },
+    { name: t('nav.webdev'), href: `${langPrefix}/category/${language === 'en' ? 'web-development' : 'web-gelistirme'}` },
+    { name: t('nav.mobile'), href: `${langPrefix}/category/${language === 'en' ? 'mobile-technology' : 'mobil-teknoloji'}` },
+    { name: t('nav.cloud'), href: `${langPrefix}/category/${language === 'en' ? 'cloud-computing' : 'bulut-bilisim'}` },
+    { name: t('nav.security'), href: `${langPrefix}/category/${language === 'en' ? 'cybersecurity' : 'siber-guvenlik'}` },
   ];
 
   const isActive = (path: string) => {
