@@ -12,7 +12,7 @@ export const fetchCategories = async (language: Language = 'tr'): Promise<Catego
   try {
     const { data: categoriesData, error: categoriesError } = await supabase
       .from('categories')
-      .select('id, name, slug, name_en, slug_en')
+      .select('id, name, slug, name_en, slug_tr, slug_en')
       .order('id')
       .neq('id', 99); // Diğer kategorisini ayrı olarak ekleyeceğiz
 
@@ -24,7 +24,7 @@ export const fetchCategories = async (language: Language = 'tr'): Promise<Catego
     // Diğer kategorisini ayrı olarak çek
     const { data: digerCategory, error: digerError } = await supabase
       .from('categories')
-      .select('id, name, slug, name_en, slug_en')
+      .select('id, name, slug, name_en, slug_tr, slug_en')
       .eq('id', 99)
       .single();
     // Her kategori için ayrı ayrı post sayısını hesapla
@@ -43,7 +43,7 @@ export const fetchCategories = async (language: Language = 'tr'): Promise<Catego
         return {
           id: category.id.toString(),
           name: language === 'en' ? (category.name_en || category.name) : category.name,
-          slug: language === 'en' ? (category.slug_en || category.slug) : category.slug,
+          slug: language === 'en' ? (category.slug_en || category.slug) : (category.slug_tr || category.slug),
           count: count || 0,
         };
       })
@@ -65,7 +65,7 @@ export const fetchCategories = async (language: Language = 'tr'): Promise<Catego
       digerCategoryWithCount = {
         id: '99',
         name: language === 'en' ? (digerCategory.name_en || digerCategory.name) : digerCategory.name,
-        slug: language === 'en' ? (digerCategory.slug_en || digerCategory.slug) : digerCategory.slug,
+        slug: language === 'en' ? (digerCategory.slug_en || digerCategory.slug) : (digerCategory.slug_tr || digerCategory.slug),
         count: count || 0,
       };
     }
@@ -94,8 +94,8 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-    categories (id, name, slug, name_en, slug_en)
+    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+    categories (id, name, slug, name_en, slug_tr, slug_en)
   `)
       .eq("is_published", true)
       .order("publish_date", { ascending: false });
@@ -112,7 +112,7 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
       summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
       content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug_tr || post.categories?.slug || "diger"),
       categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
@@ -142,7 +142,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
     const { data: categoryData, error: categoryError } = await supabase
       .from("categories")
       .select("id")
-      .or(`slug.eq.${categorySlug},slug_en.eq.${categorySlug}`)
+      .or(`slug.eq.${categorySlug},slug_tr.eq.${categorySlug},slug_en.eq.${categorySlug}`)
       .single();
 
     if (categoryError || !categoryData) {
@@ -153,8 +153,8 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
        const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug, name_en, slug_en)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        categories (id, name, slug, name_en, slug_tr, slug_en)
       `)
       .eq("is_published", true)
       .eq("category_id", categoryData.id) // ✅ artık category_id üzerinden filtreleme
@@ -171,7 +171,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
       summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
       content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug_tr || post.categories?.slug || "diger"),
       categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
@@ -197,8 +197,8 @@ export const fetchBlogPostById = async (id: string, language: Language = 'tr'): 
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug, name_en, slug_en)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        categories (id, name, slug, name_en, slug_tr, slug_en)
       `)
       .eq("id", id)
       .eq("is_published", true)
@@ -214,7 +214,7 @@ export const fetchBlogPostById = async (id: string, language: Language = 'tr'): 
       summary: language === 'en' ? (data.summary_en || data.summary) : data.summary,
       content: language === 'en' ? (data.content_en || data.content) : data.content,
       categoryId: data.category_id,
-      category: language === 'en' ? (data.categories?.slug_en || data.categories?.slug || "other") : (data.categories?.slug || "diger"),
+      category: language === 'en' ? (data.categories?.slug_en || data.categories?.slug || "other") : (data.categories?.slug_tr || data.categories?.slug || "diger"),
       categoryName: language === 'en' ? (data.categories?.name_en || data.categories?.name || "Other") : (data.categories?.name || "Diğer"),
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
@@ -380,8 +380,8 @@ export const searchBlogPosts = async (query: string, language: Language = 'tr'):
     const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug, name_en, slug_en)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        categories (id, name, slug, name_en, slug_tr, slug_en)
       `) // ✅ categories join edildi
       .eq("is_published", true)
       .or(
@@ -402,7 +402,7 @@ export const searchBlogPosts = async (query: string, language: Language = 'tr'):
       summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
       content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug_tr || post.categories?.slug || "diger"),
       categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
