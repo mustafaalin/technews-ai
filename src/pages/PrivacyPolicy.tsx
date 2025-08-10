@@ -1,103 +1,102 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import SEOHead from '../components/SEOHead';
 
 export default function PrivacyPolicy() {
+  const { language, t } = useLanguage();
+  
+  // Get current language prefix
+  const langPrefix = `/${language}`;
+  
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 text-gray-800">
-      <h1 className="text-3xl font-bold mb-6">Gizlilik Politikası</h1>
-
-      <p className="mb-4">
-        Bu Gizlilik Politikası, <strong>Pulse of Tech</strong> web sitesi
-        (<a
-          href="https://pulseoftech.net/"
-          className="text-blue-600 underline"
-          target="_blank"
-          rel="noopener noreferrer"
+      <SEOHead
+        title={`${t('privacy.title')} | Pulse of Tech`}
+        description={language === 'en' ? "Privacy Policy for Pulse of Tech - Learn how we collect and use your data" : "Pulse of Tech Gizlilik Politikası - Verilerinizi nasıl topladığımızı ve kullandığımızı öğrenin"}
+        keywords={language === 'en' ? ['privacy policy', 'data protection', 'pulse of tech'] : ['gizlilik politikası', 'veri koruma', 'pulse of tech']}
+        url={`https://pulseoftech.net${langPrefix}/privacy-policy`}
+        type="website"
+      />
+      
+      {/* Navigation */}
+      <div className="mb-8">
+        <Link
+          to={langPrefix}
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
-          https://pulseoftech.net/
-        </a>
-        ) tarafından toplanan ve işlenen kişisel veriler hakkında kullanıcıları
-        bilgilendirmek amacıyla hazırlanmıştır. Sitemizi kullanarak bu
-        politikayı kabul etmiş olursunuz.
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          {t('common.backToHome')}
+        </Link>
+      </div>
+      
+      <h1 className="text-3xl font-bold mb-6">{t('privacy.title')}</h1>
+
+      <p className="mb-4">
+        <span dangerouslySetInnerHTML={{ __html: t('privacy.intro') }} />
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">1. Toplanan Veriler</h2>
+      <h2 className="text-xl font-semibold mt-6 mb-2">{t('privacy.dataCollected')}</h2>
       <p className="mb-4">
-        Sitemizi kullanırken aşağıdaki kişisel verileriniz toplanabilir:
+        {t('privacy.dataCollectedText')}
       </p>
       <ul className="list-disc list-inside mb-4">
         <li>
-          <strong>E-posta adresiniz</strong> – Abonelik formu aracılığıyla
-          verdiğinizde Supabase veritabanına kaydedilir ve size yeni haberler
-          hakkında bilgilendirme yapmak için kullanılır.
+          <span dangerouslySetInnerHTML={{ __html: t('privacy.email') }} />
         </li>
         <li>
-          <strong>Çerezler ve kullanım verileri</strong> – Google Analytics
-          aracılığıyla site trafiği ve kullanıcı davranışları anonim olarak
-          izlenir.
+          <span dangerouslySetInnerHTML={{ __html: t('privacy.cookies') }} />
         </li>
       </ul>
       <p className="mb-4">
-        Google AdSense gibi reklam hizmetleri, reklam
-        çerezleri kullanabilir. Bu çerezler kullanıcı tercihlerinizi
-        hatırlamak ve ilgi alanlarınıza yönelik reklamlar göstermek amacıyla
-        kullanılabilir.
+        {t('privacy.adsense')}
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        2. Verilerin Kullanım Amacı
+        {t('privacy.dataUsage')}
       </h2>
       <ul className="list-disc list-inside mb-4">
-        <li>Yeni haber ve içeriklerle ilgili size bildirim göndermek</li>
-        <li>Site kullanımını analiz ederek kullanıcı deneyimini geliştirmek</li>
-        <li>
-          Reklam hizmetleri için kişiselleştirilmiş içerik
-          sağlamak
-        </li>
+        <li>{t('privacy.dataUsageList1')}</li>
+        <li>{t('privacy.dataUsageList2')}</li>
+        <li>{t('privacy.dataUsageList3')}</li>
       </ul>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        3. Üçüncü Taraf Hizmetler
+        {t('privacy.thirdParty')}
       </h2>
-      <p className="mb-4">Sitemiz aşağıdaki üçüncü taraf hizmetleri kullanır:</p>
+      <p className="mb-4">{t('privacy.thirdPartyText')}</p>
       <ul className="list-disc list-inside mb-4">
         <li>
-          <strong>Google Analytics:</strong> Site trafiğini ve kullanıcı
-          davranışlarını anonim olarak analiz eder.
+          <span dangerouslySetInnerHTML={{ __html: t('privacy.analytics') }} />
         </li>
         <li>
-          <strong>Google AdSense:</strong> Kişiselleştirilmiş reklamlar
-          göstermek için çerezleri kullanabilir.
+          <span dangerouslySetInnerHTML={{ __html: t('privacy.adsenseService') }} />
         </li>
       </ul>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        4. Verilerin Saklanması
+        {t('privacy.dataStorage')}
       </h2>
       <p className="mb-4">
-        E-posta adresiniz, yalnızca Supabase veritabanında saklanır ve yalnızca
-        haber bülteni bilgilendirmeleri için kullanılır. Talep etmeniz durumunda
-        e-posta adresiniz sistemimizden silinir.
+        {t('privacy.dataStorageText')}
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">5. Kullanıcı Hakları</h2>
+      <h2 className="text-xl font-semibold mt-6 mb-2">{t('privacy.userRights')}</h2>
       <ul className="list-disc list-inside mb-4">
-        <li>Verilerinizin hangi amaçla kullanıldığını öğrenme</li>
-        <li>Verilerinize erişme ve düzeltilmesini talep etme</li>
-        <li>Verilerinizin silinmesini talep etme</li>
+        <li>{t('privacy.userRightsList1')}</li>
+        <li>{t('privacy.userRightsList2')}</li>
+        <li>{t('privacy.userRightsList3')}</li>
       </ul>
       <p className="mb-4">
-        Talepleriniz için bizimle{" "}
-        <strong>info@pulseoftech.net</strong> üzerinden iletişime
-        geçebilirsiniz.
+        <span dangerouslySetInnerHTML={{ __html: t('privacy.contact') }} />
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        6. Gizlilik Politikasında Değişiklikler
+        {t('privacy.changes')}
       </h2>
       <p>
-        Bu gizlilik politikası zaman zaman güncellenebilir. Güncellenmiş politika
-        sitemizde yayımlandığı andan itibaren geçerli olacaktır.
+        {t('privacy.changesText')}
       </p>
     </div>
   );

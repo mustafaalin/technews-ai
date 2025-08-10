@@ -1,89 +1,80 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import SEOHead from '../components/SEOHead';
 
 export default function TermsOfService() {
+  const { language, t } = useLanguage();
+  
+  // Get current language prefix
+  const langPrefix = `/${language}`;
+  
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 text-gray-800">
-      <h1 className="text-3xl font-bold mb-6">Kullanım Şartları</h1>
+      <SEOHead
+        title={`${t('terms.title')} | Pulse of Tech`}
+        description={language === 'en' ? "Terms of Service for Pulse of Tech - Learn about our service conditions" : "Pulse of Tech Kullanım Şartları - Hizmet koşullarımızı öğrenin"}
+        keywords={language === 'en' ? ['terms of service', 'conditions', 'pulse of tech'] : ['kullanım şartları', 'koşullar', 'pulse of tech']}
+        url={`https://pulseoftech.net${langPrefix}/terms-of-service`}
+        type="website"
+      />
+      
+      {/* Navigation */}
+      <div className="mb-8">
+        <Link
+          to={langPrefix}
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          {t('common.backToHome')}
+        </Link>
+      </div>
+      
+      <h1 className="text-3xl font-bold mb-6">{t('terms.title')}</h1>
 
       <p className="mb-4">
-        Bu Kullanım Şartları,{" "}
-        <strong>Pulse of Tech</strong> web sitesi (
-        <a
-          href="https://pulseoftech.net/"
-          className="text-blue-600 underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          https://pulseoftech.net/
-        </a>
-        ) üzerinden sunulan hizmetlerin kullanımına ilişkin koşulları açıklar.
-        Sitemizi ziyaret ederek veya kullanarak bu şartları kabul etmiş
-        sayılırsınız.
+        <span dangerouslySetInnerHTML={{ __html: t('terms.intro') }} />
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">1. Hizmetin Amacı</h2>
+      <h2 className="text-xl font-semibold mt-6 mb-2">{t('terms.purpose')}</h2>
       <p className="mb-4">
-        Pulse of Tech, teknoloji haberleri ve içerikleri paylaşan bir platformdur.
-        Sitedeki içerikler bilgilendirme amacı taşır ve herhangi bir yatırım
-        veya hukuki tavsiye niteliği taşımaz.
+        {t('terms.purposeText')}
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        2. Kullanıcı Yükümlülükleri
+        {t('terms.userObligations')}
       </h2>
       <ul className="list-disc list-inside mb-4">
-        <li>
-          Siteyi yalnızca yasalara uygun şekilde ve iyi niyetle kullanmayı kabul
-          edersiniz.
-        </li>
-        <li>
-          Sitede bulunan içeriklerin izinsiz olarak kopyalanması, çoğaltılması
-          veya ticari amaçla kullanılması yasaktır.
-        </li>
-        <li>
-          Abonelik sırasında verdiğiniz e-posta adresinin doğru ve güncel
-          olmasından siz sorumlusunuz.
-        </li>
+        <li>{t('terms.userObligationsList1')}</li>
+        <li>{t('terms.userObligationsList2')}</li>
+        <li>{t('terms.userObligationsList3')}</li>
       </ul>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        3. Toplanan Veriler ve Gizlilik
+        {t('terms.dataPrivacy')}
       </h2>
       <p className="mb-4">
-        Site, Google Analytics ile anonim kullanım verilerini toplar ve
-        abonelik formu üzerinden kullanıcıların e-posta adreslerini saklar.
-        Verilerin işlenmesine ilişkin detaylar için{" "}
-        <a
-          href="/privacy-policy"
-          className="text-blue-600 underline"
-        >
-          Gizlilik Politikası
-        </a>{" "}
-        sayfamızı inceleyebilirsiniz.
+        <span dangerouslySetInnerHTML={{ __html: t('terms.dataPrivacyText') }} />
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        4. Sorumluluk Reddi
+        {t('terms.disclaimer')}
       </h2>
       <p className="mb-4">
-        Sitede yer alan içerikler “olduğu gibi” sağlanır. İçeriklerdeki
-        eksikliklerden veya hatalardan dolayı site sahibi sorumlu tutulamaz.
+        {t('terms.disclaimerText')}
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        5. Değişiklik Hakkı
+        {t('terms.changeRight')}
       </h2>
       <p className="mb-4">
-        Pulse of Tech, bu kullanım şartlarını önceden bildirim yapmaksızın
-        değiştirme hakkını saklı tutar. Güncellenmiş şartlar sitede
-        yayımlandığı andan itibaren geçerli olur.
+        {t('terms.changeRightText')}
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">6. İletişim</h2>
+      <h2 className="text-xl font-semibold mt-6 mb-2">{t('terms.contactInfo')}</h2>
       <p>
-        Herhangi bir soru veya talebiniz için bizimle{" "}
-        <strong>info@pulseoftech.net</strong> üzerinden iletişime
-        geçebilirsiniz.
+        <span dangerouslySetInnerHTML={{ __html: t('terms.contactInfoText') }} />
       </p>
     </div>
   );
