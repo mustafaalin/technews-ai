@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { getAllBlogPosts } from '../data/blogData';
 import { searchBlogPosts } from '../lib/blogService';
 import { createSeoUrl } from '../utils/urlHelpers';
 
 const Header = () => {
+  const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -14,13 +16,16 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Get current language prefix for navigation
+  const langPrefix = `/${language}`;
+
   const navigation = [
-    { name: 'Ana Sayfa', href: '/' },
-    { name: 'Yapay Zeka', href: '/category/ai-ml' },
-    { name: 'Web Geliştirme', href: '/category/web-dev' },
-    { name: 'Mobil', href: '/category/mobile' },
-    { name: 'Bulut', href: '/category/cloud' },
-    { name: 'Güvenlik', href: '/category/security' },
+    { name: t('nav.home'), href: langPrefix },
+    { name: t('nav.ai'), href: `${langPrefix}/category/ai-ml` },
+    { name: t('nav.webdev'), href: `${langPrefix}/category/web-dev` },
+    { name: t('nav.mobile'), href: `${langPrefix}/category/mobile` },
+    { name: t('nav.cloud'), href: `${langPrefix}/category/cloud` },
+    { name: t('nav.security'), href: `${langPrefix}/category/security` },
   ];
 
   const isActive = (path: string) => {
@@ -87,12 +92,42 @@ const Header = () => {
     }
   };
 
+  // Language switcher component
+  const LanguageSwitcher = () => (
+    <div className="flex items-center space-x-2">
+      <button
+        onClick={() => setLanguage('tr')}
+        className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
+          language === 'tr' 
+            ? 'bg-blue-100 text-blue-600' 
+            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+        }`}
+        title="Türkçe"
+      >
+        <span className="text-lg">🇹🇷</span>
+        <span className="text-xs font-medium">TR</span>
+      </button>
+      <button
+        onClick={() => setLanguage('en')}
+        className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
+          language === 'en' 
+            ? 'bg-blue-100 text-blue-600' 
+            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+        }`}
+        title="English"
+      >
+        <span className="text-lg">🇬🇧</span>
+        <span className="text-xs font-medium">EN</span>
+      </button>
+    </div>
+  );
+
   return (
     <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-gray-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to={langPrefix} className="flex items-center space-x-3">
             <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg shadow-lg">
               <Zap className="w-6 h-6 text-white" />
             </div>
@@ -118,14 +153,14 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Search Bar */}
-          <div className="hidden lg:flex items-center">
+          {/* Search Bar and Language Switcher */}
+          <div className="hidden lg:flex items-center space-x-4">
             <div className="relative" onBlur={() => setTimeout(() => setShowResults(false), 200)}>
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <form onSubmit={handleSearchSubmit}>
                 <input
                   type="text"
-                  placeholder="Teknoloji haberlerinde ara..."
+                  placeholder={t('search.placeholder')}
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
@@ -168,11 +203,14 @@ const Header = () => {
               {showResults && searchQuery.length >= 2 && searchResults.length === 0 && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50">
                   <p className="text-gray-500 text-sm text-center">
-                    "{searchQuery}" için sonuç bulunamadı
+                    {t('search.noResults')} "{searchQuery}"
                   </p>
                 </div>
               )}
             </div>
+            
+            {/* Language Switcher */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
@@ -209,7 +247,7 @@ const Header = () => {
                 <form onSubmit={handleSearchSubmit}>
                   <input
                     type="text"
-                    placeholder="Teknoloji haberlerinde ara..."
+                    placeholder={t('search.placeholder')}
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
                     onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
@@ -239,6 +277,12 @@ const Header = () => {
                     ))}
                   </div>
                 )}
+              </div>
+              
+              {/* Mobile Language Switcher */}
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-sm font-medium text-gray-700 mb-2">Language / Dil</p>
+                <LanguageSwitcher />
               </div>
             </div>
           </div>

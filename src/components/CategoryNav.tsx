@@ -1,16 +1,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import { getCategories } from '../data/blogData';
 
 const CategoryNav = () => {
+  const { language, t } = useLanguage();
   const location = useLocation();
   const [categories, setCategories] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
 
+  // Get current language prefix
+  const langPrefix = `/${language}`;
   React.useEffect(() => {
     const loadCategories = async () => {
       try {
-        const cats = await getCategories();
+        const cats = await getCategories(language);
         setCategories(cats);
       } catch (error) {
         console.error('Error loading categories:', error);
@@ -23,7 +27,7 @@ const CategoryNav = () => {
   }, []);
   
   const isActive = (slug: string) => {
-    return location.pathname === `/category/${slug}`;
+    return location.pathname === `${langPrefix}/category/${slug}`;
   };
 
   if (loading) {
@@ -45,19 +49,19 @@ const CategoryNav = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex space-x-8 overflow-x-auto py-4">
           <Link
-            to="/"
+            to={langPrefix}
             className={`whitespace-nowrap pb-2 px-3 py-1 rounded-lg border-b-2 font-medium text-sm transition-all duration-200 ${
-              location.pathname === '/'
+              location.pathname === langPrefix
                 ? 'border-blue-500 text-blue-600 bg-blue-50'
                 : 'border-transparent text-gray-700 hover:text-blue-600 hover:bg-gray-50'
             }`}
           >
-            Tüm Yazılar
+            {t('category.all')}
           </Link>
           {categories.map((category) => (
             <Link
               key={category.id}
-              to={`/category/${category.slug}`}
+              to={`${langPrefix}/category/${category.slug}`}
               className={`whitespace-nowrap pb-2 px-3 py-1 rounded-lg border-b-2 font-medium text-sm transition-all duration-200 ${
                 isActive(category.slug)
                   ? 'border-blue-500 text-blue-600 bg-blue-50'
