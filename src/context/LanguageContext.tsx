@@ -481,40 +481,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   // Update language and navigate to new URL
-  const setLanguage = (lang: Language) => {
-    console.log('🌐 Changing language from', language, 'to', lang);
-    console.log('📍 Current path:', location.pathname);
-    
-    setLanguageState(lang);
-    
-    // Save to localStorage
-    localStorage.setItem('preferred-language', lang);
-    
-    // Update URL
-    const currentPath = location.pathname;
-    const pathSegments = currentPath.split('/').filter(Boolean);
-    console.log('📂 Path segments:', pathSegments);
-    
-    // Remove existing language prefix if present
-    if (pathSegments[0] === 'en' || pathSegments[0] === 'tr') {
-      pathSegments.shift();
-    }
-    
-    // Handle category slug translation
-    if (pathSegments[0] === 'category' && pathSegments[1]) {
-      const currentSlug = pathSegments[1];
-      console.log('🏷️ Current category slug:', currentSlug);
-      const translatedSlug = translateCategorySlug(currentSlug, lang);
-      console.log('🔄 Translated category slug:', translatedSlug);
-      pathSegments[1] = translatedSlug;
-    }
-    
-    // Add new language prefix
-    const newPath = `/${lang}${pathSegments.length > 0 ? '/' + pathSegments.join('/') : ''}`;
-    console.log('🎯 New path:', newPath);
-    navigate(newPath);
-  };
-
   // Update language when URL changes
   useEffect(() => {
     const urlLang = getLanguageFromPath();
