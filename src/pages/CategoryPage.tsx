@@ -20,22 +20,38 @@ const CategoryPage = () => {
       if (!slug) return;
       
       try {
-        console.log('Loading category data for slug:', slug, 'language:', language);
+        console.log('🔍 Loading category data for slug:', slug, 'language:', language);
         
         // Kategorileri yükle
         const categories = await getCategories(language);
-        console.log('Available categories:', categories.map(c => ({ name: c.name, slug: c.slug })));
+        console.log('📋 Available categories:', categories.map(c => ({ name: c.name, slug: c.slug })));
         
         const foundCategory = categories.find(c => c.slug === slug);
-        console.log('Found category:', foundCategory);
+        console.log('✅ Found category:', foundCategory);
+        
+        if (!foundCategory) {
+          console.error('❌ Category not found for slug:', slug);
+          console.log('🔍 Trying alternative slug search...');
+          
+          // Alternatif slug arama - hem TR hem EN slug'larını kontrol et
+          const alternativeCategory = categories.find(c => 
+            c.slug === slug || 
+            (c as any).slug_tr === slug || 
+            (c as any).slug_en === slug
+          );
+          console.log('🔄 Alternative category found:', alternativeCategory);
+          setCategory(alternativeCategory);
+        } else {
+          setCategory(foundCategory);
+        }
         setCategory(foundCategory);
 
         // Kategori yazılarını yükle
         const posts = await getBlogPostsByCategory(slug, language);
-        console.log('Found posts:', posts.length);
+        console.log('📰 Found posts:', posts.length);
         setCategoryPosts(posts);
       } catch (error) {
-        console.error('Error loading category data:', error);
+        console.error('❌ Error loading category data:', error);
       } finally {
         setLoading(false);
       }

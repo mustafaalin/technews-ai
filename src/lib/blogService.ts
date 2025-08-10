@@ -138,7 +138,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
   }
   
   try {
-    console.log('Searching for category with slug:', categorySlug, 'in language:', language);
+    console.log('🔍 Searching for category with slug:', categorySlug, 'in language:', language);
     
     // 1️⃣ Önce category_id'yi bul
     const { data: categoryData, error: categoryError } = await supabase
@@ -147,10 +147,10 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
       .or(`slug.eq.${categorySlug},slug_tr.eq.${categorySlug},slug_en.eq.${categorySlug}`)
       .single();
 
-    console.log('Category search result:', categoryData, 'error:', categoryError);
+    console.log('📊 Category search result:', categoryData, 'error:', categoryError);
 
     if (categoryError || !categoryData) {
-      console.error("Kategori bulunamadı:", categoryError);
+      console.error("❌ Kategori bulunamadı:", categoryError);
       return [];
     }
 

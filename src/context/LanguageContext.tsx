@@ -455,33 +455,64 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   // Translate category slugs between languages
   const translateCategorySlug = (slug: string, targetLang: Language): string => {
+    console.log('🔄 Translating slug:', slug, 'to language:', targetLang);
+    
     const slugMappings = {
       // Turkish to English
-      'yapay-zeka-ml': 'ai-ml',
-      'web-gelistirme': 'web-dev',
-      'mobil-teknoloji': 'mobile',
-      'bulut-bilisim': 'cloud',
-      'siber-guvenlik': 'security',
-      'girisimcilik': 'startups',
-      'diger': 'other',
-      
-      // English to Turkish
-      'ai-ml': 'yapay-zeka-ml',
-      'web-dev': 'web-gelistirme',
-      'mobile': 'mobil-teknoloji',
-      'cloud': 'bulut-bilisim',
-      'security': 'siber-guvenlik',
-      'startups': 'girisimcilik',
-      'other': 'diger'
+      'ai-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+      'yapay-zeka-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+      'web-dev': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
+      'web-gelistirme': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
+      'mobile': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
+      'mobil-teknoloji': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
+      'cloud': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
+      'bulut-bilisim': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
+      'security': targetLang === 'en' ? 'security' : 'siber-guvenlik',
+      'siber-guvenlik': targetLang === 'en' ? 'security' : 'siber-guvenlik',
+      'startups': targetLang === 'en' ? 'startups' : 'girisimcilik',
+      'girisimcilik': targetLang === 'en' ? 'startups' : 'girisimcilik',
+      'other': targetLang === 'en' ? 'other' : 'diger',
+      'diger': targetLang === 'en' ? 'other' : 'diger'
     };
+      
+    const translatedSlug = slugMappings[slug] || slug;
+    console.log('✅ Translated slug result:', translatedSlug);
+    return translatedSlug;
+  };
 
-    // If we have a mapping for this slug, use it
-    if (slugMappings[slug]) {
-      return slugMappings[slug];
+  // Update language and navigate to new URL
+  const setLanguage = (lang: Language) => {
+    console.log('🌐 Changing language from', language, 'to', lang);
+    console.log('📍 Current path:', location.pathname);
+    
+    setLanguageState(lang);
+    
+    // Save to localStorage
+    localStorage.setItem('preferred-language', lang);
+    
+    // Update URL
+    const currentPath = location.pathname;
+    const pathSegments = currentPath.split('/').filter(Boolean);
+    console.log('📂 Path segments:', pathSegments);
+    
+    // Remove existing language prefix if present
+    if (pathSegments[0] === 'en' || pathSegments[0] === 'tr') {
+      pathSegments.shift();
     }
-
-    // If no mapping found, return the original slug
-    return slug;
+    
+    // Handle category slug translation
+    if (pathSegments[0] === 'category' && pathSegments[1]) {
+      const currentSlug = pathSegments[1];
+      console.log('🏷️ Current category slug:', currentSlug);
+      const translatedSlug = translateCategorySlug(currentSlug, lang);
+      console.log('🔄 Translated category slug:', translatedSlug);
+      pathSegments[1] = translatedSlug;
+    }
+    
+    // Add new language prefix
+    const newPath = `/${lang}${pathSegments.length > 0 ? '/' + pathSegments.join('/') : ''}`;
+    console.log('🎯 New path:', newPath);
+    navigate(newPath);
   };
 
   // Update language when URL changes
