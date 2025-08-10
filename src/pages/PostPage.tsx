@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
@@ -10,6 +10,7 @@ import { createSeoUrl, parseSeoUrl } from '../utils/urlHelpers';
 const PostPage = () => {
   const { '*': urlPath } = useParams<{ '*': string }>();
   const { language, t } = useLanguage();
+  const location = useLocation();
   const [post, setPost] = React.useState<any>(null);
   const [categories, setCategories] = React.useState<any[]>([]);
   const [relatedPosts, setRelatedPosts] = React.useState<any[]>([]);
@@ -17,26 +18,37 @@ const PostPage = () => {
 
   // Get current language prefix
   const langPrefix = `/${language}`;
+  
+  // Extract language from current URL
+  const getCurrentLanguageFromUrl = (): 'tr' | 'en' => {
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    const firstSegment = pathSegments[0];
+    return (firstSegment === 'en' || firstSegment === 'tr') ? firstSegment : 'tr';
+  };
+
   React.useEffect(() => {
     const loadPostData = async () => {
       if (!urlPath) return;
       
       try {
+        // Use the language from URL, not from context
+        const currentLang = getCurrentLanguageFromUrl();
         console.log('URL Path:', urlPath);
-        console.log('Language:', language);
+        console.log('Language from URL:', currentLang);
+        console.log('Language from context:', language);
         
         // Tüm postları al
-        const allPosts = await getAllBlogPosts(language);
+        const allPosts = await getAllBlogPosts(currentLang);
         console.log('All posts loaded:', allPosts.length);
         
         let currentPost = null;
         
         // 1. Önce SEO URL formatını dene
-        const fullSeoPath = `/${language}/post/${urlPath}`;
+        const fullSeoPath = `/${currentLang}/post/${urlPath}`;
         console.log('Trying SEO path:', fullSeoPath);
         
         currentPost = allPosts.find(post => {
-          const postSeoUrl = createSeoUrl(post, language);
+          const postSeoUrl = createSeoUrl(post, currentLang);
           console.log('Comparing:', postSeoUrl, 'with', fullSeoPath);
           return postSeoUrl === fullSeoPath;
         });
@@ -59,10 +71,10 @@ const PostPage = () => {
         setPost(currentPost);
 
         if (currentPost) {
-          const cats = await getCategories(language);
+          const cats = await getCategories(currentLang);
           setCategories(cats);
 
-          const allPosts = await getAllBlogPosts(language);
+          const allPostsForRelated = await getAllBlogPosts(currentLang);
           const related = allPosts
             .filter(p => p.id !== currentPost.id && p.category === currentPost.category)
             .slice(0, 2);
@@ -76,10 +88,11 @@ const PostPage = () => {
     };
 
     loadPostData();
-  }, [urlPath, language]);
+  }, [urlPath, location.pathname]);
 
   const formatDate = (dateString: string) => {
-    const locale = language === 'en' ? 'en-US' : 'tr-TR';
+    const currentLang = getCurrentLanguageFromUrl();
+    const locale = currentLang === 'en' ? 'en-US' : 'tr-TR';
     return new Date(dateString).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
@@ -132,7 +145,8 @@ const PostPage = () => {
   const categorySlug = post.category || "diger";
 
   // SEO için URL oluştur
-  const postUrl = `https://pulseoftech.net/${language}/post/${urlPath}`;
+  const currentLang = getCurrentLanguageFromUrl();
+  const postUrl = `https://pulseoftech.net/${currentLang}/post/${urlPath}`;
   
   // SEO için title oluştur
   const seoTitle = `${post.title} | Pulse of Tech`;
@@ -286,7 +300,7 @@ const PostPage = () => {
           {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
-                to={createSeoUrl({...relatedPost, title_en: relatedPost.title_en}, language)}
+                to={createSeoUrl({...relatedPost, title_en: relatedPost.title_en}, currentLang)}
                 className="block group"
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
