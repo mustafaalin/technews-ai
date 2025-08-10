@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { getCategories } from '../data/blogData';
+import { fetchCategories } from '../lib/blogService';
 
 const CategoryNav = () => {
   const { language, t } = useLanguage();
   const location = useLocation();
   const [categories, setCategories] = React.useState<any[]>([]);
+  const [categoriesCache, setCategoriesCache] = React.useState<{[key: string]: any[]}>({});
   const [loading, setLoading] = React.useState(true);
 
   // Get current language prefix
@@ -14,9 +15,23 @@ const CategoryNav = () => {
 
   React.useEffect(() => {
     const loadCategories = async () => {
+      // Önce cache'den kontrol et
+      if (categoriesCache[language]) {
+        setCategories(categoriesCache[language]);
+        setLoading(false);
+        return;
+      }
+      
+      setLoading(true);
       try {
-        const cats = await getCategories(language);
+        const cats = await fetchCategories(language);
         setCategories(cats);
+        
+        // Cache'e kaydet
+        setCategoriesCache(prev => ({
+          ...prev,
+          [language]: cats
+        }));
       } catch (error) {
         console.error('Error loading categories:', error);
       } finally {
@@ -25,7 +40,7 @@ const CategoryNav = () => {
     };
 
     loadCategories();
-  }, [language]); // ✅ Dil değiştiğinde kategorileri yeniden yükle
+  }, [language, categoriesCache]);
   
   const isActive = (slug: string) => {
     return location.pathname === `${langPrefix}/category/${slug}`;

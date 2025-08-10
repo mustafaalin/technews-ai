@@ -21,13 +21,28 @@ export const getCategories = async (language: Language = 'tr'): Promise<Category
   } catch (error) {
     console.error('Error fetching categories:', error);
     // Fallback olarak base kategorileri döndür
-    return baseCategories.map((category) => ({
+    const fallbackCategories = baseCategories.map((category) => ({
       ...category,
+      name: language === 'en' ? getEnglishCategoryName(category.slug) : category.name,
       count: 0,
     }));
+    return fallbackCategories;
   }
 };
 
+// İngilizce kategori isimlerini map et
+const getEnglishCategoryName = (slug: string): string => {
+  const englishNames: {[key: string]: string} = {
+    'ai-ml': 'AI & Machine Learning',
+    'web-dev': 'Web Development', 
+    'mobile': 'Mobile Technology',
+    'cloud': 'Cloud Computing',
+    'security': 'Cybersecurity',
+    'startups': 'Startups',
+    'diger': 'Other'
+  };
+  return englishNames[slug] || slug;
+};
 // Tüm blog yazılarını Supabase'den çek
 export const getAllBlogPosts = async (language: Language = 'tr'): Promise<BlogPost[]> => {
   try {
