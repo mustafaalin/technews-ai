@@ -138,7 +138,7 @@ const Home = () => {
                 <span className="font-medium text-gray-700">{featuredPost.author}</span>
                 <span className="mx-2">•</span>
                 <Clock className="w-4 h-4 mr-1" />
-                <span>{featuredPost.readTime} dk okuma</span>
+                <span>{featuredPost.readTime} {t('common.readTime')}</span>
               </div>
               
               <Link

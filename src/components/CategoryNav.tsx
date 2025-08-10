@@ -11,6 +11,7 @@ const CategoryNav = () => {
 
   // Get current language prefix
   const langPrefix = `/${language}`;
+
   React.useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -24,7 +25,7 @@ const CategoryNav = () => {
     };
 
     loadCategories();
-  }, []);
+  }, [language]); // ✅ Dil değiştiğinde kategorileri yeniden yükle
   
   const isActive = (slug: string) => {
     return location.pathname === `${langPrefix}/category/${slug}`;

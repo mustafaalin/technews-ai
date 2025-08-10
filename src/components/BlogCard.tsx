@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, ExternalLink, User } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { BlogPost } from '../types/blog';
 import { createSeoUrl } from '../utils/urlHelpers';
 
@@ -9,6 +10,8 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
+  const { t } = useLanguage();
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -52,7 +55,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <span className="font-medium text-gray-700">{post.author}</span>
           <span className="mx-2">•</span>
           <Clock className="w-4 h-4 mr-1" />
-          <span>{post.readTime} dk okuma</span>
+          <span>{post.readTime} {t('common.readTime')}</span>
           <span className="mx-2">•</span>
           <span>{formatDate(post.publishDate)}</span>
         </div>
@@ -85,9 +88,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <div className="flex items-center space-x-2">
             <Link
               to={createSeoUrl(post)}
-             className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
+              className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
             >
-              Devamını oku
+              {t('common.readMore')}
             </Link>
             <a
               href={post.sourceUrl}
