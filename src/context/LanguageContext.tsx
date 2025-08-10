@@ -429,6 +429,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   // Update language and navigate to new URL
   const setLanguage = async (lang: Language) => {
+    console.log('🔄 Language change requested:', language, '->', lang);
+    console.log('📍 Current path:', location.pathname);
+    
     setLanguageState(lang);
     
     // Save to localStorage
@@ -446,26 +449,62 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     // Handle post page URL translation
     if (pathSegments[0] === 'post') {
       try {
-        // Parse the current SEO URL
-        const seoUrlParts = parseSeoUrl(currentPath);
-        if (seoUrlParts) {
-          // Get all posts to find the current post
-          const allPosts = await getAllBlogPosts(language); // Use current language to get the post
-          
-          // Find the post by matching the date and category
-          const currentPost = allPosts.find(post => {
-            const postDate = new Date(post.publishDate).toISOString().split('T')[0];
-            return postDate === seoUrlParts.date && 
-                   (post.category === seoUrlParts.categorySlug || 
-                    translateCategorySlug(post.category, language) === seoUrlParts.categorySlug);
-          });
-          
-          if (currentPost) {
-            // Create new SEO URL with target language
-            const newSeoUrl = createSeoUrl(currentPost, lang);
-            navigate(newSeoUrl);
-            return;
+        console.log('📰 Handling post page URL translation');
+        
+        // Reconstruct the full SEO path
+        const fullSeoPath = `/${language}/${pathSegments.join('/')}`;
+        console.log('🔍 Parsing SEO path:', fullSeoPath);
+        
+        // Get all posts from CURRENT language to find the post
+        const allPosts = await getAllBlogPosts(language);
+        console.log('📊 Loaded posts:', allPosts.length);
+        
+        // Try to find the post by matching the URL
+        let currentPost = null;
+        
+        // Method 1: Try to find by exact SEO URL match
+        currentPost = allPosts.find(post => {
+          const postSeoUrl = createSeoUrl(post, language);
+          console.log('🔗 Comparing:', postSeoUrl, 'with', fullSeoPath);
+          return postSeoUrl === fullSeoPath;
+        });
+        
+        // Method 2: If not found, try parsing URL parts
+        if (!currentPost) {
+          const urlParts = pathSegments.slice(1); // Remove 'post'
+          if (urlParts.length >= 3) {
+            const categorySlug = urlParts[0];
+            const dateStr = urlParts[1];
+            
+            console.log('🔍 Searching by category:', categorySlug, 'and date:', dateStr);
+            
+            currentPost = allPosts.find(post => {
+              const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+              const postCategory = post.category;
+              
+              console.log('📝 Post check:', {
+                postDate,
+                dateStr,
+                postCategory,
+                categorySlug,
+                dateMatch: postDate === dateStr,
+                categoryMatch: postCategory === categorySlug
+              });
+              
+              return postDate === dateStr && postCategory === categorySlug;
+            });
           }
+        }
+        
+        if (currentPost) {
+          console.log('✅ Found post:', currentPost.title);
+          // Create new SEO URL with target language
+          const newSeoUrl = createSeoUrl(currentPost, lang);
+          console.log('🎯 Navigating to:', newSeoUrl);
+          navigate(newSeoUrl);
+          return;
+        } else {
+          console.log('❌ Post not found, falling back to normal navigation');
         }
       } catch (error) {
         console.error('Error translating post URL:', error);
@@ -516,6 +555,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     const urlLang = getLanguageFromPath();
     if (urlLang !== language) {
+      console.log('🔄 URL language change detected:', language, '->', urlLang);
       setLanguageState(urlLang);
     }
   }, [location.pathname]);
@@ -526,7 +566,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     if (savedLang && (savedLang === 'tr' || savedLang === 'en')) {
       const urlLang = getLanguageFromPath();
       if (urlLang !== savedLang) {
-        setLanguage(savedLang);
+        // Don't auto-change language on mount if URL has explicit language
+        console.log('💾 Saved language:', savedLang, 'URL language:', urlLang);
       }
     }
   }, []);

@@ -96,7 +96,7 @@ const Header = () => {
   const LanguageSwitcher = () => (
     <div className="flex items-center space-x-2">
       <button
-        onClick={() => setLanguage('tr')}
+        onClick={async () => await setLanguage('tr')}
         className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
           language === 'tr' 
             ? 'bg-blue-100 text-blue-600' 
@@ -114,7 +114,7 @@ const Header = () => {
         <span className="text-xs font-medium">TR</span>
       </button>
       <button
-        onClick={() => setLanguage('en')}
+        onClick={async () => await setLanguage('en')}
         className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
           language === 'en' 
             ? 'bg-blue-100 text-blue-600' 
