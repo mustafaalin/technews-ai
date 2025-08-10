@@ -1,24 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Twitter, Linkedin, Github, Mail, Zap } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
+  const { language, t } = useLanguage();
   const currentYear = new Date().getFullYear();
+  
+  // Get current language prefix
+  const langPrefix = `/${language}`;
 
   const footerLinks = {
     categories: [
-      { name: 'Yapay Zeka & Makine Öğrenmesi', href: '/category/ai-ml' },
-      { name: 'Web Geliştirme', href: '/category/web-dev' },
-      { name: 'Mobil Teknoloji', href: '/category/mobile' },
-      { name: 'Bulut Bilişim', href: '/category/cloud' },
-      { name: 'Siber Güvenlik', href: '/category/security' },
-      { name: 'Girişimcilik', href: '/category/startups' },
+      { name: t('category.aiml'), href: `${langPrefix}/category/ai-ml` },
+      { name: t('category.webdev'), href: `${langPrefix}/category/web-dev` },
+      { name: t('category.mobile'), href: `${langPrefix}/category/mobile` },
+      { name: t('category.cloud'), href: `${langPrefix}/category/cloud` },
+      { name: t('category.security'), href: `${langPrefix}/category/security` },
+      { name: t('category.startups'), href: `${langPrefix}/category/startups` },
     ],
     company: [
-      { name: 'Hakkımızda', href: '/about' },
-      { name: 'İletişim', href: '/contact' },
-      { name: 'Gizlilik Politikası', href: '/privacy-policy' },
-      { name: 'Kullanım Şartları', href: '/terms-of-service' },
+      { name: t('footer.about'), href: `${langPrefix}/about` },
+      { name: t('footer.contact'), href: `${langPrefix}/contact` },
+      { name: t('footer.privacy'), href: `${langPrefix}/privacy-policy` },
+      { name: t('footer.terms'), href: `${langPrefix}/terms-of-service` },
     ],
   };
 
@@ -35,15 +40,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
+            <Link to={langPrefix} className="flex items-center space-x-2 mb-4">
               <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-2 rounded-lg shadow-lg">
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <span className="text-xl font-bold">Pulse of Tech</span>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
-              Yapay zeka destekli özetlerle en son teknoloji haberlerinden haberdar olun. 
-              Teknoloji dünyasından özlü, doğru içgörüleri günlük olarak edinin.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -61,7 +65,7 @@ const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Kategoriler</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.categories')}</h3>
             <ul className="space-y-2">
               {footerLinks.categories.map((link) => (
                 <li key={link.name}>
@@ -78,7 +82,7 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Şirket</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.company')}</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -97,10 +101,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} Pulse of Tech. Tüm hakları saklıdır.
+            © {currentYear} Pulse of Tech. {t('footer.copyright')}
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
-            Yapay Zeka Destekli • Günlük Güncellemeler • Teknoloji Haberleri
+            {t('footer.tagline')}
           </p>
         </div>
       </div>

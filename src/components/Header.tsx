@@ -104,7 +104,13 @@ const Header = () => {
         }`}
         title="Türkçe"
       >
-        <span className="text-lg">🇹🇷</span>
+        <span className="w-5 h-3 bg-red-600 relative inline-block rounded-sm">
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="w-3 h-2 bg-red-600 relative">
+              <span className="absolute left-0 top-0 w-1 h-1 bg-white rounded-full"></span>
+            </span>
+          </span>
+        </span>
         <span className="text-xs font-medium">TR</span>
       </button>
       <button
@@ -116,7 +122,13 @@ const Header = () => {
         }`}
         title="English"
       >
-        <span className="text-lg">🇬🇧</span>
+        <span className="w-5 h-3 bg-blue-800 relative inline-block rounded-sm">
+          <span className="absolute inset-0">
+            <span className="absolute top-0 left-0 w-full h-px bg-white"></span>
+            <span className="absolute top-1 left-0 w-full h-px bg-red-600"></span>
+            <span className="absolute bottom-0 left-0 w-full h-px bg-white"></span>
+          </span>
+        </span>
         <span className="text-xs font-medium">EN</span>
       </button>
     </div>

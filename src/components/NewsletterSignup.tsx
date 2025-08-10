@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const NewsletterSignup = () => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
@@ -11,7 +13,7 @@ const NewsletterSignup = () => {
     
     if (!email || !email.includes('@')) {
       setStatus('error');
-      setMessage('Lütfen geçerli bir e-posta adresi girin.');
+      setMessage(t('newsletter.error'));
       return;
     }
 
@@ -23,11 +25,11 @@ const NewsletterSignup = () => {
       // Simulate successful signup for now
       await new Promise(resolve => setTimeout(resolve, 1000));
       setStatus('success');
-      setMessage('Başarıyla abone oldunuz! Teşekkür ederiz.');
+      setMessage(t('newsletter.success'));
       setEmail('');
     } catch (error) {
       setStatus('error');
-      setMessage('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+      setMessage(t('newsletter.error'));
     }
   };
 
@@ -43,10 +45,9 @@ const NewsletterSignup = () => {
       <div className="flex justify-center mb-4">
         <Mail className="w-12 h-12 text-blue-100" />
       </div>
-      <h3 className="text-2xl font-bold mb-4">Hiçbir Haberi Kaçırmayın</h3>
+      <h3 className="text-2xl font-bold mb-4">{t('newsletter.title')}</h3>
       <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-        Günlük yapay zeka destekli teknoloji haberi özetlerini e-posta kutunuza alın. 
-        Bilgili kalan binlerce profesyonele katılın.
+        {t('newsletter.subtitle')}
       </p>
       
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
@@ -59,7 +60,7 @@ const NewsletterSignup = () => {
                 setEmail(e.target.value);
                 resetStatus();
               }}
-              placeholder="E-posta adresinizi girin"
+              placeholder={t('newsletter.placeholder')}
               className="w-full px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
               disabled={status === 'loading'}
               required
@@ -73,7 +74,7 @@ const NewsletterSignup = () => {
             {status === 'loading' ? (
               <Loader className="w-4 h-4 animate-spin" />
             ) : (
-              'Abone Ol'
+              t('newsletter.subscribe')
             )}
           </button>
         </div>
@@ -96,7 +97,7 @@ const NewsletterSignup = () => {
       </form>
       
       <p className="text-blue-200 text-xs mt-4">
-        Spam göndermiyoruz. İstediğiniz zaman abonelikten çıkabilirsiniz.
+        {t('newsletter.disclaimer')}
       </p>
     </div>
   );
