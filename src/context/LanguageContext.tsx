@@ -514,3 +514,30 @@ export const useLanguage = (): LanguageContextType => {
   }
   return context;
 };
+
+// Export the translateCategorySlug function for use in other components
+export const translateCategorySlug = (slug: string, targetLang: Language): string => {
+  console.log('🔄 Translating slug:', slug, 'to language:', targetLang);
+  
+  const slugMappings = {
+    // Turkish to English
+    'ai-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    'yapay-zeka-ml': targetLang === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    'web-dev': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
+    'web-gelistirme': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
+    'mobile': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
+    'mobil-teknoloji': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
+    'cloud': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
+    'bulut-bilisim': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
+    'security': targetLang === 'en' ? 'security' : 'siber-guvenlik',
+    'siber-guvenlik': targetLang === 'en' ? 'security' : 'siber-guvenlik',
+    'startups': targetLang === 'en' ? 'startups' : 'girisimcilik',
+    'girisimcilik': targetLang === 'en' ? 'startups' : 'girisimcilik',
+    'other': targetLang === 'en' ? 'other' : 'diger',
+    'diger': targetLang === 'en' ? 'other' : 'diger'
+  };
+    
+  const translatedSlug = slugMappings[slug] || slug;
+  console.log('✅ Translated slug result:', translatedSlug);
+  return translatedSlug;
+};

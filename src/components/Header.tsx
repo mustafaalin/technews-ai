@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Zap } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage, translateCategorySlug } from '../context/LanguageContext';
 import { getAllBlogPosts } from '../data/blogData';
 import { searchBlogPosts } from '../lib/blogService';
 import { createSeoUrl } from '../utils/urlHelpers';
@@ -21,11 +21,11 @@ const Header = () => {
 
   const navigation = [
     { name: t('nav.home'), href: langPrefix },
-    { name: t('nav.ai'), href: `${langPrefix}/category/ai-ml` },
-    { name: t('nav.webdev'), href: `${langPrefix}/category/web-dev` },
-    { name: t('nav.mobile'), href: `${langPrefix}/category/mobile` },
-    { name: t('nav.cloud'), href: `${langPrefix}/category/cloud` },
-    { name: t('nav.security'), href: `${langPrefix}/category/security` },
+    { name: t('nav.ai'), href: `${langPrefix}/category/${translateCategorySlug('ai-ml', language)}` },
+    { name: t('nav.webdev'), href: `${langPrefix}/category/${translateCategorySlug('web-dev', language)}` },
+    { name: t('nav.mobile'), href: `${langPrefix}/category/${translateCategorySlug('mobile', language)}` },
+    { name: t('nav.cloud'), href: `${langPrefix}/category/${translateCategorySlug('cloud', language)}` },
+    { name: t('nav.security'), href: `${langPrefix}/category/${translateCategorySlug('security', language)}` },
   ];
 
   const isActive = (path: string) => {

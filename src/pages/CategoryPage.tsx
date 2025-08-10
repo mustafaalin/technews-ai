@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage, translateCategorySlug } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
 import { getBlogPostsByCategory, getCategories } from '../data/blogData';
@@ -20,34 +20,46 @@ const CategoryPage = () => {
       if (!slug) return;
       
       try {
-        console.log('🔍 Loading category data for slug:', slug, 'language:', language);
+        console.log('🔍 Loading category data for URL slug:', slug, 'language:', language);
+        
+        // Normalize the slug to match the current language
+        const normalizedSlug = translateCategorySlug(slug, language);
+        console.log('🔄 Normalized slug for current language:', normalizedSlug);
         
         // Kategorileri yükle
         const categories = await getCategories(language);
         console.log('📋 Available categories:', categories.map(c => ({ name: c.name, slug: c.slug })));
         
-        const foundCategory = categories.find(c => c.slug === slug);
+        // Try to find category with normalized slug first, then try original slug
+        let foundCategory = categories.find(c => c.slug === normalizedSlug);
+        if (!foundCategory) {
+          foundCategory = categories.find(c => c.slug === slug);
+        }
+        
         console.log('✅ Found category:', foundCategory);
         
         if (!foundCategory) {
-          console.error('❌ Category not found for slug:', slug);
+          console.error('❌ Category not found for slug:', slug, 'or normalized slug:', normalizedSlug);
           console.log('🔍 Trying alternative slug search...');
           
           // Alternatif slug arama - hem TR hem EN slug'larını kontrol et
           const alternativeCategory = categories.find(c => 
-            c.slug === slug || 
+            c.slug === slug ||
+            c.slug === normalizedSlug ||
             (c as any).slug_tr === slug || 
-            (c as any).slug_en === slug
+            (c as any).slug_en === slug ||
+            (c as any).slug_tr === normalizedSlug ||
+            (c as any).slug_en === normalizedSlug
           );
           console.log('🔄 Alternative category found:', alternativeCategory);
-          setCategory(alternativeCategory);
-        } else {
-          setCategory(foundCategory);
+          foundCategory = alternativeCategory;
         }
+        
         setCategory(foundCategory);
 
-        // Kategori yazılarını yükle
-        const posts = await getBlogPostsByCategory(slug, language);
+        // Kategori yazılarını yükle - use the slug that actually found the category
+        const categorySlugToUse = foundCategory ? foundCategory.slug : slug;
+        const posts = await getBlogPostsByCategory(categorySlugToUse, language);
         console.log('📰 Found posts:', posts.length);
         setCategoryPosts(posts);
       } catch (error) {
