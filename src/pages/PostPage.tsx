@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ExternalLink, Share2, Calendar, User } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import { getAllBlogPosts, getCategories } from '../data/blogData';
 import { fetchBlogPostById } from '../lib/blogService';
@@ -8,32 +9,35 @@ import { createSeoUrl, parseSeoUrl } from '../utils/urlHelpers';
 
 const PostPage = () => {
   const { '*': urlPath } = useParams<{ '*': string }>();
+  const { language, t } = useLanguage();
   const [post, setPost] = React.useState<any>(null);
   const [categories, setCategories] = React.useState<any[]>([]);
   const [relatedPosts, setRelatedPosts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
 
+  // Get current language prefix
+  const langPrefix = `/${language}`;
   React.useEffect(() => {
     const loadPostData = async () => {
       if (!urlPath) return;
       
       try {
-        // URL'yi parse et
-        const parsedUrl = parseSeoUrl(`/post/${urlPath}`);
+        // URL'yi parse et - dil ön ekini dahil et
+        const parsedUrl = parseSeoUrl(`/${language}/post/${urlPath}`);
         
         if (!parsedUrl) {
           // Eski format ID kontrolü
-          const allPosts = await getAllBlogPosts();
+          const allPosts = await getAllBlogPosts(language);
           const foundPost = allPosts.find(p => p.id.toString() === urlPath) || null;
           setPost(foundPost);
           return;
         }
         
         // Yeni SEO URL formatı - title slug ile post bul
-        const allPosts = await getAllBlogPosts();
+        const allPosts = await getAllBlogPosts(language);
         const foundPost = allPosts.find(post => {
-          const postSeoUrl = createSeoUrl(post);
-          return postSeoUrl === `/post/${urlPath}`;
+          const postSeoUrl = createSeoUrl(post, language);
+          return postSeoUrl === `/${language}/post/${urlPath}`;
         });
         
         let currentPost = null;
@@ -49,10 +53,10 @@ const PostPage = () => {
         }
 
         if (currentPost) {
-          const cats = await getCategories();
+          const cats = await getCategories(language);
           setCategories(cats);
 
-          const allPosts = await getAllBlogPosts();
+          const allPosts = await getAllBlogPosts(language);
           const related = allPosts
             .filter(p => p.id !== currentPost.id && p.category === currentPost.category)
             .slice(0, 2);
@@ -66,7 +70,7 @@ const PostPage = () => {
     };
 
     loadPostData();
-  }, [urlPath]);
+  }, [urlPath, language]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('tr-TR', {
@@ -80,13 +84,13 @@ const PostPage = () => {
     return (
       <>
         <SEOHead
-          title="Yükleniyor... | Pulse of Tech"
-          description="İçerik yükleniyor..."
+          title={`${t('common.loading')} | Pulse of Tech`}
+          description={t('common.loading')}
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Yazı yükleniyor...</p>
+            <p className="mt-4 text-gray-600">{t('post.loading')}</p>
           </div>
         </div>
       </>
@@ -97,19 +101,19 @@ const PostPage = () => {
     return (
       <>
         <SEOHead
-          title="Yazı Bulunamadı | Pulse of Tech"
-          description="Aradığınız yazı bulunamadı."
+          title={`${t('post.notFound')} | Pulse of Tech`}
+          description={t('post.notFoundDescription')}
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Yazı Bulunamadı</h1>
-            <p className="text-gray-600 mb-8">Aradığınız yazı mevcut değil veya kaldırılmış olabilir.</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('post.notFound')}</h1>
+            <p className="text-gray-600 mb-8">{t('post.notFoundDescription')}</p>
             <Link
-              to="/"
+              to={langPrefix}
               className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Ana Sayfaya Dön
+              {t('common.backToHome')}
             </Link>
           </div>
         </div>
@@ -121,7 +125,7 @@ const PostPage = () => {
   const categorySlug = post.category || "diger";
 
   // SEO için URL oluştur
-  const postUrl = `https://pulseoftech.net/post/${urlPath}`;
+  const postUrl = `https://pulseoftech.net/${language}/post/${urlPath}`;
   
   // SEO için title oluştur
   const seoTitle = `${post.title} | Pulse of Tech`;
@@ -160,11 +164,11 @@ const PostPage = () => {
         {/* Navigation */}
       <div className="mb-8">
         <Link
-          to="/"
+          to={langPrefix}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Tüm yazılara dön
+          {t('common.backToPosts')}
         </Link>
       </div>
 
@@ -172,7 +176,7 @@ const PostPage = () => {
       <header className="mb-8">
         <div className="flex items-center mb-4">
           <Link
-            to={`/category/${categorySlug}`}
+            to={`${langPrefix}/category/${categorySlug}`}
             className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200"
           >
             {categoryName}
@@ -191,7 +195,7 @@ const PostPage = () => {
           <span>{formatDate(post.publishDate)}</span>
           <span className="mx-2">•</span>
           <Clock className="w-4 h-4 mr-1" />
-          <span>{post.readTime} dk okuma</span>
+          <span>{post.readTime} {t('common.readTime')}</span>
         </div>
         
         <div className="flex items-center justify-between border-b border-gray-200 pb-6">
@@ -217,7 +221,7 @@ const PostPage = () => {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
             >
               <ExternalLink className="w-4 h-4 mr-1" />
-              Kaynağı Görüntüle
+              {t('common.viewSource')}
             </a>
           </div>
         </div>
@@ -234,7 +238,7 @@ const PostPage = () => {
 
       {/* Summary */}
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 mb-8">
-        <h2 className="text-lg font-semibold text-blue-900 mb-2">Özet</h2>
+        <h2 className="text-lg font-semibold text-blue-900 mb-2">{t('post.summary')}</h2>
         <p className="text-blue-800 leading-relaxed">
           {post.summary}
         </p>
@@ -253,9 +257,9 @@ const PostPage = () => {
 
       {/* Source Link */}
       <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h3 className="font-semibold text-gray-900 mb-2">Orijinal Makaleyi Okuyun</h3>
+        <h3 className="font-semibold text-gray-900 mb-2">{t('post.originalArticle')}</h3>
         <p className="text-gray-600 mb-4">
-          Daha detaylı bilgi ve tam hikaye için orijinal kaynağı ziyaret edin.
+          {t('post.originalDescription')}
         </p>
         <a
           href={post.sourceUrl}
@@ -264,18 +268,18 @@ const PostPage = () => {
           className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
         >
           <ExternalLink className="w-4 h-4 mr-2" />
-          Orijinal Kaynağı Ziyaret Et
+          {t('post.visitSource')}
         </a>
       </div>
 
       {/* Related Posts */}
       <div className="border-t border-gray-200 pt-8">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">İlgili Yazılar</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-6">{t('post.relatedPosts')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
-                to={createSeoUrl(relatedPost)}
+                to={createSeoUrl(relatedPost, language)}
                 className="block group"
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">

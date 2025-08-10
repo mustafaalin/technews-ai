@@ -84,6 +84,7 @@ const translations = {
     'post.relatedPosts': 'İlgili Yazılar',
     'post.notFound': 'Yazı Bulunamadı',
     'post.notFoundDescription': 'Aradığınız yazı mevcut değil veya kaldırılmış olabilir.',
+    'post.loading': 'Yazı yükleniyor...',
     
     // Category page
     'category.loading': 'Kategori yükleniyor...',
@@ -277,6 +278,7 @@ const translations = {
     'post.relatedPosts': 'Related Posts',
     'post.notFound': 'Post Not Found',
     'post.notFoundDescription': 'The post you are looking for does not exist or may have been removed.',
+    'post.loading': 'Loading post...',
     
     // Category page
     'category.loading': 'Loading category...',
