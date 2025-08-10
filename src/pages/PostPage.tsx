@@ -22,35 +22,41 @@ const PostPage = () => {
       if (!urlPath) return;
       
       try {
-        // URL'yi parse et - dil ön ekini dahil et
-        const parsedUrl = parseSeoUrl(`/${language}/post/${urlPath}`);
+        console.log('URL Path:', urlPath);
+        console.log('Language:', language);
         
-        if (!parsedUrl) {
-          // Eski format ID kontrolü
-          const allPosts = await getAllBlogPosts(language);
-          const foundPost = allPosts.find(p => p.id.toString() === urlPath) || null;
-          setPost(foundPost);
-          return;
-        }
-        
-        // Yeni SEO URL formatı - title slug ile post bul
+        // Tüm postları al
         const allPosts = await getAllBlogPosts(language);
-        const foundPost = allPosts.find(post => {
-          const postSeoUrl = createSeoUrl(post, language);
-          return postSeoUrl === `/${language}/post/${urlPath}`;
-        });
+        console.log('All posts loaded:', allPosts.length);
         
         let currentPost = null;
         
-        if (foundPost) {
-          setPost(foundPost);
-          currentPost = foundPost;
-        } else {
-          // ID ile de dene (geriye uyumluluk)
-          const postById = allPosts.find(p => p.id.toString() === urlPath);
-          setPost(postById);
-          currentPost = postById;
+        // 1. Önce SEO URL formatını dene
+        const fullSeoPath = `/${language}/post/${urlPath}`;
+        console.log('Trying SEO path:', fullSeoPath);
+        
+        currentPost = allPosts.find(post => {
+          const postSeoUrl = createSeoUrl(post, language);
+          console.log('Comparing:', postSeoUrl, 'with', fullSeoPath);
+          return postSeoUrl === fullSeoPath;
+        });
+        
+        // 2. SEO URL bulunamazsa, basit ID kontrolü yap
+        if (!currentPost) {
+          console.log('SEO URL not found, trying ID:', urlPath);
+          currentPost = allPosts.find(p => p.id.toString() === urlPath);
         }
+        
+        // 3. Hala bulunamazsa, URL'nin son kısmını ID olarak dene
+        if (!currentPost) {
+          const urlParts = urlPath.split('/');
+          const possibleId = urlParts[urlParts.length - 1];
+          console.log('Trying last part as ID:', possibleId);
+          currentPost = allPosts.find(p => p.id.toString() === possibleId);
+        }
+        
+        console.log('Found post:', currentPost ? currentPost.title : 'Not found');
+        setPost(currentPost);
 
         if (currentPost) {
           const cats = await getCategories(language);
