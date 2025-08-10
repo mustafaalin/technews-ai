@@ -79,7 +79,8 @@ const PostPage = () => {
   }, [urlPath, language]);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('tr-TR', {
+    const locale = language === 'en' ? 'en-US' : 'tr-TR';
+    return new Date(dateString).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
