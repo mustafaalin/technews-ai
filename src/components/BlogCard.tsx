@@ -10,7 +10,7 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   const formatDate = (dateString: string) => {
     const locale = language === 'en' ? 'en-US' : 'tr-TR';
