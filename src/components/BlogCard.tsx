@@ -63,7 +63,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
           <Link
-            to={createSeoUrl(post)}
+            to={createSeoUrl(post, language)}
             className="hover:text-blue-600 transition-colors duration-200"
           >
             {post.title}
