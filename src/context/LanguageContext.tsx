@@ -526,6 +526,8 @@ export const translateCategorySlug = (slug: string, targetLang: Language): strin
     'web-dev': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
     'web-gelistirme': targetLang === 'en' ? 'web-dev' : 'web-gelistirme',
     'mobile': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
+    'mobile-technology': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
+    'mobile-technology': targetLang === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
     'mobil-teknoloji': targetLang === 'en' ? 'mobile' : 'mobil-teknoloji',
     'cloud': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
     'bulut-bilisim': targetLang === 'en' ? 'cloud' : 'bulut-bilisim',
