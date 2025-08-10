@@ -105,36 +105,12 @@ const Header = () => {
         <div className="flex items-center space-x-1">
           {language === 'tr' ? (
             <>
-              {/* Türkiye Bayrağı */}
-              <div className="w-5 h-3 bg-red-600 relative rounded-sm overflow-hidden">
-                <div className="absolute left-1 top-1/2 transform -translate-y-1/2">
-                  <div className="w-2 h-2 border border-white rounded-full flex items-center justify-center">
-                    <div className="w-1 h-1 bg-white rounded-full"></div>
-                  </div>
-                </div>
-                <div className="absolute left-1.5 top-0.5 w-0 h-0 border-l-2 border-l-transparent border-r-2 border-r-transparent border-b-2 border-b-white transform rotate-12"></div>
-              </div>
+              <img src="/flags/tr.svg" alt="Türkiye" className="w-5 h-3 rounded-sm" />
               <span className="text-sm font-medium text-gray-700">TR</span>
             </>
           ) : (
             <>
-              {/* İngiltere Bayrağı (Union Jack) */}
-              <div className="w-5 h-3 bg-blue-800 relative rounded-sm overflow-hidden">
-                {/* Beyaz çapraz çizgiler */}
-                <div className="absolute inset-0">
-                  <div className="absolute top-0 left-0 w-full h-px bg-white"></div>
-                  <div className="absolute bottom-0 left-0 w-full h-px bg-white"></div>
-                  <div className="absolute top-0 left-0 h-full w-px bg-white"></div>
-                  <div className="absolute top-0 right-0 h-full w-px bg-white"></div>
-                  <div className="absolute top-0 left-0 w-full h-full">
-                    <div className="absolute top-0 left-0 w-full h-0.5 bg-white transform rotate-45 origin-left"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-left"></div>
-                  </div>
-                </div>
-                {/* Kırmızı çizgiler */}
-                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-600 transform -translate-y-1/2"></div>
-                <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-600 transform -translate-x-1/2"></div>
-              </div>
+              <img src="/flags/gb.svg" alt="United Kingdom" className="w-5 h-3 rounded-sm" />
               <span className="text-sm font-medium text-gray-700">EN</span>
             </>
           )}
@@ -154,15 +130,7 @@ const Header = () => {
               language === 'tr' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
             }`}
           >
-            {/* Türkiye Bayrağı */}
-            <div className="w-5 h-3 bg-red-600 relative rounded-sm overflow-hidden">
-              <div className="absolute left-1 top-1/2 transform -translate-y-1/2">
-                <div className="w-2 h-2 border border-white rounded-full flex items-center justify-center">
-                  <div className="w-1 h-1 bg-white rounded-full"></div>
-                </div>
-              </div>
-              <div className="absolute left-1.5 top-0.5 w-0 h-0 border-l-2 border-l-transparent border-r-2 border-r-transparent border-b-2 border-b-white transform rotate-12"></div>
-            </div>
+            <img src="/flags/tr.svg" alt="Türkiye" className="w-5 h-3 rounded-sm" />
             <span className="text-sm font-medium">Türkçe</span>
             {language === 'tr' && <span className="text-blue-600">✓</span>}
           </button>
@@ -176,23 +144,7 @@ const Header = () => {
               language === 'en' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
             }`}
           >
-            {/* İngiltere Bayrağı (Union Jack) */}
-            <div className="w-5 h-3 bg-blue-800 relative rounded-sm overflow-hidden">
-              {/* Beyaz çapraz çizgiler */}
-              <div className="absolute inset-0">
-                <div className="absolute top-0 left-0 w-full h-px bg-white"></div>
-                <div className="absolute bottom-0 left-0 w-full h-px bg-white"></div>
-                <div className="absolute top-0 left-0 h-full w-px bg-white"></div>
-                <div className="absolute top-0 right-0 h-full w-px bg-white"></div>
-                <div className="absolute top-0 left-0 w-full h-full">
-                  <div className="absolute top-0 left-0 w-full h-0.5 bg-white transform rotate-45 origin-left"></div>
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-left"></div>
-                </div>
-              </div>
-              {/* Kırmızı çizgiler */}
-              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-600 transform -translate-y-1/2"></div>
-              <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-600 transform -translate-x-1/2"></div>
-            </div>
+            <img src="/flags/gb.svg" alt="United Kingdom" className="w-5 h-3 rounded-sm" />
             <span className="text-sm font-medium">English</span>
             {language === 'en' && <span className="text-blue-600">✓</span>}
           </button>
