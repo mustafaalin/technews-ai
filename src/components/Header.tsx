@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, Zap } from 'lucide-react';
+import { Search, Menu, X, Zap, ChevronDown, Globe } from 'lucide-react';
 import { useLanguage, translateCategorySlug } from '../context/LanguageContext';
 import { getAllBlogPosts } from '../data/blogData';
 import { searchBlogPosts } from '../lib/blogService';
@@ -9,6 +9,7 @@ import { createSeoUrl } from '../utils/urlHelpers';
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -94,43 +95,109 @@ const Header = () => {
 
   // Language switcher component
   const LanguageSwitcher = () => (
-    <div className="flex items-center space-x-2">
+    <div className="relative">
       <button
-        onClick={async () => await setLanguage('tr')}
-        className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
-          language === 'tr' 
-            ? 'bg-blue-100 text-blue-600' 
-            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-        }`}
-        title="Türkçe"
+        onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+        className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
+        onBlur={() => setTimeout(() => setIsLanguageDropdownOpen(false), 200)}
       >
-        <span className="w-5 h-3 bg-red-600 relative inline-block rounded-sm">
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="w-3 h-2 bg-red-600 relative">
-              <span className="absolute left-0 top-0 w-1 h-1 bg-white rounded-full"></span>
-            </span>
-          </span>
-        </span>
-        <span className="text-xs font-medium">TR</span>
+        <Globe className="w-4 h-4 text-gray-600" />
+        <div className="flex items-center space-x-1">
+          {language === 'tr' ? (
+            <>
+              {/* Türkiye Bayrağı */}
+              <div className="w-5 h-3 bg-red-600 relative rounded-sm overflow-hidden">
+                <div className="absolute left-1 top-1/2 transform -translate-y-1/2">
+                  <div className="w-2 h-2 border border-white rounded-full flex items-center justify-center">
+                    <div className="w-1 h-1 bg-white rounded-full"></div>
+                  </div>
+                </div>
+                <div className="absolute left-1.5 top-0.5 w-0 h-0 border-l-2 border-l-transparent border-r-2 border-r-transparent border-b-2 border-b-white transform rotate-12"></div>
+              </div>
+              <span className="text-sm font-medium text-gray-700">TR</span>
+            </>
+          ) : (
+            <>
+              {/* İngiltere Bayrağı (Union Jack) */}
+              <div className="w-5 h-3 bg-blue-800 relative rounded-sm overflow-hidden">
+                {/* Beyaz çapraz çizgiler */}
+                <div className="absolute inset-0">
+                  <div className="absolute top-0 left-0 w-full h-px bg-white"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-px bg-white"></div>
+                  <div className="absolute top-0 left-0 h-full w-px bg-white"></div>
+                  <div className="absolute top-0 right-0 h-full w-px bg-white"></div>
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-white transform rotate-45 origin-left"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-left"></div>
+                  </div>
+                </div>
+                {/* Kırmızı çizgiler */}
+                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-600 transform -translate-y-1/2"></div>
+                <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-600 transform -translate-x-1/2"></div>
+              </div>
+              <span className="text-sm font-medium text-gray-700">EN</span>
+            </>
+          )}
+        </div>
+        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isLanguageDropdownOpen ? 'rotate-180' : ''}`} />
       </button>
-      <button
-        onClick={async () => await setLanguage('en')}
-        className={`flex items-center space-x-1 px-2 py-1 rounded transition-colors duration-200 ${
-          language === 'en' 
-            ? 'bg-blue-100 text-blue-600' 
-            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-        }`}
-        title="English"
-      >
-        <span className="w-5 h-3 bg-blue-800 relative inline-block rounded-sm">
-          <span className="absolute inset-0">
-            <span className="absolute top-0 left-0 w-full h-px bg-white"></span>
-            <span className="absolute top-1 left-0 w-full h-px bg-red-600"></span>
-            <span className="absolute bottom-0 left-0 w-full h-px bg-white"></span>
-          </span>
-        </span>
-        <span className="text-xs font-medium">EN</span>
-      </button>
+      
+      {/* Dropdown Menu */}
+      {isLanguageDropdownOpen && (
+        <div className="absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[120px] z-50">
+          <button
+            onClick={async () => {
+              await setLanguage('tr');
+              setIsLanguageDropdownOpen(false);
+            }}
+            className={`w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50 transition-colors duration-200 ${
+              language === 'tr' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+            }`}
+          >
+            {/* Türkiye Bayrağı */}
+            <div className="w-5 h-3 bg-red-600 relative rounded-sm overflow-hidden">
+              <div className="absolute left-1 top-1/2 transform -translate-y-1/2">
+                <div className="w-2 h-2 border border-white rounded-full flex items-center justify-center">
+                  <div className="w-1 h-1 bg-white rounded-full"></div>
+                </div>
+              </div>
+              <div className="absolute left-1.5 top-0.5 w-0 h-0 border-l-2 border-l-transparent border-r-2 border-r-transparent border-b-2 border-b-white transform rotate-12"></div>
+            </div>
+            <span className="text-sm font-medium">Türkçe</span>
+            {language === 'tr' && <span className="text-blue-600">✓</span>}
+          </button>
+          
+          <button
+            onClick={async () => {
+              await setLanguage('en');
+              setIsLanguageDropdownOpen(false);
+            }}
+            className={`w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50 transition-colors duration-200 ${
+              language === 'en' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+            }`}
+          >
+            {/* İngiltere Bayrağı (Union Jack) */}
+            <div className="w-5 h-3 bg-blue-800 relative rounded-sm overflow-hidden">
+              {/* Beyaz çapraz çizgiler */}
+              <div className="absolute inset-0">
+                <div className="absolute top-0 left-0 w-full h-px bg-white"></div>
+                <div className="absolute bottom-0 left-0 w-full h-px bg-white"></div>
+                <div className="absolute top-0 left-0 h-full w-px bg-white"></div>
+                <div className="absolute top-0 right-0 h-full w-px bg-white"></div>
+                <div className="absolute top-0 left-0 w-full h-full">
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-white transform rotate-45 origin-left"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-left"></div>
+                </div>
+              </div>
+              {/* Kırmızı çizgiler */}
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-600 transform -translate-y-1/2"></div>
+              <div className="absolute top-0 left-1/2 h-full w-0.5 bg-red-600 transform -translate-x-1/2"></div>
+            </div>
+            <span className="text-sm font-medium">English</span>
+            {language === 'en' && <span className="text-blue-600">✓</span>}
+          </button>
+        </div>
+      )}
     </div>
   );
 
@@ -293,7 +360,7 @@ const Header = () => {
               
               {/* Mobile Language Switcher */}
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-sm font-medium text-gray-700 mb-2">Language / Dil</p>
+                <p className="text-sm font-medium text-gray-700 mb-3">Language / Dil</p>
                 <LanguageSwitcher />
               </div>
             </div>
