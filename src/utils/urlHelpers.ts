@@ -4,6 +4,7 @@ import type { Language } from '../context/LanguageContext';
 export interface PostForUrl {
   id: string | number;
   title: string;
+  title_en?: string;
   category?: string;
   publishDate: string;
 }
@@ -27,11 +28,13 @@ export const createSlug = (text: string): string => {
 
 // Create SEO-friendly URL
 export const createSeoUrl = (post: PostForUrl, language: Language = 'tr'): string => {
-  // Use the category slug as is - it should already be in the correct language from the database
   const categorySlug = post.category || (language === 'en' ? 'other' : 'diger');
   
   const date = new Date(post.publishDate).toISOString().split('T')[0]; // yyyy-mm-dd
-  const titleSlug = createSlug(post.title);
+  
+  // Use the appropriate title based on language
+  const titleToUse = language === 'en' && post.title_en ? post.title_en : post.title;
+  const titleSlug = createSlug(titleToUse);
   
   return `/${language}/post/${categorySlug}/${date}/${titleSlug}`;
 };

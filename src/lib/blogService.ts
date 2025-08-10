@@ -109,6 +109,7 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
     return data.map((post) => ({
       id: post.id,
       title: language === 'en' ? (post.title_en || post.title) : post.title,
+      title_en: post.title_en,
       summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
       content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
@@ -172,6 +173,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
     return (data as SupabaseBlogPost[]).map((post) => ({
       id: post.id,
       title: language === 'en' ? (post.title_en || post.title) : post.title,
+      title_en: post.title_en,
       summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
       content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
@@ -215,6 +217,7 @@ export const fetchBlogPostById = async (id: string, language: Language = 'tr'): 
     return {
       id: data.id,
       title: language === 'en' ? (data.title_en || data.title) : data.title,
+      title_en: data.title_en,
       summary: language === 'en' ? (data.summary_en || data.summary) : data.summary,
       content: language === 'en' ? (data.content_en || data.content) : data.content,
       categoryId: data.category_id,

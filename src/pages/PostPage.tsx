@@ -286,7 +286,7 @@ const PostPage = () => {
           {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
-                to={createSeoUrl(relatedPost, language)}
+                to={createSeoUrl({...relatedPost, title_en: relatedPost.title_en}, language)}
                 className="block group"
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">

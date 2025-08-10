@@ -88,7 +88,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           
           <div className="flex items-center space-x-2">
             <Link
-              to={createSeoUrl(post)}
+              to={createSeoUrl(post, language)}
               className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
             >
               {t('common.readMore')}
