@@ -1,5 +1,6 @@
 import { BlogPost, Category } from '../types/blog';
 import { fetchBlogPosts, fetchBlogPostsByCategory, fetchCategories } from '../lib/blogService';
+import type { Language } from '../context/LanguageContext';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
   { id: '1', name: 'Yapay Zeka & Makine Öğrenmesi', slug: 'ai-ml' },
@@ -12,10 +13,10 @@ export const baseCategories: Omit<Category, 'count'>[] = [
 ];
 
 // Supabase verisine göre kategori sayıları
-export const getCategories = async (): Promise<Category[]> => {
+export const getCategories = async (language: Language = 'tr'): Promise<Category[]> => {
   try {
     // Supabase'den kategorileri ve post sayılarını çek
-    const categories = await fetchCategories();
+    const categories = await fetchCategories(language);
     return categories;
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -28,9 +29,9 @@ export const getCategories = async (): Promise<Category[]> => {
 };
 
 // Tüm blog yazılarını Supabase'den çek
-export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
+export const getAllBlogPosts = async (language: Language = 'tr'): Promise<BlogPost[]> => {
   try {
-    const supabasePosts = await fetchBlogPosts();
+    const supabasePosts = await fetchBlogPosts(language);
     return supabasePosts.sort(
       (a, b) =>
         new Date(b.publish_date).getTime() -
@@ -44,10 +45,11 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
 
 // Kategoriye göre blog yazılarını çek
 export const getBlogPostsByCategory = async (
-  categorySlug: string
+  categorySlug: string,
+  language: Language = 'tr'
 ): Promise<BlogPost[]> => {
   try {
-    const supabasePosts = await fetchBlogPostsByCategory(categorySlug);
+    const supabasePosts = await fetchBlogPostsByCategory(categorySlug, language);
     return supabasePosts.sort(
       (a, b) =>
         new Date(b.publish_date).getTime() -

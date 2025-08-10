@@ -1,8 +1,9 @@
 import { supabase, isSupabaseAvailable } from './supabase';
 import { BlogPost, SupabaseBlogPost, Category } from "../types/blog";
+import type { Language } from '../context/LanguageContext';
 
 // Kategorileri çek
-export const fetchCategories = async (): Promise<Category[]> => {
+export const fetchCategories = async (language: Language = 'tr'): Promise<Category[]> => {
   if (!isSupabaseAvailable()) {
     console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
     return [];
@@ -11,7 +12,7 @@ export const fetchCategories = async (): Promise<Category[]> => {
   try {
     const { data: categoriesData, error: categoriesError } = await supabase
       .from('categories')
-      .select('id, name, slug')
+      .select('id, name, slug, name_en, slug_en')
       .order('id')
       .neq('id', 99); // Diğer kategorisini ayrı olarak ekleyeceğiz
 
@@ -23,7 +24,7 @@ export const fetchCategories = async (): Promise<Category[]> => {
     // Diğer kategorisini ayrı olarak çek
     const { data: digerCategory, error: digerError } = await supabase
       .from('categories')
-      .select('id, name, slug')
+      .select('id, name, slug, name_en, slug_en')
       .eq('id', 99)
       .single();
     // Her kategori için ayrı ayrı post sayısını hesapla
@@ -41,8 +42,8 @@ export const fetchCategories = async (): Promise<Category[]> => {
 
         return {
           id: category.id.toString(),
-          name: category.name,
-          slug: category.slug,
+          name: language === 'en' ? (category.name_en || category.name) : category.name,
+          slug: language === 'en' ? (category.slug_en || category.slug) : category.slug,
           count: count || 0,
         };
       })
@@ -63,8 +64,8 @@ export const fetchCategories = async (): Promise<Category[]> => {
 
       digerCategoryWithCount = {
         id: '99',
-        name: digerCategory.name,
-        slug: digerCategory.slug,
+        name: language === 'en' ? (digerCategory.name_en || digerCategory.name) : digerCategory.name,
+        slug: language === 'en' ? (digerCategory.slug_en || digerCategory.slug) : digerCategory.slug,
         count: count || 0,
       };
     }
@@ -83,7 +84,7 @@ export const fetchCategories = async (): Promise<Category[]> => {
 };
 
 // Supabase'den blog yazılarını çek
-export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
+export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPost[]> => {
   if (!isSupabaseAvailable()) {
     console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
     return [];
@@ -93,8 +94,8 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-    id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-    categories (id, name, slug)
+    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
+    categories (id, name, slug, name_en, slug_en)
   `)
       .eq("is_published", true)
       .order("publish_date", { ascending: false });
@@ -107,12 +108,12 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     // Supabase field names'lerini frontend format'ına çevir
     return data.map((post) => ({
       id: post.id,
-      title: post.title,
-      summary: post.summary,
-      content: post.content,
+      title: language === 'en' ? (post.title_en || post.title) : post.title,
+      summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
+      content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: post.categories?.slug || "diger",
-      categoryName: post.categories?.name || "Diğer",
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
@@ -130,7 +131,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 };
 
 // Kategoriye göre blog yazılarını çek
-export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<BlogPost[]> => {
+export const fetchBlogPostsByCategory = async (categorySlug: string, language: Language = 'tr'): Promise<BlogPost[]> => {
   if (!isSupabaseAvailable()) {
     console.log("⚠️ Supabase mevcut değil, boş array döndürülüyor");
     return [];
@@ -141,7 +142,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
     const { data: categoryData, error: categoryError } = await supabase
       .from("categories")
       .select("id")
-      .eq("slug", categorySlug)
+      .or(`slug.eq.${categorySlug},slug_en.eq.${categorySlug}`)
       .single();
 
     if (categoryError || !categoryData) {
@@ -152,8 +153,8 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
        const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
+        categories (id, name, slug, name_en, slug_en)
       `)
       .eq("is_published", true)
       .eq("category_id", categoryData.id) // ✅ artık category_id üzerinden filtreleme
@@ -166,12 +167,12 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
 
     return (data as SupabaseBlogPost[]).map((post) => ({
       id: post.id,
-      title: post.title,
-      summary: post.summary,
-      content: post.content,
+      title: language === 'en' ? (post.title_en || post.title) : post.title,
+      summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
+      content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: post.categories?.slug || "diger",
-      categoryName: post.categories?.name || "Diğer",
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
@@ -187,7 +188,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string): Promise<Bl
 };
 
 // ID'ye göre tek blog yazısı çek
-export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> => {
+export const fetchBlogPostById = async (id: string, language: Language = 'tr'): Promise<BlogPost | null> => {
   if (!isSupabaseAvailable()) {
     return null;
   }
@@ -196,8 +197,8 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
+        categories (id, name, slug, name_en, slug_en)
       `)
       .eq("id", id)
       .eq("is_published", true)
@@ -209,12 +210,12 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | null> =>
 
     return {
       id: data.id,
-      title: data.title,
-      summary: data.summary,
-      content: data.content,
+      title: language === 'en' ? (data.title_en || data.title) : data.title,
+      summary: language === 'en' ? (data.summary_en || data.summary) : data.summary,
+      content: language === 'en' ? (data.content_en || data.content) : data.content,
       categoryId: data.category_id,
-      category: data.categories?.slug || "diger",
-      categoryName: data.categories?.name || "Diğer",
+      category: language === 'en' ? (data.categories?.slug_en || data.categories?.slug || "other") : (data.categories?.slug || "diger"),
+      categoryName: language === 'en' ? (data.categories?.name_en || data.categories?.name || "Other") : (data.categories?.name || "Diğer"),
       imageUrl: data.image_url,
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
@@ -369,7 +370,7 @@ export const deleteBlogPost = async (id: string): Promise<boolean> => {
 };
 
 // Arama fonksiyonu
-export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
+export const searchBlogPosts = async (query: string, language: Language = 'tr'): Promise<BlogPost[]> => {
   if (!isSupabaseAvailable()) {
     console.log("⚠️ Supabase mevcut değil, boş array döndürülüyor");
     return [];
@@ -379,12 +380,14 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
     const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
-        categories (id, name, slug)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published,category_id,
+        categories (id, name, slug, name_en, slug_en)
       `) // ✅ categories join edildi
       .eq("is_published", true)
       .or(
-        `title.ilike.%${query}%,summary.ilike.%${query}%,content.ilike.%${query}%`
+        language === 'en' 
+          ? `title_en.ilike.%${query}%,summary_en.ilike.%${query}%,content_en.ilike.%${query}%,title.ilike.%${query}%,summary.ilike.%${query}%,content.ilike.%${query}%`
+          : `title.ilike.%${query}%,summary.ilike.%${query}%,content.ilike.%${query}%`
       )
       .order("publish_date", { ascending: false });
 
@@ -395,12 +398,12 @@ export const searchBlogPosts = async (query: string): Promise<BlogPost[]> => {
 
     return data.map((post) => ({
       id: post.id,
-      title: post.title,
-      summary: post.summary,
-      content: post.content,
+      title: language === 'en' ? (post.title_en || post.title) : post.title,
+      summary: language === 'en' ? (post.summary_en || post.summary) : post.summary,
+      content: language === 'en' ? (post.content_en || post.content) : post.content,
       categoryId: post.category_id,
-      category: post.categories?.slug || "diger",
-      categoryName: post.categories?.name || "Diğer",
+      category: language === 'en' ? (post.categories?.slug_en || post.categories?.slug || "other") : (post.categories?.slug || "diger"),
+      categoryName: language === 'en' ? (post.categories?.name_en || post.categories?.name || "Other") : (post.categories?.name || "Diğer"),
       imageUrl: post.image_url,
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
