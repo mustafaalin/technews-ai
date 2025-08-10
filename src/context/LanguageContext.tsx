@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getAllBlogPosts } from '../data/blogData';
+import { createSeoUrl, parseSeoUrl } from '../utils/urlHelpers';
 
 export type Language = 'tr' | 'en';
 
@@ -426,7 +428,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   // Update language and navigate to new URL
-  const setLanguage = (lang: Language) => {
+  const setLanguage = async (lang: Language) => {
     setLanguageState(lang);
     
     // Save to localStorage
@@ -441,8 +443,37 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       pathSegments.shift();
     }
     
+    // Handle post page URL translation
+    if (pathSegments[0] === 'post') {
+      try {
+        // Parse the current SEO URL
+        const seoUrlParts = parseSeoUrl(currentPath);
+        if (seoUrlParts) {
+          // Get all posts to find the current post
+          const allPosts = await getAllBlogPosts(language); // Use current language to get the post
+          
+          // Find the post by matching the date and category
+          const currentPost = allPosts.find(post => {
+            const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+            return postDate === seoUrlParts.date && 
+                   (post.category === seoUrlParts.categorySlug || 
+                    translateCategorySlug(post.category, language) === seoUrlParts.categorySlug);
+          });
+          
+          if (currentPost) {
+            // Create new SEO URL with target language
+            const newSeoUrl = createSeoUrl(currentPost, lang);
+            navigate(newSeoUrl);
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Error translating post URL:', error);
+      }
+    }
+    
     // Handle category slug translation
-    if (pathSegments[0] === 'category' && pathSegments[1]) {
+    else if (pathSegments[0] === 'category' && pathSegments[1]) {
       const currentSlug = pathSegments[1];
       const translatedSlug = translateCategorySlug(currentSlug, lang);
       pathSegments[1] = translatedSlug;
