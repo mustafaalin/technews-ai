@@ -451,63 +451,83 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       try {
         console.log('📰 Handling post page URL translation');
         
-        // Reconstruct the full SEO path
-        const fullSeoPath = `/${language}/${pathSegments.join('/')}`;
-        console.log('🔍 Parsing SEO path:', fullSeoPath);
-        
-        // Get all posts from CURRENT language to find the post
-        const allPosts = await getAllBlogPosts(language);
-        console.log('📊 Loaded posts:', allPosts.length);
-        
-        // Try to find the post by matching the URL
-        let currentPost = null;
-        
-        // Method 1: Try to find by exact SEO URL match
-        currentPost = allPosts.find(post => {
-          const postSeoUrl = createSeoUrl(post, language);
-          console.log('🔗 Comparing:', postSeoUrl, 'with', fullSeoPath);
-          return postSeoUrl === fullSeoPath;
-        });
-        
-        // Method 2: If not found, try parsing URL parts
-        if (!currentPost) {
-          const urlParts = pathSegments.slice(1); // Remove 'post'
-          if (urlParts.length >= 3) {
-            const categorySlug = urlParts[0];
-            const dateStr = urlParts[1];
+        // Parse URL parts: /post/category/date/title-slug
+        const urlParts = pathSegments.slice(1); // Remove 'post'
+        if (urlParts.length >= 3) {
+          const categorySlug = urlParts[0];
+          const dateStr = urlParts[1];
+          const titleSlug = urlParts.slice(2).join('/'); // Handle multi-part titles
+          
+          console.log('🔍 URL parts:', { categorySlug, dateStr, titleSlug });
+          
+          // Get all posts from BOTH languages to find the matching post
+          const [currentLangPosts, targetLangPosts] = await Promise.all([
+            getAllBlogPosts(language),
+            getAllBlogPosts(lang)
+          ]);
+          
+          console.log('📊 Posts loaded:', { 
+            current: currentLangPosts.length, 
+            target: targetLangPosts.length 
+          });
+          
+          // Find post by date and category in current language
+          let currentPost = currentLangPosts.find(post => {
+            const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+            const postCategory = post.category;
             
-            console.log('🔍 Searching by category:', categorySlug, 'and date:', dateStr);
-            
-            currentPost = allPosts.find(post => {
+            return postDate === dateStr && (
+              postCategory === categorySlug ||
+              translateCategorySlug(postCategory, language) === categorySlug
+            );
+          });
+          
+          // If not found in current language, try to find by ID in target language
+          if (!currentPost && currentLangPosts.length > 0) {
+            // Try to match by title similarity or other criteria
+            currentPost = currentLangPosts.find(post => {
               const postDate = new Date(post.publishDate).toISOString().split('T')[0];
-              const postCategory = post.category;
-              
-              console.log('📝 Post check:', {
-                postDate,
-                dateStr,
-                postCategory,
-                categorySlug,
-                dateMatch: postDate === dateStr,
-                categoryMatch: postCategory === categorySlug
-              });
-              
-              return postDate === dateStr && postCategory === categorySlug;
+              return postDate === dateStr;
             });
+          }
+          
+          console.log('✅ Found current post:', currentPost?.title);
+          
+          if (currentPost) {
+            // Find the same post in target language (by ID or date+category)
+            let targetPost = targetLangPosts.find(post => 
+              post.id === currentPost.id
+            );
+            
+            if (!targetPost) {
+              // Fallback: find by date and translated category
+              const translatedCategory = translateCategorySlug(currentPost.category, lang);
+              targetPost = targetLangPosts.find(post => {
+                const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+                return postDate === dateStr && post.category === translatedCategory;
+              });
+            }
+            
+            console.log('🎯 Found target post:', targetPost?.title);
+            
+            if (targetPost) {
+              // Create new SEO URL with target language
+              const newSeoUrl = createSeoUrl(targetPost, lang);
+              console.log('🔗 Navigating to:', newSeoUrl);
+              navigate(newSeoUrl);
+              return;
+            }
           }
         }
         
-        if (currentPost) {
-          console.log('✅ Found post:', currentPost.title);
-          // Create new SEO URL with target language
-          const newSeoUrl = createSeoUrl(currentPost, lang);
-          console.log('🎯 Navigating to:', newSeoUrl);
-          navigate(newSeoUrl);
-          return;
-        } else {
-          console.log('❌ Post not found, falling back to normal navigation');
-        }
+        console.log('❌ Post not found, falling back to home page');
+        navigate(`/${lang}`);
+        return;
       } catch (error) {
         console.error('Error translating post URL:', error);
+        // Fallback to home page on error
+        navigate(`/${lang}`);
+        return;
       }
     }
     
