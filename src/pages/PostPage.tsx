@@ -152,41 +152,37 @@ const PostPage = () => {
   const createAlternateUrls = (post: any, currentLang: Language) => {
     const alternateUrls: { tr?: string; en?: string } = {};
     
-    // Turkish URL
-    alternateUrls.tr = createSeoUrl(post, 'tr');
-    if (!alternateUrls.tr.startsWith('http')) {
-      alternateUrls.tr = `https://pulseoftech.net${alternateUrls.tr}`;
-    }
+    // Turkish URL - use Turkish title if available
+    const trPost = { ...post, title: post.title }; // Use original Turkish title
+    alternateUrls.tr = `https://pulseoftech.net${createSeoUrl(trPost, 'tr')}`;
     
-    // English URL
-    alternateUrls.en = createSeoUrl({
-      ...post,
-      title: post.title_en || post.title
-    }, 'en');
-    if (!alternateUrls.en.startsWith('http')) {
-      alternateUrls.en = `https://pulseoftech.net${alternateUrls.en}`;
-    }
+    // English URL - use English title if available
+    const enPost = { ...post, title: post.title_en || post.title };
+    alternateUrls.en = `https://pulseoftech.net${createSeoUrl(enPost, 'en')}`;
     
     return alternateUrls;
   };
   
   const alternateUrls = post ? createAlternateUrls(post, currentLang) : undefined;
   
-  // SEO için title oluştur
-  const seoTitle = `${post.title} | Pulse of Tech`;
+  // SEO için title oluştur - current language title
+  const displayTitle = currentLang === 'en' && post.title_en ? post.title_en : post.title;
+  const seoTitle = `${displayTitle} | Pulse of Tech`;
   
-  // SEO için description oluştur (160 karakter sınırı)
-  const seoDescription = post.summary.length > 160 
-    ? post.summary.substring(0, 157) + '...' 
-    : post.summary;
+  // SEO için description oluştur - current language summary
+  const displaySummary = currentLang === 'en' && post.summary_en ? post.summary_en : post.summary;
+  const seoDescription = displaySummary.length > 160 
+    ? displaySummary.substring(0, 157) + '...' 
+    : displaySummary;
   
   // SEO için keywords oluştur
+  const displayTags = currentLang === 'en' && post.tags_en ? post.tags_en : post.tags;
   const seoKeywords = [
-    ...post.tags,
+    ...displayTags,
     categoryName,
-    'teknoloji haberleri',
-    'yapay zeka',
-    'teknoloji',
+    currentLang === 'en' ? 'tech news' : 'teknoloji haberleri',
+    currentLang === 'en' ? 'artificial intelligence' : 'yapay zeka',
+    currentLang === 'en' ? 'technology' : 'teknoloji',
     post.author.toLowerCase()
   ];
 

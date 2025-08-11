@@ -56,25 +56,24 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     tr: {
       language: 'Turkish',
       locale: 'tr_TR',
-      inLanguage: 'tr'
+      inLanguage: 'tr',
+      htmlLang: 'tr'
     },
     en: {
       language: 'English',
       locale: 'en_US',
-      inLanguage: 'en'
+      inLanguage: 'en',
+      htmlLang: 'en'
     }
   };
 
   const currentLangSettings = languageSettings[language];
 
-  // Default alternate URLs if not provided
-  const defaultAlternateUrls = alternateUrls || {
-    tr: url.replace('/en/', '/tr/'),
-    en: url.replace('/tr/', '/en/')
-  };
-
   return (
     <Helmet>
+      {/* HTML lang attribute */}
+      <html lang={currentLangSettings.htmlLang} />
+      
       {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={truncatedDescription} />
@@ -88,15 +87,15 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <link rel="canonical" href={url} />
       
       {/* Hreflang Tags */}
-      {defaultAlternateUrls.tr && (
-        <link rel="alternate" href={defaultAlternateUrls.tr} hreflang="tr" />
+      {alternateUrls?.tr && (
+        <link rel="alternate" href={alternateUrls.tr} hreflang="tr" />
       )}
-      {defaultAlternateUrls.en && (
-        <link rel="alternate" href={defaultAlternateUrls.en} hreflang="en" />
+      {alternateUrls?.en && (
+        <link rel="alternate" href={alternateUrls.en} hreflang="en" />
       )}
       {/* x-default points to English version */}
-      {defaultAlternateUrls.en && (
-        <link rel="alternate" href={defaultAlternateUrls.en} hreflang="x-default" />
+      {alternateUrls?.en && (
+        <link rel="alternate" href={alternateUrls.en} hreflang="x-default" />
       )}
       
       {/* Open Graph Tags */}

@@ -28,7 +28,32 @@ export const createSlug = (text: string): string => {
 
 // Create SEO-friendly URL
 export const createSeoUrl = (post: PostForUrl, language: Language = 'tr'): string => {
-  const categorySlug = post.category || (language === 'en' ? 'other' : 'diger');
+  // Map category slugs based on language
+  const categoryMappings = {
+    // Turkish to English mappings
+    'yapay-zeka-ml': language === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    'web-gelistirme': language === 'en' ? 'web-development' : 'web-gelistirme', 
+    'mobil-teknoloji': language === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
+    'bulut-bilisim': language === 'en' ? 'cloud-computing' : 'bulut-bilisim',
+    'siber-guvenlik': language === 'en' ? 'cybersecurity' : 'siber-guvenlik',
+    'girisimcilik': language === 'en' ? 'startups' : 'girisimcilik',
+    'diger': language === 'en' ? 'other' : 'diger',
+    
+    // English to Turkish mappings (reverse)
+    'ai-ml': language === 'en' ? 'ai-ml' : 'yapay-zeka-ml',
+    'web-development': language === 'en' ? 'web-development' : 'web-gelistirme',
+    'web-dev': language === 'en' ? 'web-development' : 'web-gelistirme', // Legacy support
+    'mobile-technology': language === 'en' ? 'mobile-technology' : 'mobil-teknoloji',
+    'mobile': language === 'en' ? 'mobile-technology' : 'mobil-teknoloji', // Legacy support
+    'cloud-computing': language === 'en' ? 'cloud-computing' : 'bulut-bilisim',
+    'cloud': language === 'en' ? 'cloud-computing' : 'bulut-bilisim', // Legacy support
+    'cybersecurity': language === 'en' ? 'cybersecurity' : 'siber-guvenlik',
+    'security': language === 'en' ? 'cybersecurity' : 'siber-guvenlik', // Legacy support
+    'startups': language === 'en' ? 'startups' : 'girisimcilik',
+    'other': language === 'en' ? 'other' : 'diger'
+  };
+  
+  const categorySlug = categoryMappings[post.category || 'diger'] || (language === 'en' ? 'other' : 'diger');
   
   const date = new Date(post.publishDate).toISOString().split('T')[0]; // yyyy-mm-dd
   
