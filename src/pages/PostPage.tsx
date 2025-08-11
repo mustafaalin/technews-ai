@@ -155,7 +155,8 @@ const PostPage = () => {
     // Turkish URL - use original Turkish title and Turkish category slug
     const trPost = { 
       ...post, 
-      title: post.title, // Original Turkish title
+      title: post.title, // Always use original Turkish title for TR URL
+      title_en: undefined, // Don't use English title for Turkish URL
       category: post.category // Keep original category for proper Turkish slug mapping
     };
     alternateUrls.tr = `https://pulseoftech.net${createSeoUrl(trPost, 'tr')}`;
@@ -164,6 +165,7 @@ const PostPage = () => {
     const enPost = { 
       ...post, 
       title: post.title_en || post.title,
+      title_en: post.title_en, // Keep English title for proper English slug
       category: post.category // Will be mapped to English slug in createSeoUrl
     };
     alternateUrls.en = `https://pulseoftech.net${createSeoUrl(enPost, 'en')}`;
