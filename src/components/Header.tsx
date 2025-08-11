@@ -309,43 +309,44 @@ const Header = () => {
                   </div>
                 )}
               </div>
-          </div>
+            </div>
           
-          {/* Mobile Language Switcher - Integrated into menu */}
-          <div className="pt-4 border-t border-gray-200">
-            <p className="text-sm font-medium text-gray-700 mb-3">Language / Dil</p>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={async () => {
-                  await setLanguage('tr');
-                  setIsMenuOpen(false);
-                }}
-                className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border transition-all duration-200 ${
-                  language === 'tr'
-                    ? 'bg-blue-50 border-blue-200 text-blue-700'
-                    : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                <img src="/flags/tr.svg" alt="Türkiye" className="w-5 h-3 rounded-sm" />
-                <span className="text-sm font-medium">Türkçe</span>
-                {language === 'tr' && <span className="text-blue-600 text-xs">✓</span>}
-              </button>
-              
-              <button
-                onClick={async () => {
-                  await setLanguage('en');
-                  setIsMenuOpen(false);
-                }}
-                className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border transition-all duration-200 ${
-                  language === 'en'
-                    ? 'bg-blue-50 border-blue-200 text-blue-700'
-                    : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                <img src="/flags/gb.svg" alt="United Kingdom" className="w-5 h-3 rounded-sm" />
-                <span className="text-sm font-medium">English</span>
-                {language === 'en' && <span className="text-blue-600 text-xs">✓</span>}
-              </button>
+            {/* Mobile Language Switcher - Integrated into menu */}
+            <div className="pt-4 border-t border-gray-200">
+              <p className="text-sm font-medium text-gray-700 mb-3">Language / Dil</p>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={async () => {
+                    await setLanguage('tr');
+                    setIsMenuOpen(false);
+                  }}
+                  className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border transition-all duration-200 ${
+                    language === 'tr'
+                      ? 'bg-blue-50 border-blue-200 text-blue-700'
+                      : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <img src="/flags/tr.svg" alt="Türkiye" className="w-5 h-3 rounded-sm" />
+                  <span className="text-sm font-medium">Türkçe</span>
+                  {language === 'tr' && <span className="text-blue-600 text-xs">✓</span>}
+                </button>
+                
+                <button
+                  onClick={async () => {
+                    await setLanguage('en');
+                    setIsMenuOpen(false);
+                  }}
+                  className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-lg border transition-all duration-200 ${
+                    language === 'en'
+                      ? 'bg-blue-50 border-blue-200 text-blue-700'
+                      : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <img src="/flags/gb.svg" alt="United Kingdom" className="w-5 h-3 rounded-sm" />
+                  <span className="text-sm font-medium">English</span>
+                  {language === 'en' && <span className="text-blue-600 text-xs">✓</span>}
+                </button>
+              </div>
             </div>
           </div>
         </div>
