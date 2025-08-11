@@ -75,29 +75,3 @@ export const generateSitemap = async (language: Language = 'tr'): Promise<string
 
   return sitemap;
 };
-
-// Sitemap'i dosyaya kaydet
-export const saveSitemap = async (language: Language = 'tr'): Promise<void> => {
-  try {
-    const sitemapContent = await generateSitemap(language);
-    
-    // Browser ortamında dosya kaydetme işlemi
-    const blob = new Blob([sitemapContent], { type: 'application/xml' });
-    const url = URL.createObjectURL(blob);
-    
-    const fileName = `sitemap-${language}.xml`;
-    
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    URL.revokeObjectURL(url);
-    
-    console.log(`✅ ${language.toUpperCase()} Sitemap başarıyla oluşturuldu ve indirildi: ${fileName}`);
-  } catch (error) {
-    console.error(`❌ ${language.toUpperCase()} Sitemap oluşturulurken hata:`, error);
-  }
-};

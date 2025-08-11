@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run generate-sitemaps && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "generate-sitemaps": "tsx scripts/generateSitemaps.ts",
     "migrate-posts": "tsx scripts/migratePosts.ts",
     "migrate-json": "tsx scripts/migrateJsonToSupabase.ts"
   },
