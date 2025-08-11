@@ -94,7 +94,7 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
     categories (id, name, slug, name_en, slug_tr, slug_en)
   `)
       .eq("is_published", true)
@@ -119,7 +119,7 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
       readTime: post.read_time,
-      tags: post.tags || [],
+      tags: language === 'en' ? (post.tags_en || post.tags || []) : (post.tags || []),
       author: post.author,
       is_published: post.is_published,
     }));
@@ -158,7 +158,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
        const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
         categories (id, name, slug, name_en, slug_tr, slug_en)
       `)
       .eq("is_published", true)
@@ -183,7 +183,7 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
       readTime: post.read_time,
-      tags: post.tags || [],
+      tags: language === 'en' ? (post.tags_en || post.tags || []) : (post.tags || []),
       author: post.author,
       is_published: post.is_published,
     }));
@@ -203,7 +203,7 @@ export const fetchBlogPostById = async (id: string, language: Language = 'tr'): 
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
         categories (id, name, slug, name_en, slug_tr, slug_en)
       `)
       .eq("id", id)
@@ -227,7 +227,7 @@ export const fetchBlogPostById = async (id: string, language: Language = 'tr'): 
       sourceUrl: data.source_url,
       publishDate: data.publish_date,
       readTime: data.read_time,
-      tags: data.tags || [],
+      tags: language === 'en' ? (data.tags_en || data.tags || []) : (data.tags || []),
       author: data.author,
       is_published: data.is_published
     };
@@ -387,7 +387,7 @@ export const searchBlogPosts = async (query: string, language: Language = 'tr'):
     const { data, error } = await supabase
       .from("blog_posts")
       .select(`
-        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, author, is_published, category_id,
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
         categories (id, name, slug, name_en, slug_tr, slug_en)
       `) // ✅ categories join edildi
       .eq("is_published", true)
@@ -415,7 +415,7 @@ export const searchBlogPosts = async (query: string, language: Language = 'tr'):
       sourceUrl: post.source_url,
       publishDate: post.publish_date,
       readTime: post.read_time,
-      tags: post.tags || [],
+      tags: language === 'en' ? (post.tags_en || post.tags || []) : (post.tags || []),
       author: post.author,
       is_published: post.is_published,
     }));

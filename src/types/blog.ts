@@ -34,6 +34,7 @@ export interface SupabaseBlogPost {
   publish_date: string;
   read_time: number;
   tags: string[];
+  tags_en?: string[];
   author: string;
   is_published: boolean;
   category_id: number;
