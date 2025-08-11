@@ -152,63 +152,47 @@ const PostPage = () => {
   const createAlternateUrls = (post: any, currentLang: Language) => {
     const alternateUrls: { tr?: string; en?: string } = {};
     
-    // Turkish URL - force Turkish title and category
+    // Turkish URL - force Turkish title and category by removing English fields
     alternateUrls.tr = `https://pulseoftech.net${createSeoUrl({
       ...post,
-      title: post.title, // Original Turkish title
-      title_en: undefined // Remove English title to force Turkish slug
+      title: post.title,     // Use original Turkish title
+      title_en: undefined,   // Remove English title to force Turkish slug
+      category_en: undefined // Remove English category to force Turkish slug
     }, 'tr')}`;
     
-    // English URL - use English title if available
-    alternateUrls.en = `https://pulseoftech.net${createSeoUrl({
-      ...post,
-      title: post.title_en || post.title,
-      title_en: post.title_en
-    }, 'en')}`;
+    // English URL - use English fields if available
+    alternateUrls.en = `https://pulseoftech.net${createSeoUrl(post, 'en')}`;
     
     return alternateUrls;
   };
   
-  const alternateUrls = post ? createAlternateUrls(post, currentLang) : undefined;
+  const alternateUrls = createAlternateUrls(post, currentLang);
   
-  // SEO için title oluştur - current language title
-  const displayTitle = currentLang === 'en' && post.title_en ? post.title_en : post.title;
-  const seoTitle = `${displayTitle} | Pulse of Tech`;
+  // SEO için title oluştur
+  const seoTitle = currentLang === 'en' && post.title_en 
+    ? `${post.title_en} | Pulse of Tech`
+    : `${post.title} | Pulse of Tech`;
   
-  // SEO için description oluştur - current language summary
   const createSeoDescription = (post: any, currentLang: Language): string => {
-    let description = '';
-    
     if (currentLang === 'en') {
-      // For English pages, prioritize English summary
+      // For English pages, prioritize English content
       if (post.summary_en && post.summary_en.trim()) {
-        description = post.summary_en;
+        return post.summary_en.length > 160 ? post.summary_en.substring(0, 157) + '...' : post.summary_en;
       } else if (post.content_en && post.content_en.trim()) {
         // Fallback to first 150-160 chars of English content (strip HTML)
         const cleanContent = post.content_en.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-        description = cleanContent.length > 160 ? cleanContent.substring(0, 157) + '...' : cleanContent;
+        return cleanContent.length > 160 ? cleanContent.substring(0, 157) + '...' : cleanContent;
       } else {
-        // Final fallback to Turkish summary
-        description = post.summary;
+        // Final fallback for English pages - never use Turkish content
+        return "Stay informed with concise, English summaries of the latest technology news and insights.";
       }
     } else {
-      // For Turkish pages, use Turkish summary
-      description = post.summary;
+      // For Turkish pages, use Turkish content
+      return post.summary.length > 160 ? post.summary.substring(0, 157) + '...' : post.summary;
     }
-    
-    // Ensure description is within 160 character limit
-    return description.length > 160 ? description.substring(0, 157) + '...' : description;
   };
   
-  // SEO description - always use current language
-  const seoDescription = currentLang === 'en' && post.summary_en 
-    ? (post.summary_en.length > 160 ? post.summary_en.substring(0, 157) + '...' : post.summary_en)
-    : currentLang === 'en' && post.content_en
-    ? (() => {
-        const cleanContent = post.content_en.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-        return cleanContent.length > 160 ? cleanContent.substring(0, 157) + '...' : cleanContent;
-      })()
-    : post.summary.length > 160 ? post.summary.substring(0, 157) + '...' : post.summary;
+  const seoDescription = createSeoDescription(post, currentLang);
   
   // SEO için keywords oluştur
   const displayTags = currentLang === 'en' && post.tags_en ? post.tags_en : post.tags;
