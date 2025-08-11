@@ -152,12 +152,20 @@ const PostPage = () => {
   const createAlternateUrls = (post: any, currentLang: Language) => {
     const alternateUrls: { tr?: string; en?: string } = {};
     
-    // Turkish URL - use Turkish title if available
-    const trPost = { ...post, title: post.title }; // Use original Turkish title
+    // Turkish URL - use original Turkish title and Turkish category slug
+    const trPost = { 
+      ...post, 
+      title: post.title, // Original Turkish title
+      category: post.category // Keep original category for proper Turkish slug mapping
+    };
     alternateUrls.tr = `https://pulseoftech.net${createSeoUrl(trPost, 'tr')}`;
     
-    // English URL - use English title if available
-    const enPost = { ...post, title: post.title_en || post.title };
+    // English URL - use English title and English category slug
+    const enPost = { 
+      ...post, 
+      title: post.title_en || post.title,
+      category: post.category // Will be mapped to English slug in createSeoUrl
+    };
     alternateUrls.en = `https://pulseoftech.net${createSeoUrl(enPost, 'en')}`;
     
     return alternateUrls;
@@ -170,10 +178,31 @@ const PostPage = () => {
   const seoTitle = `${displayTitle} | Pulse of Tech`;
   
   // SEO için description oluştur - current language summary
-  const displaySummary = currentLang === 'en' && post.summary_en ? post.summary_en : post.summary;
-  const seoDescription = displaySummary.length > 160 
-    ? displaySummary.substring(0, 157) + '...' 
-    : displaySummary;
+  const createSeoDescription = (post: any, currentLang: Language): string => {
+    let description = '';
+    
+    if (currentLang === 'en') {
+      // For English pages, prioritize English summary
+      if (post.summary_en && post.summary_en.trim()) {
+        description = post.summary_en;
+      } else if (post.content_en && post.content_en.trim()) {
+        // Fallback to first 150-160 chars of English content (strip HTML)
+        const cleanContent = post.content_en.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+        description = cleanContent.length > 160 ? cleanContent.substring(0, 157) + '...' : cleanContent;
+      } else {
+        // Final fallback to Turkish summary
+        description = post.summary;
+      }
+    } else {
+      // For Turkish pages, use Turkish summary
+      description = post.summary;
+    }
+    
+    // Ensure description is within 160 character limit
+    return description.length > 160 ? description.substring(0, 157) + '...' : description;
+  };
+  
+  const seoDescription = createSeoDescription(post, currentLang);
   
   // SEO için keywords oluştur
   const displayTags = currentLang === 'en' && post.tags_en ? post.tags_en : post.tags;
