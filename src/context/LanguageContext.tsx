@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getAllBlogPosts } from '../data/blogData';
-import { createSeoUrl, parseSeoUrl } from '../utils/urlHelpers';
+import { createSeoUrl, parseSeoUrl, createSlug } from '../utils/urlHelpers';
 
 export type Language = 'tr' | 'en';
 
@@ -471,24 +471,64 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
             target: targetLangPosts.length 
           });
           
-          // Find post by date and category in current language
+          // Find post by matching title slug, date, and category in current language
           let currentPost = currentLangPosts.find(post => {
             const postDate = new Date(post.publishDate).toISOString().split('T')[0];
             const postCategory = post.category;
+            const postTitleSlug = createSlug(post.title);
             
-            return postDate === dateStr && (
+            // Match by title slug first (most specific), then date and category
+            return postTitleSlug === titleSlug && postDate === dateStr && (
               postCategory === categorySlug ||
               translateCategorySlug(postCategory, language) === categorySlug
             );
           });
           
-          // If not found in current language, try to find by ID in target language
+          // If not found by title slug, try to find by date and category only (fallback)
           if (!currentPost && currentLangPosts.length > 0) {
-            // Try to match by title similarity or other criteria
+            console.log('⚠️ Title slug match failed, trying date+category fallback');
             currentPost = currentLangPosts.find(post => {
               const postDate = new Date(post.publishDate).toISOString().split('T')[0];
-              return postDate === dateStr;
+              const postCategory = post.category;
+              
+              return postDate === dateStr && (
+                postCategory === categorySlug ||
+                translateCategorySlug(postCategory, language) === categorySlug
+              );
             });
+            
+            // If multiple posts found on same date, try to match by partial title similarity
+            if (currentPost) {
+              const sameDatePosts = currentLangPosts.filter(post => {
+                const postDate = new Date(post.publishDate).toISOString().split('T')[0];
+                const postCategory = post.category;
+                
+                return postDate === dateStr && (
+                  postCategory === categorySlug ||
+                  translateCategorySlug(postCategory, language) === categorySlug
+                );
+              });
+              
+              if (sameDatePosts.length > 1) {
+                console.log(`🔍 Multiple posts found on ${dateStr}, trying title similarity match`);
+                // Try to find the best match by comparing title slugs
+                const bestMatch = sameDatePosts.find(post => {
+                  const postTitleSlug = createSlug(post.title);
+                  // Check if title slugs have significant overlap
+                  const titleWords = titleSlug.split('-');
+                  const postTitleWords = postTitleSlug.split('-');
+                  const commonWords = titleWords.filter(word => 
+                    postTitleWords.includes(word) && word.length > 2
+                  );
+                  return commonWords.length >= Math.min(3, titleWords.length / 2);
+                });
+                
+                if (bestMatch) {
+                  currentPost = bestMatch;
+                  console.log('✅ Found best title match:', bestMatch.title);
+                }
+              }
+            }
           }
           
           console.log('✅ Found current post:', currentPost?.title);
@@ -500,12 +540,30 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
             );
             
             if (!targetPost) {
-              // Fallback: find by date and translated category
+              // Fallback: find by date and translated category, with title similarity check
               const translatedCategory = translateCategorySlug(currentPost.category, lang);
-              targetPost = targetLangPosts.find(post => {
+              const candidatePosts = targetLangPosts.filter(post => {
                 const postDate = new Date(post.publishDate).toISOString().split('T')[0];
-                return postDate === dateStr && post.category === translatedCategory;
+                return postDate === dateStr && (
+                  post.category === translatedCategory ||
+                  post.category === currentPost.category
+                );
               });
+              
+              if (candidatePosts.length === 1) {
+                targetPost = candidatePosts[0];
+              } else if (candidatePosts.length > 1) {
+                // Multiple candidates, try to find the best match
+                console.log(`🔍 Multiple target candidates found, trying to match with current post`);
+                
+                // Try to match by similar content length or title similarity
+                targetPost = candidatePosts.find(post => {
+                  // Check if summaries are similar in length (within 20% difference)
+                  const lengthDiff = Math.abs(post.summary.length - currentPost.summary.length);
+                  const avgLength = (post.summary.length + currentPost.summary.length) / 2;
+                  return lengthDiff / avgLength < 0.2;
+                }) || candidatePosts[0]; // Fallback to first candidate
+              }
             }
             
             console.log('🎯 Found target post:', targetPost?.title);
