@@ -152,23 +152,19 @@ const PostPage = () => {
   const createAlternateUrls = (post: any, currentLang: Language) => {
     const alternateUrls: { tr?: string; en?: string } = {};
     
-    // Turkish URL - use original Turkish title and Turkish category slug
-    const trPost = { 
-      ...post, 
-      title: post.title, // Always use original Turkish title for TR URL
-      title_en: undefined, // Don't use English title for Turkish URL
-      category: post.category // Keep original category for proper Turkish slug mapping
-    };
-    alternateUrls.tr = `https://pulseoftech.net${createSeoUrl(trPost, 'tr')}`;
+    // Turkish URL - force Turkish title and category
+    alternateUrls.tr = `https://pulseoftech.net${createSeoUrl({
+      ...post,
+      title: post.title, // Original Turkish title
+      title_en: undefined // Remove English title to force Turkish slug
+    }, 'tr')}`;
     
-    // English URL - use English title and English category slug
-    const enPost = { 
-      ...post, 
+    // English URL - use English title if available
+    alternateUrls.en = `https://pulseoftech.net${createSeoUrl({
+      ...post,
       title: post.title_en || post.title,
-      title_en: post.title_en, // Keep English title for proper English slug
-      category: post.category // Will be mapped to English slug in createSeoUrl
-    };
-    alternateUrls.en = `https://pulseoftech.net${createSeoUrl(enPost, 'en')}`;
+      title_en: post.title_en
+    }, 'en')}`;
     
     return alternateUrls;
   };
@@ -204,7 +200,15 @@ const PostPage = () => {
     return description.length > 160 ? description.substring(0, 157) + '...' : description;
   };
   
-  const seoDescription = createSeoDescription(post, currentLang);
+  // SEO description - always use current language
+  const seoDescription = currentLang === 'en' && post.summary_en 
+    ? (post.summary_en.length > 160 ? post.summary_en.substring(0, 157) + '...' : post.summary_en)
+    : currentLang === 'en' && post.content_en
+    ? (() => {
+        const cleanContent = post.content_en.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+        return cleanContent.length > 160 ? cleanContent.substring(0, 157) + '...' : cleanContent;
+      })()
+    : post.summary.length > 160 ? post.summary.substring(0, 157) + '...' : post.summary;
   
   // SEO için keywords oluştur
   const displayTags = currentLang === 'en' && post.tags_en ? post.tags_en : post.tags;
