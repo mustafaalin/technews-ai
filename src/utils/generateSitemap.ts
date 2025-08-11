@@ -1,27 +1,40 @@
 import { getAllBlogPosts } from '../data/blogData';
 import { createSeoUrl } from './urlHelpers';
+import type { Language } from '../context/LanguageContext';
 
-export const generateSitemap = async (): Promise<string> => {
+export const generateSitemap = async (language: Language = 'tr'): Promise<string> => {
   const baseUrl = 'https://pulseoftech.net';
   const currentDate = new Date().toISOString().split('T')[0];
   
-  // Statik sayfalar
-  const staticPages = [
-    { url: '/', priority: '1.0', changefreq: 'daily' },
-    { url: '/category/ai-ml', priority: '0.8', changefreq: 'daily' },
-    { url: '/category/web-dev', priority: '0.8', changefreq: 'daily' },
-    { url: '/category/mobile', priority: '0.8', changefreq: 'daily' },
-    { url: '/category/cloud', priority: '0.8', changefreq: 'daily' },
-    { url: '/category/security', priority: '0.8', changefreq: 'daily' },
-    { url: '/category/startups', priority: '0.8', changefreq: 'daily' },
-    { url: '/about', priority: '0.6', changefreq: 'monthly' },
-    { url: '/contact', priority: '0.6', changefreq: 'monthly' },
-    { url: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
-    { url: '/terms-of-service', priority: '0.3', changefreq: 'yearly' },
+  // Dile göre statik sayfalar
+  const staticPages = language === 'en' ? [
+    { url: '/en', priority: '1.0', changefreq: 'daily' },
+    { url: '/en/category/ai-ml', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/category/web-development', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/category/mobile-technology', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/category/cloud-computing', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/category/cybersecurity', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/category/startups', priority: '0.8', changefreq: 'daily' },
+    { url: '/en/about', priority: '0.6', changefreq: 'monthly' },
+    { url: '/en/contact', priority: '0.6', changefreq: 'monthly' },
+    { url: '/en/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+    { url: '/en/terms-of-service', priority: '0.3', changefreq: 'yearly' },
+  ] : [
+    { url: '/tr', priority: '1.0', changefreq: 'daily' },
+    { url: '/tr/category/yapay-zeka-ml', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/category/web-gelistirme', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/category/mobil-teknoloji', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/category/bulut-bilisim', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/category/siber-guvenlik', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/category/girisimcilik', priority: '0.8', changefreq: 'daily' },
+    { url: '/tr/about', priority: '0.6', changefreq: 'monthly' },
+    { url: '/tr/contact', priority: '0.6', changefreq: 'monthly' },
+    { url: '/tr/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+    { url: '/tr/terms-of-service', priority: '0.3', changefreq: 'yearly' },
   ];
 
-  // Blog yazılarını al
-  const blogPosts = await getAllBlogPosts();
+  // O dildeki blog yazılarını al
+  const blogPosts = await getAllBlogPosts(language);
 
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
@@ -43,9 +56,11 @@ export const generateSitemap = async (): Promise<string> => {
     const seoUrl = createSeoUrl({
       id: post.id,
       title: post.title,
+      title_en: post.title_en,
       category: post.category,
       publishDate: post.publishDate
-    });
+    }, language);
+    
     sitemap += `
   <url>
     <loc>${baseUrl}${seoUrl}</loc>
@@ -62,25 +77,27 @@ export const generateSitemap = async (): Promise<string> => {
 };
 
 // Sitemap'i dosyaya kaydet
-export const saveSitemap = async (): Promise<void> => {
+export const saveSitemap = async (language: Language = 'tr'): Promise<void> => {
   try {
-    const sitemapContent = await generateSitemap();
+    const sitemapContent = await generateSitemap(language);
     
     // Browser ortamında dosya kaydetme işlemi
     const blob = new Blob([sitemapContent], { type: 'application/xml' });
     const url = URL.createObjectURL(blob);
     
+    const fileName = `sitemap-${language}.xml`;
+    
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'sitemap.xml';
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     
     URL.revokeObjectURL(url);
     
-    console.log('✅ Sitemap başarıyla oluşturuldu ve indirildi!');
+    console.log(`✅ ${language.toUpperCase()} Sitemap başarıyla oluşturuldu ve indirildi: ${fileName}`);
   } catch (error) {
-    console.error('❌ Sitemap oluşturulurken hata:', error);
+    console.error(`❌ ${language.toUpperCase()} Sitemap oluşturulurken hata:`, error);
   }
 };
