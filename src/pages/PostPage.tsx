@@ -148,6 +148,30 @@ const PostPage = () => {
   const currentLang = getCurrentLanguageFromUrl();
   const postUrl = `https://pulseoftech.net/${currentLang}/post/${urlPath}`;
   
+  // Create alternate URLs for hreflang
+  const createAlternateUrls = (post: any, currentLang: Language) => {
+    const alternateUrls: { tr?: string; en?: string } = {};
+    
+    // Turkish URL
+    alternateUrls.tr = createSeoUrl(post, 'tr');
+    if (!alternateUrls.tr.startsWith('http')) {
+      alternateUrls.tr = `https://pulseoftech.net${alternateUrls.tr}`;
+    }
+    
+    // English URL
+    alternateUrls.en = createSeoUrl({
+      ...post,
+      title: post.title_en || post.title
+    }, 'en');
+    if (!alternateUrls.en.startsWith('http')) {
+      alternateUrls.en = `https://pulseoftech.net${alternateUrls.en}`;
+    }
+    
+    return alternateUrls;
+  };
+  
+  const alternateUrls = post ? createAlternateUrls(post, currentLang) : undefined;
+  
   // SEO için title oluştur
   const seoTitle = `${post.title} | Pulse of Tech`;
   
@@ -179,6 +203,8 @@ const PostPage = () => {
         publishedTime={new Date(post.publishDate).toISOString()}
         category={categoryName}
         tags={post.tags}
+        language={currentLang}
+        alternateUrls={alternateUrls}
       />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

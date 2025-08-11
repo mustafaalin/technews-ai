@@ -118,6 +118,11 @@ const CategoryPage = () => {
         keywords={seoKeywords}
         url={categoryUrl}
         type="website"
+        language={language}
+        alternateUrls={{
+          tr: `https://pulseoftech.net/tr/category/${category.slug}`,
+          en: `https://pulseoftech.net/en/category/${category.slug}`
+        }}
       />
       {/* Navigation */}
       <div className="mb-8">

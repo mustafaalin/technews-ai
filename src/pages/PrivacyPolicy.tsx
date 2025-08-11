@@ -18,6 +18,11 @@ export default function PrivacyPolicy() {
         keywords={language === 'en' ? ['privacy policy', 'data protection', 'pulse of tech'] : ['gizlilik politikası', 'veri koruma', 'pulse of tech']}
         url={`https://pulseoftech.net${langPrefix}/privacy-policy`}
         type="website"
+        language={language}
+        alternateUrls={{
+          tr: 'https://pulseoftech.net/tr/privacy-policy',
+          en: 'https://pulseoftech.net/en/privacy-policy'
+        }}
       />
       
       {/* Navigation */}

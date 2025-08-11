@@ -68,6 +68,11 @@ const Home = () => {
         keywords={language === 'en' ? ['tech news', 'artificial intelligence', 'AI', 'technology', 'machine learning', 'web development', 'cloud computing', 'cybersecurity', 'startups'] : ['teknoloji haberleri', 'yapay zeka', 'AI', 'teknoloji', 'makine öğrenmesi', 'web geliştirme', 'bulut bilişim', 'siber güvenlik', 'girişimcilik']}
         url={`https://pulseoftech.net/${language}`}
         type="website"
+        language={language}
+        alternateUrls={{
+          tr: 'https://pulseoftech.net/tr',
+          en: 'https://pulseoftech.net/en'
+        }}
       />
       {/* Hero Section */}
       <div className="text-center mb-12">

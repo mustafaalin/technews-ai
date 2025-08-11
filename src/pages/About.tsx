@@ -18,6 +18,11 @@ const About = () => {
         keywords={language === 'en' ? ['about us', 'pulse of tech', 'tech news', 'artificial intelligence', 'mustafa alin'] : ['hakkımızda', 'pulse of tech', 'teknoloji haberleri', 'yapay zeka', 'mustafa alin']}
         url={`https://pulseoftech.net${langPrefix}/about`}
         type="website"
+        language={language}
+        alternateUrls={{
+          tr: 'https://pulseoftech.net/tr/about',
+          en: 'https://pulseoftech.net/en/about'
+        }}
       />
       {/* Navigation */}
       <div className="mb-8">

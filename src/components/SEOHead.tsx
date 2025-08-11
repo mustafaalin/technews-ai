@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import type { Language } from '../context/LanguageContext';
 
 interface SEOHeadProps {
   title?: string;
@@ -13,6 +14,11 @@ interface SEOHeadProps {
   modifiedTime?: string;
   category?: string;
   tags?: string[];
+  language?: Language;
+  alternateUrls?: {
+    tr?: string;
+    en?: string;
+  };
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
@@ -26,7 +32,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   publishedTime,
   modifiedTime,
   category,
-  tags = []
+  tags = [],
+  language = 'tr',
+  alternateUrls
 }) => {
   // Description'ı 160 karakter ile sınırla
   const truncatedDescription = description.length > 160 
@@ -43,6 +51,28 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     'pulse of tech'
   ].filter(Boolean).join(', ');
 
+  // Language and locale settings
+  const languageSettings = {
+    tr: {
+      language: 'Turkish',
+      locale: 'tr_TR',
+      inLanguage: 'tr'
+    },
+    en: {
+      language: 'English',
+      locale: 'en_US',
+      inLanguage: 'en'
+    }
+  };
+
+  const currentLangSettings = languageSettings[language];
+
+  // Default alternate URLs if not provided
+  const defaultAlternateUrls = alternateUrls || {
+    tr: url.replace('/en/', '/tr/'),
+    en: url.replace('/tr/', '/en/')
+  };
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -51,11 +81,23 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="keywords" content={allKeywords} />
       <meta name="author" content={author} />
       <meta name="robots" content="index, follow" />
-      <meta name="language" content="Turkish" />
+      <meta name="language" content={currentLangSettings.language} />
       <meta name="revisit-after" content="1 days" />
       
-      {/* Canonical URL */}
+      {/* Canonical URL - Self-referencing */}
       <link rel="canonical" href={url} />
+      
+      {/* Hreflang Tags */}
+      {defaultAlternateUrls.tr && (
+        <link rel="alternate" href={defaultAlternateUrls.tr} hreflang="tr" />
+      )}
+      {defaultAlternateUrls.en && (
+        <link rel="alternate" href={defaultAlternateUrls.en} hreflang="en" />
+      )}
+      {/* x-default points to English version */}
+      {defaultAlternateUrls.en && (
+        <link rel="alternate" href={defaultAlternateUrls.en} hreflang="x-default" />
+      )}
       
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
@@ -64,7 +106,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:image" content={image} />
       <meta property="og:url" content={url} />
       <meta property="og:site_name" content="Pulse of Tech" />
-      <meta property="og:locale" content="tr_TR" />
+      <meta property="og:locale" content={currentLangSettings.locale} />
       
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -117,7 +159,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": url
-            }
+            },
+            "url": url,
+            "inLanguage": currentLangSettings.inLanguage
           })}
         </script>
       )}

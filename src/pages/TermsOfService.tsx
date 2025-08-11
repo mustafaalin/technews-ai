@@ -18,6 +18,11 @@ export default function TermsOfService() {
         keywords={language === 'en' ? ['terms of service', 'conditions', 'pulse of tech'] : ['kullanım şartları', 'koşullar', 'pulse of tech']}
         url={`https://pulseoftech.net${langPrefix}/terms-of-service`}
         type="website"
+        language={language}
+        alternateUrls={{
+          tr: 'https://pulseoftech.net/tr/terms-of-service',
+          en: 'https://pulseoftech.net/en/terms-of-service'
+        }}
       />
       
       {/* Navigation */}
