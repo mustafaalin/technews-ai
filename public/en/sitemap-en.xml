@@ -2,69 +2,105 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pulseoftech.net/en</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/ai-ml</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/web-development</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/mobile-technology</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/cloud-computing</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/cybersecurity</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/startups</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/about</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/contact</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/privacy-policy</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/terms-of-service</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-13/chatgpts-model-picker-returns-complexity-remains</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cloud-computing/2025-08-13/space-force-takes-on-secrecy-ahead-of-national-security-launch</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-12/russian-hackers-target-us-federal-court-filing-system-implications-for-cybersecurity</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-12/critical-winrar-zero-day-exploit-highlights-urgent-security-concerns</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-08-12/ultraviolettes-ambitious-expansion-plan-taking-electric-motorcycles-global</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-12/boars-head-faces-inspection-challenges-amid-mold-and-meat-concerns</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/post/mobile-technology/2025-08-11/ios-26-beta-6-new-ringtones-and-enhanced-app-performance</loc>
@@ -439,31 +475,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-30/in-pursuit-of-success-the-founding-story-of-conversation</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-07-30/proton-vpn-usage-in-the-uk-increased-by-1400-reasons-and-effects</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-30/gemini-cli-vulnerability-device-control-under-threat</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-30/general-artificial-intelligence-applications-record-increase-in-downloads-and-spending</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/other/2025-07-30/a-new-era-on-tiktok-crowd-sourced-verification-with-helpful-notes</loc>
     <lastmod>2025-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -475,13 +487,37 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/waymo-and-avis-begin-the-era-of-robotaxis-in-dallas</loc>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-07-30/proton-vpn-usage-in-the-uk-increased-by-1400-reasons-and-effects</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/other/2025-07-30/a-new-era-on-tiktok-crowd-sourced-verification-with-helpful-notes</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-30/in-pursuit-of-success-the-founding-story-of-conversation</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-30/gemini-cli-vulnerability-device-control-under-threat</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/advantages-of-fast-data-analysis-with-julius-and-artificial-intelligence</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/firefly-aerospace-innovative-solutions-in-space-exploration</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/waymo-and-avis-begin-the-era-of-robotaxis-in-dallas</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -493,7 +529,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/advantages-of-fast-data-analysis-with-julius-and-artificial-intelligence</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-29/firefly-aerospace-innovative-solutions-in-space-exploration</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -505,13 +541,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-28/neanderthals-dietary-secrets-discover-healthy-diets</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-28/space-traffic-management-the-importance-of-security-and-cooperation</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-07-28/the-portable-3d-design-revolution-on-ipad-pro-with-blender</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-28/techcrunch-disrupt-2025-artificial-intelligence-investments-and-innovation</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -529,7 +565,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-28/techcrunch-disrupt-2025-artificial-intelligence-investments-and-innovation</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-28/social-media-innovation-in-steel-production-with-daniel-liss</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-28/neanderthals-dietary-secrets-discover-healthy-diets</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -541,19 +583,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-28/space-traffic-management-the-importance-of-security-and-cooperation</loc>
+    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-07-28/the-portable-3d-design-revolution-on-ipad-pro-with-blender</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-28/social-media-innovation-in-steel-production-with-daniel-liss</loc>
-    <lastmod>2025-07-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/ai-increases-efficiency-in-public-administration-in-the-us</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/microsoft-ends-use-of-china-based-teams-for-security-sensitivity</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -565,13 +601,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/energy-use-of-robots-what-is-machine-metabolism</loc>
-    <lastmod>2025-07-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/microsoft-ends-use-of-china-based-teams-for-security-sensitivity</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/climate-change-disaster-warnings-in-new-orleans</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -583,7 +613,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/climate-change-disaster-warnings-in-new-orleans</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/ai-increases-efficiency-in-public-administration-in-the-us</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-27/energy-use-of-robots-what-is-machine-metabolism</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -595,13 +631,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-26/theres-a-human-behind-the-wheel-in-teslas-robotaxi-project</loc>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-07-26/data-breach-in-tea-application-digital-privacy-at-risk</loc>
     <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-07-26/data-breach-in-tea-application-digital-privacy-at-risk</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-26/theres-a-human-behind-the-wheel-in-teslas-robotaxi-project</loc>
     <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -613,13 +649,25 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-25/artificial-intelligence-in-law-privacy-issues-and-proposed-solutions</loc>
+    <lastmod>2025-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulseoftech.net/en/post/web-development/2025-07-25/googles-opal-tool-for-no-code-application-development</loc>
     <lastmod>2025-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-25/artificial-intelligence-in-law-privacy-issues-and-proposed-solutions</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-25/natos-innovative-solutions-a-revolution-in-the-defense-sector</loc>
+    <lastmod>2025-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-25/a-new-era-in-food-ordering-watch-and-choose-with-bitesight</loc>
     <lastmod>2025-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -643,25 +691,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-25/a-new-era-in-food-ordering-watch-and-choose-with-bitesight</loc>
-    <lastmod>2025-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-25/natos-innovative-solutions-a-revolution-in-the-defense-sector</loc>
-    <lastmod>2025-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-24/intels-delayed-chip-move-leadership-at-risk</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-24/artificial-intelligence-takes-a-leap-in-software-engineering</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-24/artificial-intelligence-takes-a-leap-in-software-engineering</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-24/intels-delayed-chip-move-leadership-at-risk</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -679,7 +715,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-23/google-is-changing-search-the-age-of-artificial-intelligence-has-begun</loc>
+    <loc>https://pulseoftech.net/en/post/startups/2025-07-23/desktop-fusion-a-new-step-in-the-energy-revolution</loc>
     <lastmod>2025-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -691,7 +727,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/en/post/startups/2025-07-23/desktop-fusion-a-new-step-in-the-energy-revolution</loc>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-07-23/google-is-changing-search-the-age-of-artificial-intelligence-has-begun</loc>
     <lastmod>2025-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

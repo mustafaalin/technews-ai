@@ -2,69 +2,105 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pulseoftech.net/tr</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/yapay-zeka-ml</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/web-gelistirme</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/mobil-teknoloji</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/bulut-bilisim</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/siber-guvenlik</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/category/girisimcilik</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/about</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/contact</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/privacy-policy</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/terms-of-service</loc>
-    <lastmod>2025-08-11</lastmod>
+    <lastmod>2025-08-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-08-13/gpt-5-ve-sadelesme-beklentileri-gercekler-ve-yanilsamalar</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/bulut-bilisim/2025-08-13/vulcan-roketi-ile-ulusal-guvenlik-misyonu-uzaya-yeni-bir-adim</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-08-12/rusyanin-federal-mahkeme-sistemine-sizmasi-siber-guvenlikte-zirve-noktasi</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-08-12/winrardaki-kritik-acik-booby-trapped-arsivler-ve-kalici-saldirilar</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/mobil-teknoloji/2025-08-12/ultraviolette-elektrikli-motosikletler-ile-global-pazara-adim-atiyor</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-08-12/boars-head-fabrikalarinin-inceleme-raporlari-korkutucu-sonuclar-ortaya-koyuyor</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/tr/post/mobil-teknoloji/2025-08-11/ios-26-beta-6-yeni-ziller-hizli-uygulama-acilislari-ve-kamera-duzeltmeleri</loc>
@@ -439,31 +475,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-30/basarinin-pesinden-conversationin-kurulus-hikayesi</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-07-30/ingilterede-proton-vpn-kullanimi-1400-artti-nedenleri-ve-etkileri</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-30/gemini-cli-guvenlik-acigi-cihaz-kontrolu-tehdit-altinda</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-30/genel-yapay-zeka-uygulamalari-indirme-ve-harcamalarda-rekor-artis</loc>
-    <lastmod>2025-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/diger/2025-07-30/tiktokta-yeni-bir-donem-faydali-notlar-ile-kitle-kaynakli-dogrulama</loc>
     <lastmod>2025-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -475,13 +487,37 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/waymo-ve-avis-ile-dallasta-robotaksi-donemi-basliyor</loc>
+    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-07-30/ingilterede-proton-vpn-kullanimi-1400-artti-nedenleri-ve-etkileri</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/diger/2025-07-30/tiktokta-yeni-bir-donem-faydali-notlar-ile-kitle-kaynakli-dogrulama</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-30/basarinin-pesinden-conversationin-kurulus-hikayesi</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-30/gemini-cli-guvenlik-acigi-cihaz-kontrolu-tehdit-altinda</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/julius-ile-yapay-zeka-ile-hizli-veri-analizi-avantajlari</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/firefly-aerospace-uzay-kesfinde-yenilikci-cozumler</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/waymo-ve-avis-ile-dallasta-robotaksi-donemi-basliyor</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -493,7 +529,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/julius-ile-yapay-zeka-ile-hizli-veri-analizi-avantajlari</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-29/firefly-aerospace-uzay-kesfinde-yenilikci-cozumler</loc>
     <lastmod>2025-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -505,13 +541,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-28/neandertallerin-beslenme-sirlari-saglikli-diyetleri-kesfet</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-28/uzay-trafigi-yonetimi-guvenlik-ve-isbirliginin-onemi</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/mobil-teknoloji/2025-07-28/blender-ile-ipad-proda-tasinabilir-3d-tasarim-devrimi</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-28/techcrunch-disrupt-2025-yapay-zeka-yatirimlari-ve-inovasyon</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -529,7 +565,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-28/techcrunch-disrupt-2025-yapay-zeka-yatirimlari-ve-inovasyon</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-28/daniel-liss-ile-celik-uretiminde-sosyal-medya-inovasyonu</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-28/neandertallerin-beslenme-sirlari-saglikli-diyetleri-kesfet</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -541,19 +583,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-28/uzay-trafigi-yonetimi-guvenlik-ve-isbirliginin-onemi</loc>
+    <loc>https://pulseoftech.net/tr/post/mobil-teknoloji/2025-07-28/blender-ile-ipad-proda-tasinabilir-3d-tasarim-devrimi</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-28/daniel-liss-ile-celik-uretiminde-sosyal-medya-inovasyonu</loc>
-    <lastmod>2025-07-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/abdde-yapay-zeka-ile-kamu-yonetiminde-verimlilik-artiyor</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/microsofttan-cin-ekiplerine-guvenlik-duyarliligi</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -565,13 +601,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/robotlarin-enerji-kullanimi-makine-metabolizmasi-nedir</loc>
-    <lastmod>2025-07-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/microsofttan-cin-ekiplerine-guvenlik-duyarliligi</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/iklim-degisikligi-new-orleansta-felaket-uyarilari</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -583,7 +613,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/iklim-degisikligi-new-orleansta-felaket-uyarilari</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/abdde-yapay-zeka-ile-kamu-yonetiminde-verimlilik-artiyor</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-27/robotlarin-enerji-kullanimi-makine-metabolizmasi-nedir</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -595,13 +631,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-26/teslanin-robotaksi-projesinde-direksiyon-basinda-insan-var</loc>
+    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-07-26/tea-uygulamasinda-veri-ihlali-dijital-mahremiyet-tehlikede</loc>
     <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/siber-guvenlik/2025-07-26/tea-uygulamasinda-veri-ihlali-dijital-mahremiyet-tehlikede</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-26/teslanin-robotaksi-projesinde-direksiyon-basinda-insan-var</loc>
     <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -613,13 +649,25 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-25/hukukta-yapay-zeka-gizlilik-sorunlari-ve-cozum-onerileri</loc>
+    <lastmod>2025-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulseoftech.net/tr/post/web-gelistirme/2025-07-25/googlein-opal-araciyla-kodsuz-uygulama-gelistirme</loc>
     <lastmod>2025-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-25/hukukta-yapay-zeka-gizlilik-sorunlari-ve-cozum-onerileri</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-25/natonun-yenilikci-cozumleri-savunma-sektorunde-devrim</loc>
+    <lastmod>2025-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-25/yemek-siparisinde-yeni-donem-bitesight-ile-izle-ve-sec</loc>
     <lastmod>2025-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -643,25 +691,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-25/yemek-siparisinde-yeni-donem-bitesight-ile-izle-ve-sec</loc>
-    <lastmod>2025-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-25/natonun-yenilikci-cozumleri-savunma-sektorunde-devrim</loc>
-    <lastmod>2025-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-24/intelin-erteledigi-cip-hamlesi-liderlik-tehlikede</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-24/yapay-zek-yazilim-muhendisliginde-sinif-atladi</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-24/yapay-zek-yazilim-muhendisliginde-sinif-atladi</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-24/intelin-erteledigi-cip-hamlesi-liderlik-tehlikede</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -679,7 +715,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-23/google-aramayi-degistiriyor-yapay-zeka-cagi-basladi</loc>
+    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-23/masaustu-fuzyon-enerjide-devrimin-yeni-adimi</loc>
     <lastmod>2025-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -691,7 +727,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulseoftech.net/tr/post/girisimcilik/2025-07-23/masaustu-fuzyon-enerjide-devrimin-yeni-adimi</loc>
+    <loc>https://pulseoftech.net/tr/post/yapay-zeka-ml/2025-07-23/google-aramayi-degistiriyor-yapay-zeka-cagi-basladi</loc>
     <lastmod>2025-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
