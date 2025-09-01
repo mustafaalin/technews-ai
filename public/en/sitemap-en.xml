@@ -2,69 +2,315 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pulseoftech.net/en</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/ai-ml</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/web-development</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/mobile-technology</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/cloud-computing</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/cybersecurity</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/category/startups</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/about</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/contact</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/privacy-policy</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/terms-of-service</loc>
-    <lastmod>2025-08-19</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-09-01/homicide-investigation-shadows-closing-days-of-burning-man-festival</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-31/impact-of-uks-new-age-check-rules-on-adult-websites</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-31/exploring-breakthroughs-3d-reconstruction-of-the-shroud-of-turin-and-other-fascinating-scientific-discoveries</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cloud-computing/2025-08-31/funding-concerns-for-pioneering-climate-models-pose-risks-to-future-forecasting</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-31/nvidias-revenue-dependency-40-from-two-key-customers</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-30/taco-bells-voice-ai-ordering-faces-backlash-amid-viral-stunts</loc>
+    <lastmod>2025-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-30/texas-lawsuit-challenges-wall-street-firms-over-climate-collaborations</loc>
+    <lastmod>2025-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-30/metas-ai-strategy-relying-on-competitors-after-major-investment</loc>
+    <lastmod>2025-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-30/new-law-strengthens-consumers-stand-against-misleading-digital-rentals</loc>
+    <lastmod>2025-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-27/ai-voice-assistants-transforming-911-emergency-response</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-27/concerns-arise-over-urban-vulnerability-in-climate-policy-discussions</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-27/spacex-achieves-major-milestones-in-tenth-starship-test</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-27/concerns-over-ai-industry-as-historic-class-action-settlement-approaches</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-26/anthropic-unveils-innovative-ai-agent-for-chrome-users</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cloud-computing/2025-08-26/trump-administration-halts-key-offshore-wind-project-impacting-thousands-of-homes</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-26/tesla-faces-2425-million-judgment-over-autopilot-incident</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-08-26/googles-new-policy-on-android-app-sideloading-understanding-the-implications</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-25/navigating-the-challenges-of-ai-design-the-rise-of-ai-psychosis</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-25/trump-targets-abc-and-nbc-amidst-hostile-media-relations</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-25/the-evolutionary-mysteries-of-cave-fish-how-mexican-tetras-adapt-to-darkness</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-25/the-reality-behind-ai-chatbots-navigating-the-hype-and-misconceptions</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-25/pintarnya-secures-167-million-to-bridge-jobs-and-financial-services-in-indonesia</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-24/bluesky-halts-service-in-mississippi-over-age-assurance-law-concerns</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-24/spacex-plans-for-new-starship-launch-amidst-test-flight-challenges</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-08-24/apples-upcoming-hardware-event-what-to-expect-from-the-new-iphone-air-and-airpods</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-23/openai-takes-a-stand-against-spvs-and-unauthorized-investments</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cloud-computing/2025-08-23/the-misinformation-surrounding-wind-turbines-debunking-myths-and-misunderstandings</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-23/meta-collaborates-with-midjourney-to-enhance-ai-image-and-video-capabilities</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-23/rare-bacterium-linked-to-serious-illnesses-may-be-expanding-its-range</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-22/bluesky-blocks-service-in-mississippi-over-age-assurance-law</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cloud-computing/2025-08-22/starship-returns-to-launch-pad-after-three-month-hiatus</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-22/openai-expands-presence-in-india-with-new-office-opening</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-22/sam-altman-warns-of-ai-bubble-while-targeting-500-billion-valuation-for-openai</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-21/indian-startups-react-to-real-money-gaming-ban-impact-and-future-prospects</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-21/spacexs-texas-facility-a-gamechanger-for-starship-production</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/cybersecurity/2025-08-21/hacktivists-expose-north-korean-government-hacker-a-bold-revelation</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/ai-ml/2025-08-21/aaas-driver-assistance-system-testing-reveals-need-for-human-intervention</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/startups/2025-08-20/innovating-the-space-economy-insights-from-techcrunch-disrupt-2025</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/other/2025-08-20/the-impact-of-natural-disasters-on-us-drug-manufacturing-facilities</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/other/2025-08-20/pediatricians-advocate-for-vaccination-of-children-under-two-amid-ongoing-vaccine-debates</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulseoftech.net/en/post/mobile-technology/2025-08-19/upcoming-google-pixel-10-event-what-to-expect-and-how-to-watch</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pulseoftech.net/en/post/startups/2025-08-19/discover-hidden-treasures-at-the-crater-of-diamonds-state-park</loc>
