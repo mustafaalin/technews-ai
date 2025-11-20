@@ -201,24 +201,51 @@ const CategoryPage = () => {
 
       {/* Posts Grid */}
       {categoryPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categoryPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
-        
-        {/* Loading indicator */}
-        {loadingMore && (
-          <div className="flex justify-center items-center py-8">
-            <Loader className="w-8 h-8 animate-spin text-blue-600" />
-            <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categoryPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
           </div>
-        )}
-        
-        {/* Intersection observer target */}
-        {hasMore && !loadingMore && categoryPosts.length > 0 && (
-          <div ref={observerRef} className="h-10 flex justify-center items-center">
-            <div className="text-gray-400 text-sm">{t('category.scrollForMore')}</div>
+          
+          {/* Loading indicator */}
+          {loadingMore && (
+            <div className="flex justify-center items-center py-8">
+              <Loader className="w-8 h-8 animate-spin text-blue-600" />
+              <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+            </div>
+          )}
+          
+          {/* Intersection observer target */}
+          {hasMore && !loadingMore && categoryPosts.length > 0 && (
+            <div ref={observerRef} className="h-10 flex justify-center items-center">
+              <div className="text-gray-400 text-sm">{t('category.scrollForMore')}</div>
+            </div>
+          )}
+          
+          {/* End of posts message */}
+          {!hasMore && categoryPosts.length > 0 && (
+            <div className="text-center py-8">
+              <p className="text-gray-500">{t('category.allPostsLoaded')}</p>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="text-center py-12">
+          <p className="text-gray-500 text-lg">{t('category.noPosts')}</p>
+          <Link
+            to={langPrefix}
+            className="text-blue-600 hover:text-blue-800 mt-4 inline-block"
+          >
+            {t('category.viewAll')}
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CategoryPage;
           </div>
         )}
         
