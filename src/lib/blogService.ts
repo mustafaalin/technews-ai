@@ -2,6 +2,18 @@ import { supabase, isSupabaseAvailable } from './supabase';
 import { BlogPost, SupabaseBlogPost, Category } from "../types/blog";
 import type { Language } from '../context/LanguageContext';
 
+// Pagination interface
+export interface PaginationOptions {
+  limit?: number;
+  offset?: number;
+}
+
+export interface PaginatedResult<T> {
+  data: T[];
+  count: number;
+  hasMore: boolean;
+}
+
 // Kategorileri çek
 export const fetchCategories = async (language: Language = 'tr'): Promise<Category[]> => {
   if (!isSupabaseAvailable()) {
@@ -84,29 +96,39 @@ export const fetchCategories = async (language: Language = 'tr'): Promise<Catego
 };
 
 // Supabase'den blog yazılarını çek
-export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPost[]> => {
+export const fetchBlogPosts = async (
+  language: Language = 'tr', 
+  options?: PaginationOptions
+): Promise<PaginatedResult<BlogPost>> => {
   if (!isSupabaseAvailable()) {
     console.log('⚠️ Supabase mevcut değil, boş array döndürülüyor');
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
 
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('blog_posts')
       .select(`
-    id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
-    categories (id, name, slug, name_en, slug_tr, slug_en)
-  `)
+        id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
+        categories (id, name, slug, name_en, slug_tr, slug_en)
+      `, { count: 'exact' })
       .eq("is_published", true)
       .order("publish_date", { ascending: false });
 
+    // Apply pagination if provided
+    if (options?.limit !== undefined && options?.offset !== undefined) {
+      query = query.range(options.offset, options.offset + options.limit - 1);
+    }
+
+    const { data, error, count } = await query;
+
     if (error) {
       console.error('Blog posts fetch error:', error);
-      return [];
+      return { data: [], count: 0, hasMore: false };
     }
 
     // Supabase field names'lerini frontend format'ına çevir
-    return data.map((post) => ({
+    const posts = data.map((post) => ({
       id: post.id,
       title: language === 'en' ? (post.title_en || post.title) : post.title,
       title_en: post.title_en,
@@ -124,18 +146,29 @@ export const fetchBlogPosts = async (language: Language = 'tr'): Promise<BlogPos
       is_published: post.is_published,
     }));
 
+    const hasMore = options?.limit ? (count || 0) > (options.offset || 0) + (options.limit || 0) : false;
+
+    return {
+      data: posts,
+      count: count || 0,
+      hasMore
+    };
 
   } catch (error) {
     console.error('Unexpected error fetching blog posts:', error);
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
 };
 
 // Kategoriye göre blog yazılarını çek
-export const fetchBlogPostsByCategory = async (categorySlug: string, language: Language = 'tr'): Promise<BlogPost[]> => {
+export const fetchBlogPostsByCategory = async (
+  categorySlug: string, 
+  language: Language = 'tr',
+  options?: PaginationOptions
+): Promise<PaginatedResult<BlogPost>> => {
   if (!isSupabaseAvailable()) {
     console.log("⚠️ Supabase mevcut değil, boş array döndürülüyor");
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
   
   try {
@@ -152,25 +185,32 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
 
     if (categoryError || !categoryData) {
       console.error("❌ Kategori bulunamadı:", categoryError);
-      return [];
+      return { data: [], count: 0, hasMore: false };
     }
 
-       const { data, error } = await supabase
+    let query = supabase
       .from("blog_posts")
       .select(`
         id, title, summary, content, title_en, summary_en, content_en, image_url, source_url, publish_date, read_time, tags, tags_en, author, is_published, category_id,
         categories (id, name, slug, name_en, slug_tr, slug_en)
-      `)
+      `, { count: 'exact' })
       .eq("is_published", true)
       .eq("category_id", categoryData.id) // ✅ artık category_id üzerinden filtreleme
       .order("publish_date", { ascending: false });
 
-    if (error) {
-      console.error('Blog posts by category fetch error:', error);
-      return [];
+    // Apply pagination if provided
+    if (options?.limit !== undefined && options?.offset !== undefined) {
+      query = query.range(options.offset, options.offset + options.limit - 1);
     }
 
-    return (data as SupabaseBlogPost[]).map((post) => ({
+    const { data, error, count } = await query;
+
+    if (error) {
+      console.error('Blog posts by category fetch error:', error);
+      return { data: [], count: 0, hasMore: false };
+    }
+
+    const posts = (data as SupabaseBlogPost[]).map((post) => ({
       id: post.id,
       title: language === 'en' ? (post.title_en || post.title) : post.title,
       title_en: post.title_en,
@@ -187,9 +227,17 @@ export const fetchBlogPostsByCategory = async (categorySlug: string, language: L
       author: post.author,
       is_published: post.is_published,
     }));
+
+    const hasMore = options?.limit ? (count || 0) > (options.offset || 0) + (options.limit || 0) : false;
+
+    return {
+      data: posts,
+      count: count || 0,
+      hasMore
+    };
   } catch (error) {
     console.error('Unexpected error fetching blog posts by category:', error);
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, Clock, Users, User } from 'lucide-react';
+import { TrendingUp, Clock, Users, User, Loader } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
@@ -11,13 +11,21 @@ import { createSeoUrl } from '../utils/urlHelpers';
 const Home = () => {
   const { language, t } = useLanguage();
   const [blogPosts, setBlogPosts] = React.useState<any[]>([]);
+  const [loadingMore, setLoadingMore] = React.useState(false);
+  const [hasMore, setHasMore] = React.useState(true);
+  const [offset, setOffset] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
+  const observerRef = React.useRef<HTMLDivElement>(null);
+
+  const POSTS_PER_PAGE = 9;
 
   React.useEffect(() => {
     const loadBlogPosts = async () => {
       try {
-        const posts = await getAllBlogPosts(language);
-        setBlogPosts(posts);
+        const result = await getAllBlogPosts(language, { limit: POSTS_PER_PAGE, offset: 0 });
+        setBlogPosts(result.data);
+        setHasMore(result.hasMore);
+        setOffset(POSTS_PER_PAGE);
       } catch (error) {
         console.error('Error loading blog posts:', error);
       } finally {
@@ -27,6 +35,40 @@ const Home = () => {
 
     loadBlogPosts();
   }, [language]);
+
+  const loadMorePosts = React.useCallback(async () => {
+    if (loadingMore || !hasMore) return;
+
+    setLoadingMore(true);
+    try {
+      const result = await getAllBlogPosts(language, { limit: POSTS_PER_PAGE, offset });
+      setBlogPosts(prev => [...prev, ...result.data]);
+      setHasMore(result.hasMore);
+      setOffset(prev => prev + POSTS_PER_PAGE);
+    } catch (error) {
+      console.error('Error loading more posts:', error);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [language, offset, loadingMore, hasMore]);
+
+  // Intersection Observer for infinite scroll
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore) {
+          loadMorePosts();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loadMorePosts, hasMore, loadingMore]);
 
   if (loading) {
     return (
@@ -40,7 +82,7 @@ const Home = () => {
   }
 
   const featuredPost = blogPosts[0];
-  const recentPosts = blogPosts.slice(1, 7);
+  const recentPosts = blogPosts.slice(1);
 
   if (!featuredPost) {
     return (
@@ -166,6 +208,28 @@ const Home = () => {
             <BlogCard key={post.id} post={post} />
           ))}
         </div>
+        
+        {/* Loading indicator */}
+        {loadingMore && (
+          <div className="flex justify-center items-center py-8">
+            <Loader className="w-8 h-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+          </div>
+        )}
+        
+        {/* Intersection observer target */}
+        {hasMore && !loadingMore && (
+          <div ref={observerRef} className="h-10 flex justify-center items-center">
+            <div className="text-gray-400 text-sm">{t('home.scrollForMore')}</div>
+          </div>
+        )}
+        
+        {/* End of posts message */}
+        {!hasMore && recentPosts.length > 0 && (
+          <div className="text-center py-8">
+            <p className="text-gray-500">{t('home.allPostsLoaded')}</p>
+          </div>
+        )}
       </div>
 
       {/* Newsletter Signup */}

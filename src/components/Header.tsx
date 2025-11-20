@@ -57,8 +57,8 @@ const Header = () => {
       
       // Supabase'de bulunamazsa JSON'da ara
       console.log("⚠️ Supabase'de sonuç bulunamadı, JSON verilerinde aranıyor");
-      const allPosts = await getAllBlogPosts();
-      const jsonResults = allPosts.filter(post =>
+      const allPostsResult = await getAllBlogPosts();
+      const jsonResults = allPostsResult.data.filter(post =>
         post.title.toLowerCase().includes(query.toLowerCase()) ||
         post.summary.toLowerCase().includes(query.toLowerCase()) ||
         post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||

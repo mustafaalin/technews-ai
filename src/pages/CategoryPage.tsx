@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader } from 'lucide-react';
 import { useLanguage, translateCategorySlug } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
@@ -11,10 +11,25 @@ const CategoryPage = () => {
   const { language, t } = useLanguage();
   const [category, setCategory] = React.useState<any>(null);
   const [categoryPosts, setCategoryPosts] = React.useState<any[]>([]);
+  const [loadingMore, setLoadingMore] = React.useState(false);
+  const [hasMore, setHasMore] = React.useState(true);
+  const [offset, setOffset] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
+  const observerRef = React.useRef<HTMLDivElement>(null);
+
+  const POSTS_PER_PAGE = 9;
 
   // Get current language prefix
   const langPrefix = `/${language}`;
+
+  // Reset pagination when slug or language changes
+  React.useEffect(() => {
+    setCategoryPosts([]);
+    setOffset(0);
+    setHasMore(true);
+    setLoadingMore(false);
+  }, [slug, language]);
+
   React.useEffect(() => {
     const loadCategoryData = async () => {
       if (!slug) return;
@@ -59,9 +74,11 @@ const CategoryPage = () => {
 
         // Kategori yazılarını yükle - use the slug that actually found the category
         const categorySlugToUse = foundCategory ? foundCategory.slug : slug;
-        const posts = await getBlogPostsByCategory(categorySlugToUse, language);
+        const result = await getBlogPostsByCategory(categorySlugToUse, language, { limit: POSTS_PER_PAGE, offset: 0 });
         console.log('📰 Found posts:', posts.length);
-        setCategoryPosts(posts);
+        setCategoryPosts(result.data);
+        setHasMore(result.hasMore);
+        setOffset(POSTS_PER_PAGE);
       } catch (error) {
         console.error('❌ Error loading category data:', error);
       } finally {
@@ -71,6 +88,40 @@ const CategoryPage = () => {
 
     loadCategoryData();
   }, [slug, language]);
+
+  const loadMorePosts = React.useCallback(async () => {
+    if (loadingMore || !hasMore || !category) return;
+
+    setLoadingMore(true);
+    try {
+      const result = await getBlogPostsByCategory(category.slug, language, { limit: POSTS_PER_PAGE, offset });
+      setCategoryPosts(prev => [...prev, ...result.data]);
+      setHasMore(result.hasMore);
+      setOffset(prev => prev + POSTS_PER_PAGE);
+    } catch (error) {
+      console.error('Error loading more posts:', error);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [category, language, offset, loadingMore, hasMore]);
+
+  // Intersection Observer for infinite scroll
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore) {
+          loadMorePosts();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loadMorePosts, hasMore, loadingMore]);
 
   if (loading) {
     return (
@@ -155,6 +206,28 @@ const CategoryPage = () => {
             <BlogCard key={post.id} post={post} />
           ))}
         </div>
+        
+        {/* Loading indicator */}
+        {loadingMore && (
+          <div className="flex justify-center items-center py-8">
+            <Loader className="w-8 h-8 animate-spin text-blue-600" />
+            <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+          </div>
+        )}
+        
+        {/* Intersection observer target */}
+        {hasMore && !loadingMore && categoryPosts.length > 0 && (
+          <div ref={observerRef} className="h-10 flex justify-center items-center">
+            <div className="text-gray-400 text-sm">{t('category.scrollForMore')}</div>
+          </div>
+        )}
+        
+        {/* End of posts message */}
+        {!hasMore && categoryPosts.length > 0 && (
+          <div className="text-center py-8">
+            <p className="text-gray-500">{t('category.allPostsLoaded')}</p>
+          </div>
+        )}
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">{t('category.noPosts')}</p>

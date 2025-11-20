@@ -1,5 +1,5 @@
 import { BlogPost, Category } from '../types/blog';
-import { fetchBlogPosts, fetchBlogPostsByCategory, fetchCategories } from '../lib/blogService';
+import { fetchBlogPosts, fetchBlogPostsByCategory, fetchCategories, PaginationOptions, PaginatedResult } from '../lib/blogService';
 import type { Language } from '../context/LanguageContext';
 
 export const baseCategories: Omit<Category, 'count'>[] = [
@@ -44,35 +44,33 @@ const getEnglishCategoryName = (slug: string): string => {
   return englishNames[slug] || slug;
 };
 // Tüm blog yazılarını Supabase'den çek
-export const getAllBlogPosts = async (language: Language = 'tr'): Promise<BlogPost[]> => {
+export const getAllBlogPosts = async (
+  language: Language = 'tr', 
+  options?: PaginationOptions
+): Promise<PaginatedResult<BlogPost>> => {
   try {
-    const supabasePosts = await fetchBlogPosts(language);
-    return supabasePosts.sort(
-      (a, b) =>
-        new Date(b.publish_date).getTime() -
-        new Date(a.publish_date).getTime()
-    );
+    const result = await fetchBlogPosts(language, options);
+    // Posts are already sorted by publish_date in descending order from Supabase
+    return result;
   } catch (error) {
     console.error('Error fetching blog posts:', error);
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
 };
 
 // Kategoriye göre blog yazılarını çek
 export const getBlogPostsByCategory = async (
   categorySlug: string,
-  language: Language = 'tr'
-): Promise<BlogPost[]> => {
+  language: Language = 'tr',
+  options?: PaginationOptions
+): Promise<PaginatedResult<BlogPost>> => {
   try {
-    const supabasePosts = await fetchBlogPostsByCategory(categorySlug, language);
-    return supabasePosts.sort(
-      (a, b) =>
-        new Date(b.publish_date).getTime() -
-        new Date(a.publish_date).getTime()
-    );
+    const result = await fetchBlogPostsByCategory(categorySlug, language, options);
+    // Posts are already sorted by publish_date in descending order from Supabase
+    return result;
   } catch (error) {
     console.error('Error fetching blog posts by category:', error);
-    return [];
+    return { data: [], count: 0, hasMore: false };
   }
 };
 export const categories: Category[] = baseCategories.map((category) => ({

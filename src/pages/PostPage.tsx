@@ -38,7 +38,8 @@ const PostPage = () => {
         console.log('Language from context:', language);
         
         // Tüm postları al
-        const allPosts = await getAllBlogPosts(currentLang);
+        const allPostsResult = await getAllBlogPosts(currentLang);
+        const allPosts = allPostsResult.data;
         console.log('All posts loaded:', allPosts.length);
         
         let currentPost = null;
@@ -74,7 +75,8 @@ const PostPage = () => {
           const cats = await getCategories(currentLang);
           setCategories(cats);
 
-          const allPostsForRelated = await getAllBlogPosts(currentLang);
+          const allPostsForRelatedResult = await getAllBlogPosts(currentLang);
+          const allPostsForRelated = allPostsForRelatedResult.data;
           const related = allPosts
             .filter(p => p.id !== currentPost.id && p.category === currentPost.category)
             .slice(0, 2);
