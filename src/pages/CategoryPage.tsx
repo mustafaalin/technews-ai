@@ -75,7 +75,7 @@ const CategoryPage = () => {
         // Kategori yazılarını yükle - use the slug that actually found the category
         const categorySlugToUse = foundCategory ? foundCategory.slug : slug;
         const result = await getBlogPostsByCategory(categorySlugToUse, language, { limit: POSTS_PER_PAGE, offset: 0 });
-        console.log('📰 Found posts:', posts.length);
+        console.log('📰 Found posts:', (result.data ?? []).length);
         setCategoryPosts(result.data);
         setHasMore(result.hasMore);
         setOffset(POSTS_PER_PAGE);
@@ -230,31 +230,6 @@ const CategoryPage = () => {
             </div>
           )}
         </>
-      ) : (
-        <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">{t('category.noPosts')}</p>
-          <Link
-            to={langPrefix}
-            className="text-blue-600 hover:text-blue-800 mt-4 inline-block"
-          >
-            {t('category.viewAll')}
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default CategoryPage;
-          </div>
-        )}
-        
-        {/* End of posts message */}
-        {!hasMore && categoryPosts.length > 0 && (
-          <div className="text-center py-8">
-            <p className="text-gray-500">{t('category.allPostsLoaded')}</p>
-          </div>
-        )}
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">{t('category.noPosts')}</p>
