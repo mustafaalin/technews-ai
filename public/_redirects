@@ -1,3 +1,8 @@
 /post/startups/*   /tr/post/girisimcilik/:splat  301
 /post/ai/*         /tr/post/yapay-zeka-ml/:splat  301
+/post/ai-ml/*         /tr/post/yapay-zeka-ml/:splat  301
+/post/mobile/*         /tr/post/mobil-teknoloji/:splat  301
+/post/diger/*         /tr/post/diger/:splat  301
+/post/web-dev/*         /tr/post/web-gelistirme/:splat  301
+/post/security/*         /tr/post/siber-guvenlik/:splat  301
 /*                 /index.html   200
