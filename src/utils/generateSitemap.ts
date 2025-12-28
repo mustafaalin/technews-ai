@@ -34,7 +34,8 @@ export const generateSitemap = async (language: Language = 'tr'): Promise<string
   ];
 
   // O dildeki blog yazılarını al
-  const blogPosts = await getAllBlogPosts(language);
+  const blogPostsResult = await getAllBlogPosts(language);
+  const blogPosts = blogPostsResult.data;
 
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
