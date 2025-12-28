@@ -18,7 +18,7 @@ function App() {
       <LanguageProvider>
         <ScrollToTop />
         <Routes>
-          {/* Default redirect to Turkish */}
+          {/* Default redirect to English */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
           </Route>

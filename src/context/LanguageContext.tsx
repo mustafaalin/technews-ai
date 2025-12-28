@@ -425,7 +425,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const getLanguageFromPath = (): Language => {
     const pathSegments = location.pathname.split('/').filter(Boolean);
     const firstSegment = pathSegments[0];
-    return (firstSegment === 'en' || firstSegment === 'tr') ? firstSegment : 'tr';
+    return (firstSegment === 'en' || firstSegment === 'tr') ? firstSegment : 'en';
   };
 
   const [language, setLanguageState] = useState<Language>(getLanguageFromPath);

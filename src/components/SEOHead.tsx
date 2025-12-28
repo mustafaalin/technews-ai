@@ -23,8 +23,8 @@ interface SEOHeadProps {
 
 const SEOHead: React.FC<SEOHeadProps> = ({
   title = 'Pulse of Tech - AI-Powered Tech News',
-  description = 'Yapay zeka destekli özetlerle en son teknoloji haberlerinden haberdar olun. Teknoloji dünyasından özlü, doğru içgörüleri günlük olarak edinin.',
-  keywords = ['teknoloji haberleri', 'yapay zeka', 'AI', 'teknoloji', 'makine öğrenmesi', 'web geliştirme', 'bulut bilişim'],
+  description = 'Stay updated with daily AI-powered tech news summaries. Get insights from the tech world in minutes, not hours.',
+  keywords = ['tech news', 'artificial intelligence', 'AI', 'technology', 'machine learning', 'web development', 'cloud computing'],
   image = 'https://pulseoftech.net/favicon.png',
   url = 'https://pulseoftech.net',
   type = 'website',
@@ -33,7 +33,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   modifiedTime,
   category,
   tags = [],
-  language = 'tr',
+  language = 'en',
   alternateUrls
 }) => {
   // Description'ı 160 karakter ile sınırla
