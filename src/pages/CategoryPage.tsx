@@ -193,8 +193,8 @@ const CategoryPage = () => {
         </h1>
         <p className="text-gray-600 text-lg">
           {language === 'en' 
-            ? `${categoryPosts.length} ${categoryPosts.length === 1 ? 'article' : 'articles'} in this category`
-            : `Bu kategoride ${categoryPosts.length} ${categoryPosts.length === 1 ? 'makale' : 'makale'}`
+            ? `${category.count} ${category.count === 1 ? 'article' : 'articles'} in this category`
+            : `Bu kategoride ${category.count} ${category.count === 1 ? 'makale' : 'makale'}`
           }
         </p>
       </div>
