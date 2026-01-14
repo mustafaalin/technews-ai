@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, Clock, Users, User, Loader } from 'lucide-react';
+import { TrendingUp, Clock, Users, User, Loader, Plus } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEOHead from '../components/SEOHead';
 import BlogCard from '../components/BlogCard';
@@ -15,7 +15,6 @@ const Home = () => {
   const [hasMore, setHasMore] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
-  const observerRef = React.useRef<HTMLDivElement>(null);
 
   const POSTS_PER_PAGE = 9;
 
@@ -52,23 +51,11 @@ const Home = () => {
     }
   }, [language, offset, loadingMore, hasMore]);
 
-  // Intersection Observer for infinite scroll
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loadingMore) {
-          loadMorePosts();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadMorePosts();
     }
-
-    return () => observer.disconnect();
-  }, [loadMorePosts, hasMore, loadingMore]);
+  };
 
   if (loading) {
     return (
@@ -209,25 +196,40 @@ const Home = () => {
           ))}
         </div>
         
-        {/* Loading indicator */}
-        {loadingMore && (
-          <div className="flex justify-center items-center py-8">
-            <Loader className="w-8 h-8 animate-spin text-blue-600" />
-            <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+        {/* Load More Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              className={`flex items-center px-8 py-4 rounded-lg font-medium text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 ${
+                loadingMore
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
+                  : 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white'
+              }`}
+            >
+              {loadingMore ? (
+                <>
+                  <Loader className="w-5 h-5 mr-3 animate-spin" />
+                  {t('home.loading')}
+                </>
+              ) : (
+                <>
+                  <Plus className="w-5 h-5 mr-3" />
+                  {t('home.loadMore')}
+                </>
+              )}
+            </button>
           </div>
         )}
         
-        {/* Intersection observer target */}
-        {hasMore && !loadingMore && (
-          <div ref={observerRef} className="h-10 flex justify-center items-center">
-            <div className="text-gray-400 text-sm">{t('home.scrollForMore')}</div>
-          </div>
-        )}
-        
-        {/* End of posts message */}
-        {!hasMore && recentPosts.length > 0 && (
-          <div className="text-center py-8">
-            <p className="text-gray-500">{t('home.allPostsLoaded')}</p>
+        {/* All posts loaded message */}
+        {!hasMore && recentPosts.length > 0 && !loading && (
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center px-6 py-3 bg-gray-100 rounded-lg">
+              <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+              <p className="text-gray-600 font-medium">{t('home.allPostsLoaded')}</p>
+            </div>
           </div>
         )}
       </div>

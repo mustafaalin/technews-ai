@@ -57,7 +57,8 @@ const translations = {
     'home.trending': 'Trend',
     'home.recent': 'Son Güncellemeler',
     'home.readFull': 'Tam Haberi Oku',
-    'home.scrollForMore': 'Daha fazla haber için aşağı kaydırın',
+    'home.loadMore': 'Daha Fazla Haber',
+    'home.loading': 'Yükleniyor...',
     'home.allPostsLoaded': 'Tüm haberler yüklendi',
     
     // Newsletter
@@ -95,8 +96,7 @@ const translations = {
     'category.notFound': 'Kategori bulunamadı',
     'category.postsCount': 'makale',
     'category.noPosts': 'Bu kategoride henüz yazı bulunamadı.',
-    'category.viewAll': 'Tüm yazılara göz at',
-    'category.scrollForMore': 'Daha fazla haber için aşağı kaydırın',
+    'category.loadMore': 'Daha Fazla Haber',
     'category.allPostsLoaded': 'Bu kategorideki tüm haberler yüklendi',
     
     // About page
@@ -255,7 +255,8 @@ const translations = {
     'home.trending': 'Trending',
     'home.recent': 'Recent Updates',
     'home.readFull': 'Read Full Story',
-    'home.scrollForMore': 'Scroll down for more news',
+    'home.loadMore': 'Load More News',
+    'home.loading': 'Loading...',
     'home.allPostsLoaded': 'All posts loaded',
     
     // Newsletter
@@ -293,8 +294,7 @@ const translations = {
     'category.notFound': 'Category not found',
     'category.postsCount': 'articles',
     'category.noPosts': 'No posts found in this category yet.',
-    'category.viewAll': 'View all posts',
-    'category.scrollForMore': 'Scroll down for more news',
+    'category.loadMore': 'Load More News',
     'category.allPostsLoaded': 'All posts in this category loaded',
     
     // About page
