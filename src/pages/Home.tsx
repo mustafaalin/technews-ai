@@ -21,10 +21,10 @@ const Home = () => {
   React.useEffect(() => {
     const loadBlogPosts = async () => {
       try {
-        const result = await getAllBlogPosts(language, { limit: POSTS_PER_PAGE, offset: 0 });
+        const result = await getAllBlogPosts(language, { limit: POSTS_PER_PAGE + 1, offset: 0 });
         setBlogPosts(result.data);
         setHasMore(result.hasMore);
-        setOffset(POSTS_PER_PAGE);
+        setOffset(POSTS_PER_PAGE + 1);
       } catch (error) {
         console.error('Error loading blog posts:', error);
       } finally {
