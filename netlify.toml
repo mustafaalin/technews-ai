@@ -1,0 +1,51 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[edge_functions]]
+  function = "inject-meta"
+  path = "/tr/post/*"
+
+[[edge_functions]]
+  function = "inject-meta"
+  path = "/en/post/*"
+
+[[redirects]]
+  from = "/post/startups/*"
+  to = "/tr/post/girisimcilik/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/ai/*"
+  to = "/tr/post/yapay-zeka-ml/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/ai-ml/*"
+  to = "/tr/post/yapay-zeka-ml/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/mobile/*"
+  to = "/tr/post/mobil-teknoloji/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/diger/*"
+  to = "/tr/post/diger/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/web-dev/*"
+  to = "/tr/post/web-gelistirme/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/post/security/*"
+  to = "/tr/post/siber-guvenlik/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
